@@ -1,0 +1,49 @@
+<div class="report-container">
+        <h2>Shkoder Weather Status</h2>
+        <div class="time">
+            <div>Tuesday 1:49 pm</div>
+            <div>11th August, 2019</div>
+            <div>Few Clouds</div>
+        </div>
+        <div class="weather-forecast">
+            <img
+                src="http://openweathermap.org/img/w/02d.png"
+                class="weather-icon" /> 34°C<span
+                class="min-temperature">34°C</span>
+        </div>
+        <div class="time">
+            <div>Humidity: 38 %</div>
+            <div>Wind: 1 km/h</div>
+        </div>
+    </div>
+    <script>
+        
+      $(document).ready(function() {
+        // Instead of button click, change this.
+        setTimeout(function() {
+          jQuery.support.cors = true;
+          $.ajax({
+            crossDomain: true,
+            async: true,
+            type: "POST",
+            url: "php/weather.html",
+            success: function(result) {
+              $(".widget1").html(result);
+            },
+            jsonpCallback: 'callbackFnc',
+            failure: function() {},
+            complete: function(data) {
+              $("").html("Success : ");
+              if (data.readyState == '4' && data.status == '200') {
+
+                //document.write("Success : ");
+                //document.write(data);
+              } else {
+                document.writeln("Something went  wrong ...");
+              }
+            }
+          });
+        }, 1000);
+      });
+
+    </script>
