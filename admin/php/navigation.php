@@ -1,9 +1,6 @@
 <!--<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">-->
     
-<nav class="navbar navbar-expand-lg fixed-top flex-md-nowrap navbar-dark bg-dark p-0 shadow">
-    <a class="navbar-logo" href="#">
-      <img src="img/logo.png" alt="Foto">
-    </a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,11 +32,11 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="php/settings.php">
               <span class="favicon">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-cog"></i>
               </span>
-                Orders
+                Settings
               </a>
             </li>
             <li class="nav-item">
