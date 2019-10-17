@@ -1,6 +1,7 @@
 <?php
     require_once "php/connection.php";
     $layout = 1;
+    
 ?>
 <!DOCTYPE html>
 <html>
