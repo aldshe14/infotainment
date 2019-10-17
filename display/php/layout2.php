@@ -3,11 +3,6 @@
 <head>
 	<title>Layout 2</title>
 	<link rel="stylesheet" href="grid.css">
-	<script>
-         setTimeout(function(){
-            window.location.href = 'layout3.php';
-         }, 5000);
-      </script>
 	<style>
 		body{
 			padding: 0px;

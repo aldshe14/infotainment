@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Layout 2</title>
+	<title>Layout 1</title>
 	<link rel="stylesheet" href="grid.css">
-	<script>
-         setTimeout(function(){
-            window.location.href = 'layout1.php';
-         }, 5000);
-      </script>
 	<style>
 		body{
 			padding: 0px;
