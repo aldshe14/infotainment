@@ -1,27 +1,57 @@
-.navbar-logo {
-    display: inline-block;
-    padding: 0.3125rem;
-    padding-bottom: 0.3125rem;
-    margin: 0rem 0.5rem;
-    font-size: 1.25rem;
-    line-height: inherit;
-    white-space: nowrap;
-    color : #fff;
+nav a{
+    font-weight: 600;
+    font-size: 16px;
 }
 
-.navbar-logo:hover, .navbar-logo:focus {
-    text-decoration: none; 
+nav a img{
+    margin-left: 4em;
 }
 
-.navbar-logo img {
-    max-width: 10rem !important;
-    min-width: 10rem !important;
-    height: auto;
+#passwordHelp{
+    font-size: 0.95em !important;
+    text-justify: center;
 }
 
-.navbar img {
-    max-width: 2rem;
-    height: auto;
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
 }
 
 
+#hide {
+    -webkit-animation: cssAnimation 5s forwards; 
+    animation: cssAnimation 5s forwards;
+}
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.dropdown-menu{
+    z-index:1051 !important;
+}
+
+.wrapper{
+    width:auto;
+    padding:20px;
+    height: 100px;
+    }
+
+    datalist {
+        max-height: 250px;
+        overflow-y: auto;
+    }
