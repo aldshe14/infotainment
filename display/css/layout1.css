@@ -6,7 +6,7 @@ body{
     display: grid;
     grid-template-columns: 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw ;
     grid-template-rows: 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh;
-    background-color: #e6e6e6;
+    background-color: #e6e6e6 !important;
     padding: 0px;
     margin: 0px;
     }

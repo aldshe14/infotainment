@@ -21,7 +21,7 @@
             ?>
 
             <h2><?php echo $data->name; ?> Weather Status</h2>
-            <div id="time">z
+            <div id="time">
                 <div>
                 <div><?php echo date("l g:i a", $currentTime); ?></div>
                 <div><?php echo date("jS F, Y",$currentTime); ?></div>
