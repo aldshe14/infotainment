@@ -1,4 +1,4 @@
-<?php require_once('php/weather.php'); ?>
+<?php require_once('php/supplierplan.php'); ?>
 
 <script>
         
@@ -10,7 +10,7 @@
         crossDomain: true,
         async: true,
         type: "POST",
-        url: "php/weather.php",
+        url: "php/supplierplan.php",
         success: function(result) {
           $(".body").html(result);
         },

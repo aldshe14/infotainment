@@ -10,9 +10,9 @@
         crossDomain: true,
         async: true,
         type: "POST",
-        url: "php/website.php",
+        url: "php/weather.php",
         success: function(result) {
-          $(".body").html(result);
+          $(".widget1").html(result);
         },
         jsonpCallback: 'callbackFnc',
         failure: function() {},

@@ -19,7 +19,7 @@
             <a class="nav-link" href="dekorime.php">MENU2</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='nenshtetesi.php') echo "active"; ?>">
-            <a class="nav-link" href="nenshtetesi.php"><i class="fas fa-cog"></i> MENU3</a>
+            <a class="nav-link" href="nenshtetesi.php"><i class="fas fa-user"></i> </i> MENU3</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='dekret.php') echo "active"; ?>">
             <a class="nav-link" href="dekret.php">Settings</a>

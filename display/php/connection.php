@@ -4,7 +4,7 @@
 $servername="localhost";
 $usr="root";
 $pswd="";
-$dbname="presidenca_e_republikes";
+$dbname="infotainment_system";
 
 $message;
 $con;
