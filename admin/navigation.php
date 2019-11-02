@@ -1,8 +1,10 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
 	  
-    <a class="navbar-brand" href="index.php">
-        <img src="img/logo.png" width="20%" height="100%" alt="Logo Presidenti">
+    <a href="#" class="navbar-brand">
+        <!-- Logo Image -->
+        <img src="img/logo.png" width="215" height="50" alt="" class="d-inline-block align-middle mr-2">
+        
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,14 +14,14 @@
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='index.php') echo "active"; ?>">
             <a class="nav-link" href="index.php">HOME</a>
         </li>
-        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='presidenti.php') echo "active"; ?>">
-            <a class="nav-link" href="presidenti.php">MENU1</a>
+        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php') echo "active"; ?>">
+            <a class="nav-link" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='dekorime.php') echo "active"; ?>">
             <a class="nav-link" href="dekorime.php">MENU2</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='nenshtetesi.php') echo "active"; ?>">
-            <a class="nav-link" href="nenshtetesi.php"><i class="fas fa-user"></i> </i> MENU3</a>
+            <a class="nav-link" href="nenshtetesi.php"><i class="fas fa-user"></i> MENU3</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='dekret.php') echo "active"; ?>">
             <a class="nav-link" href="dekret.php">Settings</a>

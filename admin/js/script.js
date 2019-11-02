@@ -10,6 +10,7 @@ $(document).ready(function() {
       fixedHeader: false,
       keys: true,
       fixedColumns:   true,
+      "autoWidth": true,
       "bAutoWidth": false,
       "processing": true,
       dom: 'CBRSflrtip',
@@ -42,7 +43,7 @@ $(document).ready(function() {
       ],
       "columnDefs": [ {
         "targets": 0,
-        "orderable": false
+        "orderable": true
         } ],
         "processing": true,
       lengthChange: true,
@@ -90,12 +91,7 @@ $(document).ready(function() {
     }
     });
 
-    t.on( 'order.dt search.dt', function () {
-      t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-         cell.innerHTML = i + 1;
-          t.cell(cell).invalidate('dom'); 
-      } );
-   } ).draw();
+    
 
    $('#resetuserdata thead tr').clone(true).appendTo( '#resetuserdata thead' );
   $('#resetuserdata thead tr:eq(1) th').each( function (i) {

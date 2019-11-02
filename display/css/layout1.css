@@ -1,17 +1,17 @@
 body{
     padding: 0px;
     margin: 0px;
-    }
-    .grid-container {
+}
+.grid-container {
     display: grid;
     grid-template-columns: 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw 6.25vw ;
     grid-template-rows: 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh 6.25vh;
     background-color: #e6e6e6 !important;
     padding: 0px;
     margin: 0px;
-    }
+}
 
-    .header {
+.header {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     grid-row-start: 1;
@@ -24,10 +24,10 @@ body{
     grid-column-end: 17;
     display: inline-block;
     overflow: hidden;
-    
-    }
 
-    .body {
+}
+
+.body {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     grid-row-start: 3;
@@ -37,9 +37,9 @@ body{
     grid-column-start: 1;
     grid-column-end: 11;
     overflow: hidden;
-    }
+}
 
-    .widget1 {
+.widget1 {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     grid-row-start: 3;
@@ -49,8 +49,8 @@ body{
     grid-column-start: 11;
     grid-column-end: 17;
     overflow: hidden;
-    }
-    .widget2 {
+}
+.widget2 {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     grid-row-start: 9;
@@ -61,9 +61,9 @@ body{
     grid-column-end: 17;
     overflow: hidden;
 
-    }
+}
 
-    .footer{
+.footer{
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     grid-row-start: 15;
@@ -73,16 +73,18 @@ body{
     grid-column-start: 1;
     grid-column-end: 17;
     overflow: hidden;
-    }
+    padding: 0px;
+    margin: 0px;
+}
 
-    .logo{
-        float:left; 
-        margin-top: 2vh;
-        margin-left: 1.2vw;
-    }
+.logo{
+    float:left; 
+    margin-top: 2vh;
+    margin-left: 1.2vw;
+}
 
-    .time{
-        float:right; 
-        margin-right: 1.2vw;
-    }
+.time{
+    float:right; 
+    margin-right: 1.2vw;
+}
 

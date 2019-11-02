@@ -5,9 +5,11 @@
     $stmt = $con->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach($result as $row) {  
-        echo $row['u_id']." ".$row['unterricht_nr']." ".$row['klasse']." ".$row['lehrer']."<br>";
+    echo "<table>";
+    foreach($result as $row) {
+        echo "<tr>";  
+        echo "<td>".$row['u_id']."</td><td>".$row['unterricht_nr']."</td><td>".$row['klasse']."</td><td>".$row['lehrer']."</td>";
+        echo "</tr>";
     }
-   
+    echo "</table>";
 ?>
