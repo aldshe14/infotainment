@@ -29,7 +29,7 @@ if(day==1){
 } else if(day==3){
     day_str = "Mittwoch";
 } else if(day==4){
-    day_str = "Dienstag";
+    day_str = "Donnerstag";
 } else if(day==5){
     day_str = "Freitag";
 } else if(day==6){
