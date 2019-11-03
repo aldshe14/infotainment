@@ -47,10 +47,21 @@
     $sth->execute();
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+    if($result[0]['tag']==1){
+        $dayName = "Montag";
+    } else if($result[0]['tag']==2){
+        $dayName = "Dienstag";
+    } else if($result[0]['tag']==3){
+        $dayName = "Mittwoch";
+    } else if($result[0]['tag']==4){
+        $dayName = "Donnerstag";
+    } else if($result[0]['tag']==5){
+        $dayName = "Freitag";
+    }
 ?>
 
 <div class="container">
-        <h1 class="mt-4">Ndrysho Dekret</h1>
+        <h1 class="mt-4">Stundenplan für <?php echo $result[0]['lehrer']." - ".$dayName; ?></h1>
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id']; ?>" method="post">
         <div class="form-row">
