@@ -1,11 +1,11 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-	  
-    <a href="#" class="navbar-brand">
+	
+    <a href="index.php" class="navbar-brand">
         <!-- Logo Image -->
         <img src="img/logo.png" width="215" height="50" alt="" class="d-inline-block align-middle mr-2">
-        
     </a>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

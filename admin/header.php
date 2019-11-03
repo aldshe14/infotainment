@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Home</title>
+	<title>
+	<?php
+		echo "Infotainment ";
+		if(basename($_SERVER["SCRIPT_FILENAME"])=='index.php') {  
+			echo '- Home';
+		}else if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php') {  
+			echo '- Supplierplan';
+		}else{
+			echo '';
+		}
+	?>
+	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="">
     <meta name="author" content="Aldo Sheldija, Irena Bala">
@@ -10,7 +21,7 @@
     <!-- Mobile viewport Optimierung -->
     
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon"/>
+	<link rel="shortcut icon" href="img/favicon_1.png" type="image/x-icon"/>
 
   	<!-- Bootstrap CSS File-->
   	<link rel="stylesheet" href="css/bootstrap.min.css">

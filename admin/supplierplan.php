@@ -16,7 +16,7 @@
     if(isset($_GET['day']))
         $day = $_GET['day'];
 
-    $sql = "SELECT * FROM tb_infotainment_unterricht where tag = :test and fach <> 'SU' group by lehrer order by klasse asc ;";
+    $sql = "SELECT * FROM tb_infotainment_unterricht where tag = :test and fach <> 'SU' and lehrer <> '' group by lehrer order by klasse asc ;";
     $stmt = $con->prepare($sql);
     $stmt->bindValue(":test",$day);
     $stmt->execute();
@@ -50,11 +50,7 @@
             <thead>
                 <tr>
                     <!--<th data-hide="true">ID</th>-->
-                    <th>Stunde</th>
-                    <th>Klasse</th>
                     <th>Lehrer</th>
-                    <th>Fach</th>
-                    <th>Raum</th>
                     <th>Edit</th>
                 </tr>
             </thead>
@@ -66,13 +62,8 @@
                         echo '<tr>';
                         //<td>'.$row['p_id'].'</td>
                         //echo '<td></td>';
-                    echo '
-                            
-                        <td>'.$row['stunde'].'</td>
-                        <td>'.$row['klasse'].'</td>
+                    echo '                         
                         <td>'.$row['lehrer'].'</td>
-                        <td>'.$row['fach'].'</td>
-                        <td>'.$row['raum'].'</td>
                         <td><a href="editSupp.php?id='.$row['u_id'].'">Fehlt</td>';
 
                 }
@@ -82,11 +73,7 @@
             <tfoot>
                 <tr>
                     <!--<th data-hide="true">ID</th>-->
-                    <th>Nr.</th>
-                    <th>Emri</th>
-                    <th>Mbiemri</th>
-                    <th>Lloji i Dokumentit</th>
-                    <th>Vendodhja ne arkive</th>
+                    <th>Lehrer</th>
                     <th>Edit</th>
                 </tr>
             </tfoot>
