@@ -6,8 +6,9 @@
     if(!isset($_SESSION['loggedin']) && !isset($_SESSION['email']) && !isset($_SESSION['role']) && !isset($_SESSION['user_id'])){
         header('Location: signin.php');
     }
-
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['numri']) && isset($_POST['data']) && isset($_POST['presidenti'])){
+    
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['stunde1']) && isset($_POST['lehrer1']) && isset($_POST['fach1'])
+    && isset($_POST['klasse1']) && isset($_POST['suplehrer1']) && isset($_POST['beschreibung1']) && isset($_POST['raum1']) && isset($_POST['anz'])){
  
         // Validate name
             // Prepare an insert statement
@@ -47,6 +48,11 @@
     $sth->execute();
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql = "SELECT * FROM tb_infotainment_unterricht WHERE tag =" . $result[0]['tag']." and lehrer = '".$result[0]['lehrer']."' and fach <> 'SU' order by stunde asc;";
+    $sth = $con->prepare($sql);
+    $sth->execute();
+    $result1 = $sth->fetchAll(PDO::FETCH_ASSOC);
+
     if($result[0]['tag']==1){
         $dayName = "Montag";
     } else if($result[0]['tag']==2){
@@ -65,40 +71,72 @@
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id']; ?>" method="post">
         <div class="form-row">
-            <div class="form-group col-md-4">
-            <label>Emri</label>
-            <input type="number" class="form-control" name="numri" value="<?php echo $result[0]['lehrer']?>" required>
+            <div class="form-group col-md-1">
+                <label>Stunde</label>
             </div>
-            <div class="form-group col-md-4">
-            <label>Data</label>
-            <input type="date" class="form-control" name="data" value="<?php echo $result[0]['u_id']?>" required>
+            <div class="form-group col-md-1">
+                <label>Lehrer</label>
+            </div>
+            <div class="form-group col-md-1">
+                <label>Fach</label>
+            </div>
+            <div class="form-group col-md-1">
+                <label>Klasse</label>
+            </div>
+            <div class="form-group col-md-1">
+                <label>Raum</label>
+            </div>
+            <div class="form-group col-md-1">
+                <label>Supplierer</label>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Beschreibung</label>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-8">
-                <label>Presidenti</label>
-                <select name="presidenti" class="form-control">
-                    <?php
-                    $sql = "SELECT *
-                    FROM tb_pres_presidenti order by p_mbarimi desc;";
-                    $pdo = $con->prepare($sql);
-                    $pdo->execute();
-                    $result1 = $pdo->fetchAll();
-
-                    foreach($result1 as $row){
-                        if($row['p_id'] == $result[0]['d_presidenti'] ){
-                            echo '<option value="'.$row['p_id'].'" selected>'.$row['p_emer'].' '.$row['p_mbiemri'].'</option>
-                            ';
-                        }else{
-                            echo '<option value="'.$row['p_id'].'">'.$row['p_emer'].' '.$row['p_mbiemri'].'</option>
-                            ';
-                        }
-                    }
-                    ?>
-                </select>
+        
+        <?php 
+        $anz=0;
+        foreach($result1 as $row){
+            $anz = $anz+1;
+            echo '<div class="form-row">
+                <div class="form-group col-md-1">
+                <input type="number" class="form-control" name="stunde'.$anz.'" value="'.$row["stunde"].'" disabled>
+                </div>
+                <div class="form-group col-md-1">           
+                <input type="text" class="form-control" name="lehrer'.$anz.'" value="'.$row["lehrer"].'" disabled>
+                </div>
+                <div class="form-group col-md-1">
+                <input type="text" class="form-control" name="fach'.$anz.'" value="'.$row["fach"].'" disabled>
+                </div>
+                <div class="form-group col-md-1">
+                <input type="text" class="form-control" name="klasse'.$anz.'" value="'.$row["klasse"].'" disabled>
+                </div>
+                <div class="form-group col-md-1">
+                <input type="text" class="form-control" name="raum'.$anz.'" value="'.$row["raum"].'">
+                </div>
+                <div class="form-group col-md-1">';
+                $sql = "SELECT * FROM tb_infotainment_unterricht WHERE tag =" . $row['tag']." and stunde = ".$row['stunde']." and fach = 'SU';";
+                $sth = $con->prepare($sql);
+                $sth->execute();
+                $supplierer = $sth->fetchAll(PDO::FETCH_ASSOC);
+                echo '
+                    <select name="suplehrer'.$anz.'" class="form-control">
+                        <option value="0">----</option>';
+                    foreach($supplierer as $row){
+                        echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].'</option>
+                    ';}
+                    
+                    echo '
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                <input type="text" class="form-control" name="beschreibung'.$anz.'" value="">
+                </div>
             </div>
-
-            </div>
+        '; }
+        ?> 
+            <input type="text" name="anz" value="<?php echo $anz; ?>" hidden>
+            
             <br>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg" value="Submit">Ndrysho</button>
