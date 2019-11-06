@@ -15,7 +15,7 @@ if(isset($_POST['register'])){
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } else{
-        $sql = "SELECT u_id FROM tb_pres_users WHERE u_email = :username";
+        $sql = "SELECT u_id FROM tb_infotainment_users WHERE u_email = :username";
         if($stmt = $con->prepare($sql)){
             $param_username = trim($_POST["username"]);
             $stmt->bindParam(':username', $param_username);
@@ -66,7 +66,7 @@ if(isset($_POST['register'])){
     }
 
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
-        $sql = "INSERT INTO tb_pres_users (u_email, u_pswd,u_role) VALUES (:username, :password,:p)";
+        $sql = "INSERT INTO tb_infotainment_users (u_email, u_pswd,u_role) VALUES (:username, :password,:p)";
         if($stmt = $con->prepare($sql)){
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash

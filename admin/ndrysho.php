@@ -27,7 +27,7 @@
         if($password == $passwordConfirm){
             if(!$passwordConfirm_error && !$password_error){
                 if($password!='12345678' && (strlen($password)>7 && strlen($password)<21)){
-                    $sql = "UPDATE tb_pres_users SET u_pswd = :pswd WHERE u_id = :id";
+                    $sql = "UPDATE tb_infotainment_users SET u_pswd = :pswd WHERE u_id = :id";
                     $stmt = $con->prepare($sql);
                     //Bind value.
                     $stmt->bindValue(':pswd', password_hash($password,PASSWORD_DEFAULT));
@@ -36,7 +36,7 @@
                     
                     try {
                         $stmt->execute();
-                        $query = "Select * from tb_pres_users where u_id = :id;";
+                        $query = "Select * from tb_infotainment_users where u_id = :id;";
                         $pdo = $con->prepare($query);
                         $pdo->bindValue(':id', $_GET['id']);
                         $pdo->execute();

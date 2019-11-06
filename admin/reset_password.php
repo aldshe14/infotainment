@@ -5,7 +5,7 @@
         header('Location: signin.php');
     }
     if(isset($_GET['id'])){     
-        $sql = "UPDATE tb_pres_users set u_pswd= :pswd
+        $sql = "UPDATE tb_infotainment_users set u_pswd= :pswd
         WHERE u_id = :id ;";
         $pdo = $con->prepare($sql);
         $pdo->bindParam(':pswd', password_hash('12345678',PASSWORD_DEFAULT));
