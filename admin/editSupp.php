@@ -7,20 +7,26 @@
         header('Location: signin.php');
     }
     
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['stunde1']) && isset($_POST['lehrer1']) && isset($_POST['fach1'])
-    && isset($_POST['klasse1']) && isset($_POST['suplehrer1']) && isset($_POST['beschreibung1']) && isset($_POST['raum1']) && isset($_POST['anz'])){
- 
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['anz']) && isset($_POST['date'])){
+        $anz = 1; 
+        while($anz <= $_POST['anz']){
+            if(isset($_POST['stunde'.$anz]) && isset($_POST['lehrer'.$anz]) && isset($_POST['fach'.$anz])
+        && isset($_POST['klasse'.$anz]) && isset($_POST['suplehrer'.$anz]) && isset($_POST['beschreibung'.$anz]) && isset($_POST['raum'.$anz]))
+            echo "hohoho";
+            
         // Validate name
             // Prepare an insert statement
-            $sql = "UPDATE`tb_pres_dekret` set `d_numri`=:numri, `d_data`=:data, `d_presidenti`=:presidenti
-                    WHERE d_numri = :id";
+            $sql = "INSERT INTO `tb_infotainment_supplieren`(`stunde`,`lehrer`,`supplierer`,`klasse`,`raum`,`datum`,`beschreibung`) VALUES(:stunde,:lehrer,:supplierer,:klasse,:raum,:datum,:beschreibung) ";
              
             if($sth = $con->prepare($sql)){
                 // Bind variables to the prepared statement as parameters
-                $sth->bindParam(':numri', $_POST["numri"]);
-                $sth->bindParam(':data', $_POST["data"]);
-                $sth->bindParam(':presidenti', $_POST["presidenti"]);
-                $sth->bindParam(':id', $_GET["id"]);
+                $sth->bindParam(':stunde', $_POST["stunde".$anz]);
+                $sth->bindParam(':lehrer', $_POST["lehrer".$anz]);
+                $sth->bindParam(':supplierer', $_POST["suplehrer".$anz]);
+                $sth->bindParam(':klasse', $_POST["klasse".$anz]);
+                $sth->bindParam(':raum', $_POST["raum".$anz]);
+                $sth->bindParam(':datum', $_POST["date"]);
+                $sth->bindParam(':beschreibung', $_POST["beschreibung".$anz]);
 
                 try {
                     $sth->execute();
@@ -28,9 +34,7 @@
                     echo "<div id='hide' class=\"alert alert-success \">";
                     echo "<p>Dekreti u ndryshua me sukses!</p>";
                     echo "</div>";
-                    echo "<script> setTimeout(function(){
-                        window.location.href = 'dekret.php';
-                     }, 2000);</script>";
+                    
 
                 } catch (PDOException $e) {
                     echo "<div id='hide' class=\"alert alert-danger \">";
@@ -40,8 +44,12 @@
                     //echo '<script>window.location.href = "users.php?insert=err";</script>';
                 }
             }
+            $anz++;
+        }
         
     }
+
+    $rawDate = date("Y-m-d");
 
     $sql = "SELECT * FROM tb_infotainment_unterricht WHERE u_id =" . $_GET["id"].";";
     $sth = $con->prepare($sql);
@@ -96,20 +104,21 @@
         
         <?php 
         $anz=0;
+        
         foreach($result1 as $row){
             $anz = $anz+1;
             echo '<div class="form-row">
                 <div class="form-group col-md-1">
-                <input type="number" class="form-control" name="stunde'.$anz.'" value="'.$row["stunde"].'" disabled>
+                <input type="number" class="form-control" name="stunde'.$anz.'" value="'.$row["stunde"].'" readonly>
                 </div>
                 <div class="form-group col-md-1">           
-                <input type="text" class="form-control" name="lehrer'.$anz.'" value="'.$row["lehrer"].'" disabled>
+                <input type="text" class="form-control" name="lehrer'.$anz.'" value="'.$row["lehrer"].'" readonly>
                 </div>
                 <div class="form-group col-md-1">
-                <input type="text" class="form-control" name="fach'.$anz.'" value="'.$row["fach"].'" disabled>
+                <input type="text" class="form-control" name="fach'.$anz.'" value="'.$row["fach"].'" readonly>
                 </div>
                 <div class="form-group col-md-1">
-                <input type="text" class="form-control" name="klasse'.$anz.'" value="'.$row["klasse"].'" disabled>
+                <input type="text" class="form-control" name="klasse'.$anz.'" value="'.$row["klasse"].'" readonly>
                 </div>
                 <div class="form-group col-md-1">
                 <input type="text" class="form-control" name="raum'.$anz.'" value="'.$row["raum"].'">
@@ -136,7 +145,7 @@
         '; }
         ?> 
             <input type="text" name="anz" value="<?php echo $anz; ?>" hidden>
-            
+            <input type="text" name="date" value="<?php echo date('Y-m-d', strtotime($rawDate . ' +'.$_GET['d'].' day')); ?>" hidden>
             <br>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg" value="Submit">Ndrysho</button>

@@ -2,20 +2,24 @@
 	require_once "connection.php";
     require_once "header.php";
     require_once "navigation.php";
-
+    $diff=0;
     if(!isset($_SESSION['loggedin']) && !isset($_SESSION['email']) && !isset($_SESSION['role']) && !isset($_SESSION['user_id'])){
         header('Location: signin.php');
     }
     
-    $rawDate = date("m/d/Y");
+    $rawDate = date("Y-m-d");
 
     $day = date('N', strtotime($rawDate));
     if($day>5)
         $day=1;
 
-    if(isset($_GET['day']))
-        $day = $_GET['day'];
-
+    if(isset($_GET['day'])){
+        if($day < $_GET['day']){
+            $diff = $_GET['day'] - $day; 
+            $day = $_GET['day'];
+            //echo date('m/d/Y', strtotime($rawDate . ' +'.$diff.' day'));
+        }
+    }
     $sql = "SELECT * FROM tb_infotainment_unterricht where tag = :test and fach <> 'SU' and lehrer <> '' group by lehrer order by klasse asc ;";
     $stmt = $con->prepare($sql);
     $stmt->bindValue(":test",$day);
@@ -35,11 +39,11 @@
         </div>
         <div class="form-group col-md-4 mt-4">
             <select name="day" class="form-control">
-                <option value="1" <?php if(isset($_GET['day'])){if($_GET['day']==1){ echo 'selected'; $selected = 1;}}else{ echo 'selected';$selected = 1;}?>>Montag</option>
-                <option value="2" <?php if(isset($_GET['day'])){if($_GET['day']==2){ echo 'selected'; $selected = 2;}}?>>Dienstag</option>
-                <option value="3" <?php if(isset($_GET['day'])){if($_GET['day']==3){ echo 'selected'; $selected = 3;}}?>>Mittwoch</option>
-                <option value="4" <?php if(isset($_GET['day'])){if($_GET['day']==4){ echo 'selected'; $selected = 4;}}?>>Donnerstag</option>
-                <option value="5" <?php if(isset($_GET['day'])){if($_GET['day']==5){ echo 'selected'; $selected =5;}}?>>Freitag</option>
+                <option value="1" <?php if(isset($day)){if($day==1){ echo 'selected'; $selected = 1;}}else{ echo 'selected';$selected = 1;}?>>Montag</option>
+                <option value="2" <?php if(isset($day)){if($day==2){ echo 'selected'; $selected = 2;}}?>>Dienstag</option>
+                <option value="3" <?php if(isset($day)){if($day==3){ echo 'selected'; $selected = 3;}}?>>Mittwoch</option>
+                <option value="4" <?php if(isset($day)){if($day==4){ echo 'selected'; $selected = 4;}}?>>Donnerstag</option>
+                <option value="5" <?php if(isset($day)){if($day==5){ echo 'selected'; $selected =5;}}?>>Freitag</option>
             </select>
             
         </div>
@@ -64,7 +68,7 @@
                         //echo '<td></td>';
                     echo '                         
                         <td>'.$row['lehrer'].'</td>
-                        <td><a href="editSupp.php?id='.$row['u_id'].'">Fehlt</td>';
+                        <td><a href="editSupp.php?id='.$row['u_id'].'&d='.$diff.'">Fehlt</td>';
 
                 }
                 echo '</tbody>

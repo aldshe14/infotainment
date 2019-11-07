@@ -48,47 +48,51 @@ $(document).ready(function() {
         "processing": true,
       lengthChange: true,
       language:{
-        select: {
-          rows: {
-              _: "%d rreshta te selektuar",
-              0: "Kliko nje rresht per ta selektuar",
-              1: "1 rresht i selektuar"
-          }
-        },
-        "sEmptyTable":     "Nuk ka asnjë të dhënë në tabelë",
-        "sInfo":           "Duke treguar _START_ deri _END_ prej _TOTAL_ reshtave",
-        "sInfoEmpty":      "Duke treguar 0 deri 0 prej 0 reshtave",
-        "sInfoFiltered":   "(të filtruara nga gjithësej _MAX_  reshtave)",
-        "sInfoPostFix":    "",
-        "sInfoThousands":  ",",
-        "sLengthMenu":     "Shfaq _MENU_ rreshta",
-        "sLoadingRecords": "Duke punuar...",
-        "sProcessing":     "Duke procesuar...",
-        "sSearch":         "Kërko:",
-        "sZeroRecords":    "Asnjë e dhënë nuk u gjet",
+        "sEmptyTable":      "Keine Daten in der Tabelle vorhanden",
+        "sInfo":            "_START_ bis _END_ von _TOTAL_ Einträgen",
+        "sInfoEmpty":       "Keine Daten vorhanden",
+        "sInfoFiltered":    "(gefiltert von _MAX_ Einträgen)",
+        "sInfoPostFix":     "",
+        "sInfoThousands":   ".",
+        "sLengthMenu":      "_MENU_ Einträge anzeigen",
+        "sLoadingRecords":  "Wird geladen ..",
+        "sProcessing":      "Bitte warten ..",
+        "sSearch":          "Suchen",
+        "sZeroRecords":     "Keine Einträge vorhanden",
         "oPaginate": {
-            "sFirst":    "E para",
-            "sLast":     "E Fundit",
-            "sNext":     "Tjetra",
-            "sPrevious": "E Kaluara"
+            "sFirst":       "Erste",
+            "sPrevious":    "Zurück",
+            "sNext":        "Nächste",
+            "sLast":        "Letzte"
         },
         "oAria": {
-            "sSortAscending":  ": aktivizo për të sortuar kolonen me vlera në ngritje",
-            "sSortDescending": ": aktivizo për të sortuar kolonen me vlera në zbritje"
+            "sSortAscending":  ": aktivieren, um Spalte aufsteigend zu sortieren",
+            "sSortDescending": ": aktivieren, um Spalte absteigend zu sortieren"
+        },
+        "select": {
+            "rows": {
+                "_": "%d Zeilen ausgewählt",
+                "0": "",
+                "1": "1 Zeile ausgewählt"
+            }
         },
         "buttons": {
-          "csv": "Excel",
-          "print":    "Printo",
-          "colvis":   "Kolona",
-          "copy":     "Kopjo",
-          "copyTitle":    "Kopjo në clipboard",
-          "copyKeys": "Taste <i>ctrl</i> oder <i>\u2318</i> + <i>C</i> um Tabelle<br>in Zwischenspeicher zu kopieren.<br><br>Um abzubrechen die Nachricht anklicken oder Escape drücken.",
-          "copySuccess": {
-              "_": "%d Kolona u kopjuan",
-              "1": "1 Kolone u kopjua"
-          }
+            "print":    "Drucken",
+            "colvis":   "Spalten",
+            "copy":     "Kopieren",
+            "copyTitle":    "In Zwischenablage kopieren",
+            "copyKeys": "Taste <i>ctrl</i> oder <i>\u2318</i> + <i>C</i> um Tabelle<br>in Zwischenspeicher zu kopieren.<br><br>Um abzubrechen die Nachricht anklicken oder Escape drücken.",
+            "copySuccess": {
+                "_": "%d Zeilen kopiert",
+                "1": "1 Zeile kopiert"
+            },
+            "pageLength": {
+                "-1": "Zeige alle Zeilen",
+                "_":  "Zeige %d Zeilen"
+            }
         }
     }
+    
     });
 
     
@@ -96,7 +100,7 @@ $(document).ready(function() {
    $('#resetuserdata thead tr').clone(true).appendTo( '#resetuserdata thead' );
   $('#resetuserdata thead tr:eq(1) th').each( function (i) {
       var title = $(this).text();
-      $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+      $(this).html( '<input type="text" placeholder="'+title+' suchen" />' );
 
       $( 'input', this ).on( 'keyup change', function () {
           if ( t.column(i).search() !== this.value ) {
