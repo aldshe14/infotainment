@@ -10,10 +10,10 @@
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['anz']) && isset($_POST['date'])){
         $anz = 1; 
         while($anz <= $_POST['anz']){
-            if(isset($_POST['stunde'.$anz]) && isset($_POST['lehrer'.$anz]) && isset($_POST['fach'.$anz])
+
+            if(isset($_POST['stunde'.$anz]) && isset($_POST['lehrer'.$anz]) && isset($_POST['fach'.$anz]) & isset($_POST['check'.$anz])
         && isset($_POST['klasse'.$anz]) && isset($_POST['suplehrer'.$anz]) && isset($_POST['beschreibung'.$anz]) && isset($_POST['raum'.$anz]))
-            echo "hohoho";
-            
+            {
         // Validate name
             // Prepare an insert statement
             $sql = "INSERT INTO `tb_infotainment_supplieren`(`stunde`,`lehrer`,`supplierer`,`klasse`,`raum`,`datum`,`beschreibung`) VALUES(:stunde,:lehrer,:supplierer,:klasse,:raum,:datum,:beschreibung) ";
@@ -31,10 +31,11 @@
                 try {
                     $sth->execute();
                     //header('Location: users.php?insert=done');
-                    echo "<div id='hide' class=\"alert alert-success \">";
-                    echo "<p>Dekreti u ndryshua me sukses!</p>";
-                    echo "</div>";
-                    
+                    if($anz==$_POST['anz']){
+                        echo "<div id='hide' class=\"alert alert-success \">";
+                        echo "<p>Dekreti u ndryshua me sukses!</p>";
+                        echo "</div>";
+                    }
 
                 } catch (PDOException $e) {
                     echo "<div id='hide' class=\"alert alert-danger \">";
@@ -43,6 +44,7 @@
                     //header('Location: users.php?insert=err');
                     //echo '<script>window.location.href = "users.php?insert=err";</script>';
                 }
+            }
             }
             $anz++;
         }
@@ -79,6 +81,9 @@
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id']; ?>" method="post">
         <div class="form-row">
+        <div class="form-group col-xs-2">
+                <label></label>
+            </div>
             <div class="form-group col-md-1">
                 <label>Stunde</label>
             </div>
@@ -108,6 +113,9 @@
         foreach($result1 as $row){
             $anz = $anz+1;
             echo '<div class="form-row">
+                <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="check'.$anz.'" value="">
+                </div>
                 <div class="form-group col-md-1">
                 <input type="number" class="form-control" name="stunde'.$anz.'" value="'.$row["stunde"].'" readonly>
                 </div>
@@ -130,7 +138,7 @@
                 $supplierer = $sth->fetchAll(PDO::FETCH_ASSOC);
                 echo '
                     <select name="suplehrer'.$anz.'" class="form-control">
-                        <option value="0">----</option>';
+                        <option value="---">----</option>';
                     foreach($supplierer as $row){
                         echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].'</option>
                     ';}
