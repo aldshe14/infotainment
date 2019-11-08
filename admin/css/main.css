@@ -11,9 +11,8 @@ nav a img{
     font-size: 0.95em !important;
     text-justify: center;
 }
-td{
+table thead td{
     font-weight: bold !important;
-    font-style: italic !important;
 }
 
 table.dataTable thead .sorting:after,
