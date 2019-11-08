@@ -14,6 +14,6 @@ WHERE u.tag ="5" and u.stunde = "1" and u.fach = 'SU' and s.supplierer is null;
 
 select * 
 FROM tb_infotainment_unterricht
-where tag="5" and stunde <> "1"
+where (stunde <> "1" and tag ="5") or (tag<>"5")
 group by lehrer;
 

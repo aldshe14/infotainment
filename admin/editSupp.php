@@ -143,15 +143,29 @@
                 $sth = $con->prepare($sql);
                 $sth->execute();
                 $supplierer = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+                $sql1 = "SELECT lehrer
+                FROM tb_infotainment_unterricht
+                WHERE ((tag =" . $row['tag']." and stunde = ".$row['stunde'].") or (tag <>" . $row['tag'].")) and lehrer <>''
+                group by lehrer";
+                $stmt = $con->prepare($sql1);
+                $stmt->execute();
+                $supplierer1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
                 echo '
-                    <select name="suplehrer'.$anz.'" class="form-control">
-                        <option value="---">----</option>';
+                    <select name="suplehrer'.$anz.'" class="form-control">';
+                    if($supplierer)    
+                    echo '<option value="---">----</option>';
                     foreach($supplierer as $row){
-                        echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].'</option>
+                        echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].' - Bereit</option>
                     ';}
                     
                     echo '
-                    <option value="---">----</option>
+                    <option value="---">----</option>';
+                    foreach($supplierer1 as $row){
+                        echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].'</option>
+                    ';}
+                    echo '
                     </select>
                 </div>
                 <div class="form-group col-md-2">
