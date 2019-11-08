@@ -16,7 +16,8 @@
             {
         // Validate name
             // Prepare an insert statement
-            $sql = "INSERT INTO `tb_infotainment_supplieren`(`stunde`,`lehrer`,`supplierer`,`klasse`,`raum`,`datum`,`beschreibung`) VALUES(:stunde,:lehrer,:supplierer,:klasse,:raum,:datum,:beschreibung) ";
+            $sql = "INSERT INTO `tb_infotainment_supplieren`(`stunde`,`lehrer`,`supplierer`,`klasse`,`raum`,`datum`,`beschreibung`) 
+            VALUES(:stunde,:lehrer,:supplierer,:klasse,:raum,:datum,:beschreibung) ";
              
             if($sth = $con->prepare($sql)){
                 // Bind variables to the prepared statement as parameters
@@ -57,9 +58,11 @@
     $sth = $con->prepare($sql);
     $sth->execute();
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-
+    
     $sql = "SELECT u.u_id as id, u.unterricht_nr as unterricht_nr, u.klasse as klasse, u.lehrer as lehrer, u.raum as raum, u.fach as fach, u.tag as tag, u.stunde as stunde
-            FROM tb_infotainment_unterricht u left join tb_infotainment_supplieren s on u.lehrer = s.lehrer and u.stunde = s.stunde and u.tag <> dayofweek(s.datum)
+            FROM tb_infotainment_unterricht u 
+            left join tb_infotainment_supplieren s 
+            on u.lehrer = s.lehrer and u.stunde = s.stunde and u.tag <> (dayofweek(s.datum)-1)
             WHERE s.lehrer is null and u.tag =" . $result[0]['tag']." and u.lehrer = '".$result[0]['lehrer']."' and u.fach <> 'SU' order by u.stunde asc;";
     $sth = $con->prepare($sql);
     $sth->execute();

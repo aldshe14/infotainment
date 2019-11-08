@@ -1,6 +1,17 @@
 SELECT u.u_id as id, u.unterricht_nr as unterricht_nr, u.klasse as klasse, u.lehrer as lehrer, u.raum as raum, u.fach as fach, u.tag as tag, u.stunde as stunde
-FROM tb_infotainment_unterricht u left join tb_infotainment_supplieren s on u.lehrer = s.lehrer and u.stunde = s.stunde
-WHERE s.lehrer is null and u.tag ="4" and u.lehrer = 'AIT' and u.fach <> 'SU' order by u.stunde asc;
+FROM tb_infotainment_unterricht u 
+join tb_infotainment_supplieren s 
+on u.lehrer = s.lehrer and u.stunde = s.stunde and dayofweek(s.datum)=u.tag
+WHERE s.lehrer is null and u.tag ="5" and u.lehrer = 'AIT' and u.fach <> 'SU' 
+order by u.stunde asc;
+
+
+SELECT *
+FROM tb_infotainment_unterricht u 
+left join tb_infotainment_supplieren s 
+on u.lehrer = s.lehrer and u.stunde = s.stunde and u.tag=(dayofweek(s.datum)-1)
+WHERE s.lehrer is null and u.tag ="5" and u.lehrer = 'AIT' and u.fach <> 'SU'
+order by u.stunde asc;
 
 SELECT *
 FROM tb_infotainment_unterricht u left join tb_infotainment_supplieren s on u.lehrer = s.lehrer and u.stunde = s.stunde and u.tag = dayofweek(s.datum)
@@ -14,6 +25,19 @@ WHERE u.tag ="5" and u.stunde = "1" and u.fach = 'SU' and s.supplierer is null;
 
 select * 
 FROM tb_infotainment_unterricht
-where (stunde <> "1" and tag ="5") or (tag<>"5")
+where ((stunde <> "1" and tag ="5") )and lehrer <> ''   
 group by lehrer;
 
+
+
+select * 
+FROM tb_infotainment_unterricht
+where stunde <> "1"
+group by lehrer;
+
+select * 
+FROM tb_infotainment_unterricht u
+ left join tb_infotainment_unterricht l
+on u.lehrer = l.lehrer and u.stunde = l.stunde and u.tag = l.tag
+where u.stunde <> "1" and u.tag ="5"
+group by u.lehrer;
