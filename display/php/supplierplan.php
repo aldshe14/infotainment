@@ -7,7 +7,7 @@
 
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo '<table border="1" width="97%" ID="Table2" cellpadding="0" cellspacing="0" height="97%" style="margin-left:auto; margin-right:auto; margin-top:1%;"';
+    echo '<table border="1" width="97%" ID="Table2" cellpadding="0" cellspacing="0" style="margin-left:auto; margin-right:auto; margin-top:1%;"';
     echo '<thead><td>Stunde</td><td>Klasse</td><td>Lehrer</td><td>Supplierer</td><td>Raum</td><td>Beschreibung</td></thead>';
     foreach($result as $row) {
         echo "<tr>";  
@@ -15,4 +15,5 @@
         echo "</tr>";
     }
     echo "</table>";
+    
 ?>

@@ -58,10 +58,13 @@
     $sth->execute();
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT * FROM tb_infotainment_unterricht WHERE tag =" . $result[0]['tag']." and lehrer = '".$result[0]['lehrer']."' and fach <> 'SU' order by stunde asc;";
+    $sql = "SELECT u.u_id as id, u.unterricht_nr as unterricht_nr, u.klasse as klasse, u.lehrer as lehrer, u.raum as raum, u.fach as fach, u.tag as tag, u.stunde as stunde
+            FROM tb_infotainment_unterricht u left join tb_infotainment_supplieren s on u.lehrer = s.lehrer and u.stunde = s.stunde and u.tag <> dayofweek(s.datum)
+            WHERE s.lehrer is null and u.tag =" . $result[0]['tag']." and u.lehrer = '".$result[0]['lehrer']."' and u.fach <> 'SU' order by u.stunde asc;";
     $sth = $con->prepare($sql);
     $sth->execute();
     $result1 = $sth->fetchAll(PDO::FETCH_ASSOC);
+
 
     if($result[0]['tag']==1){
         $dayName = "Montag";
@@ -109,7 +112,7 @@
         
         <?php 
         $anz=0;
-        
+        if($result1){
         foreach($result1 as $row){
             $anz = $anz+1;
             echo '<div class="form-row">
@@ -132,7 +135,11 @@
                 <input type="text" class="form-control" name="raum'.$anz.'" value="'.$row["raum"].'">
                 </div>
                 <div class="form-group col-md-1">';
-                $sql = "SELECT * FROM tb_infotainment_unterricht WHERE tag =" . $row['tag']." and stunde = ".$row['stunde']." and fach = 'SU';";
+                $sql = "SELECT u.lehrer as lehrer 
+                FROM tb_infotainment_unterricht u 
+                left join tb_infotainment_supplieren s
+                on u.lehrer = s.supplierer
+                WHERE u.tag =" . $row['tag']." and u.stunde = ".$row['stunde']." and u.fach = 'SU' and s.supplierer is null;";
                 $sth = $con->prepare($sql);
                 $sth->execute();
                 $supplierer = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -144,13 +151,14 @@
                     ';}
                     
                     echo '
+                    <option value="---">----</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
                 <input type="text" class="form-control" name="beschreibung'.$anz.'" value="">
                 </div>
             </div>
-        '; }
+        '; }}
         ?> 
             <input type="text" name="anz" value="<?php echo $anz; ?>" hidden>
             <input type="text" name="date" value="<?php echo date('Y-m-d', strtotime($rawDate . ' +'.$_GET['d'].' day')); ?>" hidden>

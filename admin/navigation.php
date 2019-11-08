@@ -17,8 +17,8 @@
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php') echo "active"; ?>">
             <a class="nav-link" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
         </li>
-        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='dekorime.php') echo "active"; ?>">
-            <a class="nav-link" href="dekorime.php">Displays</a>
+        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='suppliertabelle.php') echo "active"; ?>">
+            <a class="nav-link" href="suppliertabelle.php">SUPPLIERTABELLE</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='nenshtetesi.php') echo "active"; ?>">
             <a class="nav-link" href="nenshtetesi.php"><i class="fas fa-user"></i> MENU3</a>

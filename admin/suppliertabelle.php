@@ -17,17 +17,19 @@
         if($day < $_GET['day']){
             $diff = $_GET['day'] - $day; 
             $day = $_GET['day'];
+            $rawDate = date('Y-m-d', strtotime($rawDate . ' +'.$diff.' day'));
             //echo date('m/d/Y', strtotime($rawDate . ' +'.$diff.' day'));
         }else if($day == 5 && $_GET['day']<$day){
             //$diff = 3;
             $diff = 2+$_GET['day'];
+            $rawDate = date('Y-m-d', strtotime($rawDate . ' +'.$diff.' day'));
             //$day = 1;
             $day = $_GET['day'];
         }
     }
-    $sql = "SELECT * FROM tb_infotainment_unterricht where tag = :test and fach <> 'SU' and lehrer <> '' group by lehrer order by klasse asc ;";
+    $sql = "SELECT * FROM tb_infotainment_supplieren where datum = :datum '' order by stunde asc ;";
     $stmt = $con->prepare($sql);
-    $stmt->bindValue(":test",$day);
+    $stmt->bindValue(":datum",$rawDate);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -40,7 +42,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 mt-4">
-        <h1>Supplierplan</h1>
+        <h1>Suppliertabelle</h1>
         </div>
         <div class="form-group col-md-4 mt-4">
             <select name="day" class="form-control">
@@ -58,14 +60,24 @@
         <table id="resetuserdata" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]' data-page-length='50'>
             <thead>
                 <tr>
-                    <!--<th data-hide="true">ID</th>-->
+                    <td>Stunde</td>
+                    <td>Klasse</td>
+                    <td>Raum</td>
                     <td>Lehrer</td>
+                    <td>Supplierer</td>
+                    <td>Beschreibung</td>
                     <td>Edit</td>
+                    <td>Delete</td>
                 </tr>
                 <tr>
-                    <!--<th data-hide="true">ID</th>-->
-                    <th>Lehrer</th>
-                    <th>Edit</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <?php
@@ -77,8 +89,14 @@
                         //<td>'.$row['p_id'].'</td>
                         //echo '<td></td>';
                     echo '                         
+                        <td>'.$row['stunde'].'</td>
+                        <td>'.$row['klasse'].'</td>
+                        <td>'.$row['raum'].'</td>
                         <td>'.$row['lehrer'].'</td>
-                        <td><a href="editSupp.php?id='.$row['u_id'].'&d='.$diff.'">Fehlt</td>';
+                        <td>'.$row['supplierer'].'</td>
+                        <td>'.$row['beschreibung'].'</td>
+                        <td><a href="editSupp.php?id='.$row['s_id'].'">Edit</td>
+                        <td><a href="delSupplierer.php?id='.$row['s_id'].'">Delete</td>';
 
                 }
                 echo '</tbody>
@@ -86,9 +104,14 @@
             ?>
             <tfoot>
                 <tr>
-                    <!--<th data-hide="true">ID</th>-->
+                    <th>Stunde</th>
+                    <th>Klasse</th>
+                    <th>Raum</th>
                     <th>Lehrer</th>
+                    <th>Supplierer</th>
+                    <th>Beschreibung</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </tfoot>
         </table>

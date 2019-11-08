@@ -97,8 +97,8 @@ $(document).ready(function() {
 
     
 
-   $('#resetuserdata thead tr').clone(true).appendTo( '#resetuserdata thead' );
-  $('#resetuserdata thead tr:eq(1) th').each( function (i) {
+    //$('#resetuserdata thead tr').clone(true).appendTo( '#resetuserdata thead' );
+    $('#resetuserdata thead tr th').each( function (i) {
       var title = $(this).text();
       $(this).html( '<input type="text" placeholder="'+title+' suchen" />' );
 
