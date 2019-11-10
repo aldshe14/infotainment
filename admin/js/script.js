@@ -28,7 +28,9 @@ $(document).ready(function() {
           {
             extend: 'print',
             title: "",
-            messageTop: "",
+            messageTop: function (){
+              return "Stundenplan";
+            },
             messageBottom: "",
             header : true,
             exportOptions:{

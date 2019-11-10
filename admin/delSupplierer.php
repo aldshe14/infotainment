@@ -8,16 +8,19 @@
     }
 
         require_once "connection.php";
-        $sql = "DELETE FROM tb_infotainment_supplieren where s_id = :id";
+        $sql = "DELETE FROM tb_infotainment_supp_unter where s_id = :id";
         $sth = $con->prepare($sql);
         $sth->bindParam(':id', $_GET["id"]);
 
         try {
             $sth->execute();
+            $sql = "DELETE FROM tb_infotainment_supplieren where s_id = :id";
+            $sth = $con->prepare($sql);
+            $sth->bindParam(':id', $_GET["id"]);
             $con = null;
-            header('location:suppliertabelle.php?status=done');
+            header('location:suppliertabelle.php?status=done&day='.$_GET['day']);
         } catch (PDOException $e) {
-            header('location:suppliertabelle.php?status=err');
+            header('location:suppliertabelle.php?status=err&day='.$_GET['day']);
         }
         exit();        
     ?>

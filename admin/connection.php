@@ -1,10 +1,10 @@
 <?php
 
-$servername="htl-server.com:33066";
+$servername="localhost";
 
-$usr="infotainment";
+$usr="root";
 
-$pswd="1nf0tainment";
+$pswd="";
 
 $dbname="infotainment_system";
 
