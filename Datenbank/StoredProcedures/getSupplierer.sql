@@ -2,7 +2,7 @@ delimiter //
 create procedure sp_getSupplierer(istunde int, itag int, iwoche int)
 begin 
 	-- select *, abs(a1.stunde-istunde)
-    select *,a1.lehrer
+    select a1.lehrer
 	from tb_infotainment_unterricht a1
 	left join (
 		select t1.lehrer
@@ -49,7 +49,7 @@ begin
 		where d1.fach = 'SU' and d1.tag =itag and stunde=istunde and d2.supplierer is null
     ) a5
     on a1.lehrer = a5.lehrer
-	where a1.tag= itag and a2.lehrer is not null and a3.supplierer is null and a4.lehrer is null and a1.fach <> 'SU'
+	where a1.tag= itag and a2.lehrer is not null and a3.supplierer is null and a4.lehrer is null and a5.lehrer is null
 	group by a1.lehrer
     order by abs(a1.stunde-istunde) asc;
 end //
