@@ -1,10 +1,19 @@
 <?php
 	require_once "connection.php";
     
-    $sql = "SELECT * FROM tb_infotainment_supplieren where datum=:date order by stunde asc;";
-    $stmt = $con->prepare($sql);
-    $stmt->bindValue(":date",date("Y-m-d"));
+    $rawDate = date("Y-m-d");
+    $day = date('N', strtotime($rawDate));
 
+    $sql = "SELECT u.stunde as stunde, u.fach as fach, u.lehrer as lehrer, u.raum as raum, 
+            s.supplierer as supplierer, s.beschreibung as beschreibung, u.klasse as klasse
+            FROM tb_infotainment_supplieren s
+            join tb_infotainment_unterricht u
+            on s.u_id = u.u_id 
+            where u.tag = :tag and s.woche = :woche
+            order by s.u_id asc;";
+    $stmt = $con->prepare($sql);
+    $stmt->bindValue(":tag",$day);
+    $stmt->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate)));
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo '<table border="1" width="97%" ID="Table2" cellpadding="0" cellspacing="0" style="margin-left:auto; margin-right:auto; margin-top:1%;"';

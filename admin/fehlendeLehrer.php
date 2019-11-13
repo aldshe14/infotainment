@@ -34,7 +34,6 @@
             $day = $_GET['day'];
         }
     }
-
     $sql = "SELECT u.u_id as u_id, u.lehrer as lehrer
             FROM tb_infotainment_unterricht u
             left join (
@@ -46,7 +45,7 @@
             on u.u_id = u1.u_id
             left join tb_infotainment_fehlendeLehrer l
             on u.u_id = l.u_id and woche = :woche
-            where u.tag = :tag1 and u.lehrer <> ''and u1.u_id is not null and l.u_id is null
+            where u.tag = :tag1 and u.lehrer <> ''and u1.u_id is not null and l.u_id is not null
             order by u.klasse asc ;";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":tag",$day);
@@ -67,7 +66,7 @@
         <h1>Supplierplan</h1>
         </div>
         <div class="form-group col-md-2 mt-4">
-            <select name="day"class="form-control">
+        <select name="day"class="form-control">
                 <option value="1" <?php if($day==1){ echo 'selected';}?>>Montag</option>
                 <option value="2" <?php if($day==2){ echo 'selected';}?>>Dienstag</option>
                 <option value="3" <?php if($day==3){ echo 'selected';}?>>Mittwoch</option>
@@ -90,11 +89,13 @@
                     <!--<th data-hide="true">ID</th>-->
                     <td>Lehrer</td>
                     <td>Edit</td>
+                    <td>Löschen</td>
                 </tr>
                 <tr>
                     <!--<th data-hide="true">ID</th>-->
                     <th>Lehrer</th>
-                    <th>Edit</th>
+                    <th>Supplieren</th>
+                    <th>Löschen</th>
                 </tr>
             </thead>
             <?php
@@ -107,8 +108,8 @@
                         //echo '<td></td>';
                     echo '                         
                         <td>'.$row['lehrer'].'</td>
-                        <td><a href="addLehrer.php?id='.$row['u_id'].'&d='.($diff+$tage).'&day='.$day.'">Fehlt</td>';
-
+                        <td><a href="editSupp.php?id='.$row['u_id'].'&d='.($diff+$tage).'&day='.$day.'">Supplieren</td>
+                        <td><a href="delLehrer.php?id='.$row['u_id'].'&d='.($diff+$tage).'&day='.$day.'">Delete</td>';
                 }
                 echo '</tbody>
                     ';
@@ -118,6 +119,7 @@
                     <!--<th data-hide="true">ID</th>-->
                     <th>Lehrer</th>
                     <th>Edit</th>
+                    <th>Löschen</th>
                 </tr>
             </tfoot>
         </table>

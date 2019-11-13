@@ -7,16 +7,18 @@
         header('Location: signin.php');
     }
 
-    $sql = "DELETE FROM tb_infotainment_supplieren where u_id = :id and woche = :woche";
+    $rawDate = date("Y-m-d");
+
+    $sql = "DELETE FROM tb_infotainment_fehlendeLehrer where u_id = :id and woche = :woche";
     $sth = $con->prepare($sql);
     $sth->bindParam(':id', $_GET["id"]);
-    $sth->bindParam(':woche', $_GET["woche"]);
+    $sth->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate . ' +'.$_GET['d'].' day')));
     try {
         $sth->execute();
         $con = null;
-        header('location:suppliertabelle.php?status=done&day='.$_GET['day']);
+        header('location:fehlendeLehrer.php?status=done&day='.$_GET['day']);
     } catch (PDOException $e) {
-        header('location:suppliertabelle.php?status=err&day='.$_GET['day']);
+        header('location:fehlendeLehrer.php?status=err&day='.$_GET['day']);
     }
     exit();        
-    ?>
+?>

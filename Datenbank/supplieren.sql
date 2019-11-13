@@ -1,8 +1,14 @@
 create table tb_infotainment_supplieren(
-	s_id int primary key auto_increment,
+	u_id int,
+    woche int default YEARWEEK(date(now())),
     supplierer varchar(3) not null,
-    beschreibung varchar(50)
+    beschreibung varchar(50),
+    primary key(u_id,woche),
+    constraint fk_supplieren_fehlendelehrer
+    foreign key(u_id)
+    references tb_infotainment_fehlendeLehrer(u_id)
 );
+
 
 create table tb_infotainment_supp_unter(
 	u_id int not null,
@@ -26,3 +32,4 @@ SELECT *,u.u_id as u_id, u.stunde as stunde
 insert tb_infotainment_supplieren(supplierer,datum,beschreibung)values("AIT","2019-01-01","");
 select last_insert_id();
 drop table tb_infotainment_supp_unter;
+drop table tb_infotainment_supplieren;

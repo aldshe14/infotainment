@@ -17,39 +17,27 @@
             {
         // Validate name
             // Prepare an insert statement
-            $sql = "INSERT INTO `tb_infotainment_supplieren`(`supplierer`,`beschreibung`) 
-            VALUES(:supplierer,:beschreibung) ";
+            $sql = "INSERT INTO `tb_infotainment_supplieren`(`u_id`, `woche`, `supplierer`,`beschreibung`) 
+            VALUES(:id, :woche, :supplierer,:beschreibung) ";
              
             if($sth = $con->prepare($sql)){
                 // Bind variables to the prepared statement as parameters
+                $sth->bindParam(':id', $_POST["u_id".$anz]);
                 $sth->bindParam(':supplierer', $_POST["suplehrer".$anz]);
                 //$sth->bindParam(':datum', $_POST["date"]);
                 $sth->bindParam(':beschreibung', $_POST["beschreibung".$anz]);
-
-
+                $sth->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate . ' +'.$_GET['d'].' day')));
                 
                 try {
                     $sth->execute();
 
-                    $sql = "SELECT Last_Insert_Id() as id;";
-                    $stmt = $con->prepare($sql);
-                    $stmt->execute();
-                    $last = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    echo $last[0]["id"];
-                    $sql = "INSERT into tb_infotainment_supp_unter(u_id,s_id,woche) values(:u_id,:s_id,:woche)";
-                    $stmt = $con->prepare($sql);
-                    $stmt->bindParam(':u_id', $_POST["u_id".$anz]);
-                    $stmt->bindParam(':s_id', $last[0]["id"]);
-                    $stmt->bindValue(':woche', date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate . ' +'.$_GET['d'].' day')));
-                    $stmt->execute();
                     //header('Location: users.php?insert=done');
                     if($anz==$_POST['anz']){
                         echo "<div id='hide' class=\"alert alert-success \">";
                         echo "<p>Dekreti u ndryshua me sukses!</p>";
                         echo "</div>";
-                        
                     }
-                    header('Location: supplierplan.php?day='.$_GET['day']);
+                    header('Location: fehlendeLehrer.php?day='.$_GET['day']);
 
                 } catch (PDOException $e) {
                     echo "<div id='hide' class=\"alert alert-danger \">";
@@ -72,10 +60,8 @@
     
     $sql = "SELECT *, u.u_id as u_id
             from tb_infotainment_unterricht u
-            left join tb_infotainment_supp_unter z
-            on u.u_id = z.u_id
             left join tb_infotainment_supplieren s
-            on z.s_id = s.s_id
+            on s.u_id = u.u_id
             where u.fach <> 'SU' and u.tag = :tag and supplierer is null and u.lehrer = :lehrer or woche <> :woche
             having u.tag = :tag1
             order by u.stunde asc
@@ -159,31 +145,24 @@
                 <input type="text" class="form-control" name="raum'.$anz.'" value="'.$row["raum"].'" readonly>
                 </div>
                 <div class="form-group col-md-1">';
+
                 $sql = "SELECT u.lehrer as lehrer
                         from tb_infotainment_unterricht u
                         left join tb_infotainment_supplieren s
-                        on u.lehrer = s.supplierer
-                        where u.fach = 'SU' and tag =:tag and stunde=:stunde and s.supplierer is null";
+                        on u.lehrer = s.supplierer and woche = :woche
+                        where u.fach = 'SU' and tag =:tag and stunde=:stunde and s.supplierer is null ";
                 $sth = $con->prepare($sql);
                 $sth->bindParam(":tag",$row['tag']);
                 $sth->bindParam(":stunde",$row['stunde']);
+                $sth->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate . ' +'.$_GET['d'].' day')));
                 $sth->execute();
                 $supplierer = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-                $sql1 = "SELECT u.lehrer as lehrer
-                        from tb_infotainment_unterricht u
-                        left join (select lehrer
-                        from tb_infotainment_unterricht tu
-                        where tu.stunde = :stunde and tu.tag=:tag ) u1
-                        on u.lehrer = u1.lehrer
-                        left join tb_infotainment_supp_unter z
-                        on z.u_id = u.u_id
-                        where u.tag=:tag1 and z.u_id is null and u.fach <> 'SU' and u.lehrer <> '' and u1.lehrer is null
-                        group by u.lehrer;";
+                $sql1 = "call sp_getSupplierer(:stunde,:tag,:woche)";
                 $stmt = $con->prepare($sql1);
                 $stmt->bindParam(":tag",$row['tag']);
                 $stmt->bindParam(":stunde",$row['stunde']);
-                $stmt->bindParam(":tag1",$row['tag']);
+                $stmt->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate . ' +'.$_GET['d'].' day')));
                 $stmt->execute();
                 $supplierer1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

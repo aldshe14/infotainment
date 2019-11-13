@@ -18,13 +18,10 @@
             <a class="nav-link" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='suppliertabelle.php') echo "active"; ?>">
-            <a class="nav-link" href="suppliertabelle.php">SUPPLIERTABELLE</a>
+            <a class="nav-link" href="suppliertabelle.php"><i class="fas fa-table"></i> SUPPLIERTABELLE</a>
         </li>
-        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='nenshtetesi.php') echo "active"; ?>">
-            <a class="nav-link" href="nenshtetesi.php"><i class="fas fa-user"></i> MENU3</a>
-        </li>
-        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='dekret.php') echo "active"; ?>">
-            <a class="nav-link" href="dekret.php">Settings</a>
+        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='fehlendeLehrer.php') echo "active"; ?>">
+            <a class="nav-link" href="fehlendeLehrer.php"><i class="fas fa-address-book"></i> FEHLENDELEHRER</a>
         </li>
 
         <?php

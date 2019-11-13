@@ -1,9 +1,9 @@
 <?php
 
 
-$servername="htl-server.com:33066";
-$usr="infotainment";
-$pswd="1nf0tainment";
+$servername="localhost";
+$usr="root";
+$pswd="";
 $dbname="infotainment_system";
 
 $message;

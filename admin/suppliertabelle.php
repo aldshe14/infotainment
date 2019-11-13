@@ -35,16 +35,13 @@
             $diff = $_GET['day']-$day;
             $day = $_GET['day'];
         }
-    }else{
-        $diff = 1-$day;
     }
+
     $sql = "SELECT * 
             FROM tb_infotainment_unterricht u
-            left join tb_infotainment_supp_unter z
-            on u.u_id = z.u_id
             left join tb_infotainment_supplieren s
-            on z.s_id = s.s_id
-            where z.woche = :week and tag = :tag
+            on u.u_id = s.u_id
+            where s.woche = :week and u.tag = :tag
             order by u.stunde asc ;";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":tag",$day);
@@ -64,12 +61,12 @@
         <h1>Suppliertabelle</h1>
         </div>
         <div class="form-group col-md-2 mt-4">
-            <select name="day" class="form-control">
-                <option value="1" <?php if(isset($_GET['day'])){if($_GET['day']==1){ echo 'selected'; $selected = 1;}}else{ echo 'selected';$selected = 1;}?>>Montag</option>
-                <option value="2" <?php if(isset($_GET['day'])){if($_GET['day']==2){ echo 'selected'; $selected = 2;}}?>>Dienstag</option>
-                <option value="3" <?php if(isset($_GET['day'])){if($_GET['day']==3){ echo 'selected'; $selected = 3;}}?>>Mittwoch</option>
-                <option value="4" <?php if(isset($_GET['day'])){if($_GET['day']==4){ echo 'selected'; $selected = 4;}}?>>Donnerstag</option>
-                <option value="5" <?php if(isset($_GET['day'])){if($_GET['day']==5){ echo 'selected'; $selected =5;}}?>>Freitag</option>
+            <select name="day"class="form-control">
+                <option value="1" <?php if($day==1){ echo 'selected';}?>>Montag</option>
+                <option value="2" <?php if($day==2){ echo 'selected';}?>>Dienstag</option>
+                <option value="3" <?php if($day==3){ echo 'selected';}?>>Mittwoch</option>
+                <option value="4" <?php if($day==4){ echo 'selected';}?>>Donnerstag</option>
+                <option value="5" <?php if($day==5){ echo 'selected';}?>>Freitag</option>
             </select>
         </div>
         <div class="col-md-2 mt-4">
@@ -119,8 +116,8 @@
                         <td>'.$row['lehrer'].'</td>
                         <td>'.$row['supplierer'].'</td>
                         <td>'.$row['beschreibung'].'</td>
-                        <td><a href="editSupp.php?id='.$row['s_id'].'&day='.$day.'">Edit</td>
-                        <td><a href="delSupplierer.php?id='.$row['s_id'].'&day='.$day.'">Delete</td>';
+                        <td><a href="editSupp.php?id='.$row['u_id'].'&day='.$day.'">Edit</td>
+                        <td><a href="delSupplierer.php?id='.$row['u_id'].'&day='.$day.'&woche='.$row['woche'].'">Delete</td>';
 
                 }
                 echo '</tbody>
