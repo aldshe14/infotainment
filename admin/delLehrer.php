@@ -9,7 +9,7 @@
 
     $rawDate = date("Y-m-d");
 
-    $sql = "DELETE FROM tb_infotainment_fehlendeLehrer where u_id = :id and woche = :woche";
+    $sql = "DELETE FROM tb_infotainment_fehlendelehrer where u_id = :id and woche = :woche";
     $sth = $con->prepare($sql);
     $sth->bindParam(':id', $_GET["id"]);
     $sth->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate . ' +'.$_GET['d'].' day')));

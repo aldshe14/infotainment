@@ -10,7 +10,7 @@
     }
 
         require_once "connection.php";
-        $sql = "INSERT INTO  tb_infotainment_fehlendeLehrer (u_id,woche) VALUES (:id,:woche);";
+        $sql = "INSERT INTO  tb_infotainment_fehlendelehrer (u_id,woche) VALUES (:id,:woche);";
         $sth = $con->prepare($sql);
         $sth->bindParam(':id', $_GET["id"]);
         $sth->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate . ' +'.$_GET['d'].' day')));

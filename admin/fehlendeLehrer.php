@@ -43,7 +43,7 @@
                 group by lehrer
             ) u1
             on u.u_id = u1.u_id
-            left join tb_infotainment_fehlendeLehrer l
+            left join tb_infotainment_fehlendelehrer l
             on u.u_id = l.u_id and woche = :woche
             where u.tag = :tag1 and u.lehrer <> ''and u1.u_id is not null and l.u_id is not null
             order by u.klasse asc ;";
