@@ -2,8 +2,8 @@
 
 
 $servername="localhost";
-$usr="root";
-$pswd="";
+$usr="infotainment";
+$pswd="1nf0tainment";
 $dbname="infotainment_system";
 
 $message;
