@@ -4,7 +4,7 @@ $servername="localhost";
 
 $usr="infotainmnet";
 
-$pswd="infotainment";
+$pswd="1nf0tainment";
 
 $dbname="infotainment_system";
 
