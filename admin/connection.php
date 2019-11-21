@@ -2,7 +2,7 @@
 
 $servername="localhost";
 
-$usr="infotainmnet";
+$usr="infotainment";
 
 $pswd="1nf0tainment";
 
