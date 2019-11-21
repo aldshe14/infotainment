@@ -62,7 +62,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getSupplierer` (`istunde` INT, `
 		group by lehrer
 		) c2
 		on c1.u_id = c2.u_id
-		left join tb_infotainment_fehlendeLehrer c3
+		left join tb_infotainment_fehlendelehrer c3
 		on c1.u_id = c3.u_id and woche = iwoche
 		where c1.tag = itag and c1.lehrer <> '' and c2.u_id is not null and c3.u_id is not null
 	) a4
@@ -117,18 +117,18 @@ INSERT INTO `tb_infotainment_fehlendelehrer` (`u_id`, `woche`) VALUES
 -- Triggers `tb_infotainment_fehlendelehrer`
 --
 DELIMITER $$
-CREATE TRIGGER `checkLehrer` BEFORE DELETE ON `tb_infotainment_fehlendelehrer` FOR EACH ROW begin
+CREATE TRIGGER `checklehrer` BEFORE DELETE ON `tb_infotainment_fehlendelehrer` FOR EACH ROW begin
 	declare status int;
     declare ilehrer varchar(3);
     declare itag int;
     select u.lehrer into ilehrer
     from tb_infotainment_unterricht u
-    join tb_infotainment_fehlendeLehrer f
+    join tb_infotainment_fehlendelehrer f
     on u.u_id = f.u_id and f.woche = old.woche
     where u.u_id = old.u_id;
     select u.tag into itag
     from tb_infotainment_unterricht u
-    join tb_infotainment_fehlendeLehrer f
+    join tb_infotainment_fehlendelehrer f
     on u.u_id = f.u_id and f.woche = old.woche
     where u.u_id = old.u_id;
 	select count(*) into status
@@ -146,7 +146,7 @@ CREATE TRIGGER `checkLehrer` BEFORE DELETE ON `tb_infotainment_fehlendelehrer` F
 	where a1.lehrer is not null and tag= itag and s.u_id is not null;
     if status>0 
     then 
-		signal sqlstate '45000' set message_text = 'Lehrer kann nicht geloescht werden, weil Supplierstunde hat!';
+		signal sqlstate '45000' set message_text = 'lehrer kann nicht geloescht werden, weil Supplierstunde hat!';
     end if;
 end
 $$
@@ -1561,7 +1561,7 @@ ALTER TABLE `tb_infotainment_display`
 -- Constraints for table `tb_infotainment_fehlendelehrer`
 --
 ALTER TABLE `tb_infotainment_fehlendelehrer`
-  ADD CONSTRAINT `fk_fehlendeLehrer_unterricht` FOREIGN KEY (`u_id`) REFERENCES `tb_infotainment_unterricht` (`u_id`);
+  ADD CONSTRAINT `fk_fehlendelehrer_unterricht` FOREIGN KEY (`u_id`) REFERENCES `tb_infotainment_unterricht` (`u_id`);
 
 --
 -- Constraints for table `tb_infotainment_layout_sections`
