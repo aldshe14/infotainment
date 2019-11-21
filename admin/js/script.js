@@ -29,7 +29,7 @@ $(document).ready(function() {
             extend: 'print',
             title: "",
             messageTop: function (){
-              return "Stundenplan";
+              return "";
             },
             messageBottom: "",
             header : true,

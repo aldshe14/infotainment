@@ -2,9 +2,9 @@
 
 $servername="localhost";
 
-$usr="root";
+$usr="infotainmnet";
 
-$pswd="";
+$pswd="infotainment";
 
 $dbname="infotainment_system";
 

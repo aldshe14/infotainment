@@ -130,6 +130,6 @@
         </label>
     </div>
     -->
-    <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign in</button>
+    <button class="btn btn-lg btn-dark btn-block" type="submit" name="login">Sign in</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; Infotainment System <?php echo date("Y");?></p>
 </form>

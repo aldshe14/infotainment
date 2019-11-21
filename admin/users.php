@@ -42,23 +42,23 @@
 <div class="container">
     <br>
     <div class="text-center">
-    <button type="button" class="btn btn-primary btn-lg"><a href="addUser.php">Shto User</a></button>
+    <button type="button" class="btn btn-dark btn-lg"><a href="addUser.php">Shto User</a></button>
     </div>
     <br><br>
     <div class="table-responsive">
     <table id="resetuserdata" class="table table-striped table-bordered" data-order='[[ 1, "asc" ]]' data-page-length='25'>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Date</th>
-                </tr>
-                <tr>
                     <td>Name</td>
                     <td>Email</td>
                     <td>Role</td>
                     <td>Date</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <?php
