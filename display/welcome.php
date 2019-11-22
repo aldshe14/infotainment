@@ -1,33 +1,36 @@
 <?php
     require_once "php/connection.php";
-
+	function getMacLinux() {
+		exec('netstat -ie', $result);
+		if(is_array($result)) {
+		  $iface = array();
+		  foreach($result as $key => $line) {
+			if($key > 0) {
+			  $tmp = str_replace(" ", "", substr($line, 0, 10));
+			  if($tmp <> "") {
+				$macpos = strpos($line, "HWaddr");
+				if($macpos !== false) {
+				  $iface[] = array('iface' => $tmp, 'mac' => strtolower(substr($line, $macpos+7, 17)));
+				}
+			  }
+			}
+		  }
+		  return $iface[0]['mac'];
+		} else {
+		  return "notfound";
+		}
+	  }
     $MAC = exec('getmac'); 
     $MAC = strtok($MAC, ' '); 
     $sql = "SELECT mac
             FROM tb_infotainment_display
             where mac = :mac;
-            ";
+			";
+	$MAC = getMacLinux();
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    $ipAddress=$_SERVER['REMOTE_ADDR'];
-    $macAddr=false;
-
-    #run the external command, break output into lines
-    $arp=`arp -a $ipAddress`;
-    $lines=explode("\n", $arp);
-
-    #look for the output line describing our IP address
-    foreach($lines as $line)
-    {
-    $cols=preg_split('/\s+/', trim($line));
-    if ($cols[0]==$ipAddress)
-    {
-        $macAddr=$cols[1];
-    }
-    }
 
     if($result != false){
         header('Location: index.php');
@@ -102,7 +105,7 @@
 		<div class="player-id-section">
 			Player ID : 
             <?php
-                echo $MAC.$macAddr;
+                echo $MAC;
             ?>
 		</div>
 		<div class="separator"></div>
