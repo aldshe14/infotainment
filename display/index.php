@@ -1,5 +1,22 @@
 <?php
     require_once "php/connection.php";
+
+    $MAC = exec('getmac'); 
+    $MAC = strtok($MAC, ' '); 
+
+    $sql = "SELECT mac
+            FROM tb_infotainment_display
+            where mac = :mac;
+            ";
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(":mac",$MAC);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if($result === false){
+        header('Location: welcome.php');
+    }
+
     $layout = 1;
     
 ?>

@@ -1,5 +1,6 @@
 create table tb_infotainment_display(
 	d_id int primary key auto_increment,
+    mac varchar(17) not null,
     name varchar(50) not null,
     location_id int not null,
     layout_id int not null,

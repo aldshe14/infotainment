@@ -14,6 +14,9 @@
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='index.php') echo "active"; ?>">
             <a class="nav-link" href="index.php">HOME</a>
         </li>
+        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='displays.php') echo "active"; ?>">
+            <a class="nav-link" href="displays.php"><i class="fas fa-calendar"></i> DISPLAYS</a>
+        </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php') echo "active"; ?>">
             <a class="nav-link" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
         </li>
