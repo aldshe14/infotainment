@@ -7,8 +7,9 @@
             FROM tb_infotainment_display
             where mac = :mac;
 			";
-	exec("/sbin/ifconfig eth0 | grep HWaddr", $output);
-	print_r( $output);
+	$mac = shell_exec("ifconfig -a | grep -Po 'HWaddr \K.*$'");
+
+	var_dump($mac);
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
