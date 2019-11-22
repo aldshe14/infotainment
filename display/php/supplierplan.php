@@ -10,7 +10,7 @@
             join tb_infotainment_unterricht u
             on s.u_id = u.u_id 
             where u.tag = :tag and s.woche = :woche
-            order by s.u_id asc;";
+            order by u.stunde asc;";
     $stmt = $con->prepare($sql);
     $stmt->bindValue(":tag",$day);
     $stmt->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate)));
