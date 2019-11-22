@@ -3,7 +3,6 @@
 
     $MAC = exec('getmac'); 
     $MAC = strtok($MAC, ' '); 
-
     $sql = "SELECT mac
             FROM tb_infotainment_display
             where mac = :mac;
@@ -12,6 +11,23 @@
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $ipAddress=$_SERVER['REMOTE_ADDR'];
+    $macAddr=false;
+
+    #run the external command, break output into lines
+    $arp=`arp -a $ipAddress`;
+    $lines=explode("\n", $arp);
+
+    #look for the output line describing our IP address
+    foreach($lines as $line)
+    {
+    $cols=preg_split('/\s+/', trim($line));
+    if ($cols[0]==$ipAddress)
+    {
+        $macAddr=$cols[1];
+    }
+    }
 
     if($result != false){
         header('Location: index.php');
@@ -86,9 +102,7 @@
 		<div class="player-id-section">
 			Player ID : 
             <?php
-                $MAC = exec('getmac'); 
-                $MAC = strtok($MAC, ' '); 
-                echo $MAC;
+                echo $MAC.$macAddr;
             ?>
 		</div>
 		<div class="separator"></div>
