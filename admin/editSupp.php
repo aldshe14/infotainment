@@ -62,7 +62,7 @@
             from tb_infotainment_unterricht u
             left join tb_infotainment_supplieren s
             on s.u_id = u.u_id
-            where u.fach <> 'SU' and u.tag = :tag and supplierer is null and u.lehrer = :lehrer or woche <> :woche
+            where u.fach <> 'SU' and u.tag = :tag and supplierer is null and (u.lehrer = :lehrer or woche <> :woche)
             having u.tag = :tag1
             order by u.stunde asc
             ";

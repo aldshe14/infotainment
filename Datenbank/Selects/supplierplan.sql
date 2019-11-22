@@ -4,7 +4,7 @@ select *
 from tb_infotainment_unterricht u
 left join tb_infotainment_supplieren s
 on u.u_id = s.u_id
-where fach <> 'SU' and tag = 1 and supplierer is null and lehrer = "AIT"
+where fach <> 'SU' and tag = 5 and supplierer is null and lehrer = "HÖM"
 order by stunde asc;
 
 SELECT *,u.u_id as u_id
@@ -163,3 +163,14 @@ on a.lehrer = d.lehrer
 where a.fach <> 'SU' and a.fach <> ''
 group by a.lehrer
 having b.lehrer is not null and c.lehrer is not null and d.lehrer is not null;
+
+
+==================================================;
+
+SELECT *, u.u_id as u_id
+from tb_infotainment_unterricht u
+left join tb_infotainment_supplieren s
+on s.u_id = u.u_id
+where u.fach <> 'SU' and u.tag = 5 and supplierer is null and (u.lehrer = 'MEI' or woche <> 201947)
+having u.tag = 5
+order by u.stunde asc

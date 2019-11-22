@@ -2,10 +2,10 @@
 
 $servername="localhost";
 
+//$usr="root";
 $usr="infotainment";
-
+//$pswd="";
 $pswd="1nf0tainment";
-
 $dbname="infotainment_system";
 
 $message;
