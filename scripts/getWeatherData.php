@@ -17,7 +17,7 @@
             $cityId = $row['city_id'];
         }
     }catch (PDOException $e) {
-        header("Location: getWeatherData.php");
+    	header("Location: getWeatherData.php");
     }
 
     $googleApiUrl = "http://api.openweathermap.org/data/2.5/weather?id=" . $cityId . "&units=metric&APPID=" . $apiKey;
@@ -36,8 +36,6 @@
     $data = json_decode($response);
     $currentTime = time();
 
-    echo $data->weather[0]->description." ".date("d-m-Y H:m:s", $currentTime);
-
     $sql = "INSERT INTO `tb_infotainment_weather` (`datum`, `beschreibung`, `temp`, `temp_min`, `temp_max`, `humidity`, `sunrise`, `sunset`, `wind_speed`, `icon`, `city_name`) 
     VALUES(:datum, :beschreibung, :temp, :min, :max, :humidity, :sunrise, :sunset, :windspeed, :icon, :city_name)";
     $sth = $con->prepare($sql);
@@ -47,8 +45,8 @@
     $sth->bindValue(':min', $data->main->temp_min);
     $sth->bindValue(':max', $data->main->temp_max);
     $sth->bindValue(':humidity', $data->main->humidity);
-    $sth->bindValue(':sunrise', date('Y-m-d H:i:s',strtotime('+0 hour',strtotime(gmdate("Y-m-d\TH:i:s\Z", $data->sys->sunrise)))));
-    $sth->bindValue(':sunset', date('Y-m-d H:i:s',strtotime('+0 hour',strtotime(gmdate("Y-m-d\TH:i:s\Z", $data->sys->sunset)))));
+    $sth->bindValue(':sunrise', date('Y-m-d H:i:s',strtotime('+1 hour',strtotime(gmdate("Y-m-d\TH:i:s\Z", $data->sys->sunrise)))));
+    $sth->bindValue(':sunset', date('Y-m-d H:i:s',strtotime('+1 hour',strtotime(gmdate("Y-m-d\TH:i:s\Z", $data->sys->sunset)))));
     $sth->bindValue(':windspeed', $data->wind->speed);
     $sth->bindValue(':icon', $data->weather[0]->icon);
     $sth->bindValue(':city_name', $data->name);

@@ -3,9 +3,9 @@
 $servername="localhost";
 
 //$usr="root";
-$usr="root";
+$usr="infotainment";
 //$pswd="";
-$pswd="";
+$pswd="1nf0tainment";
 $dbname="infotainment_system";
 
 $message;
