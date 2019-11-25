@@ -8,7 +8,7 @@
     }
 
     $sql = "SELECT * 
-    FROM tb_infotainment_display ;";
+    FROM  vDisplays ;";
     $pdo = $con->prepare($sql);
     $pdo->execute();
     $result = $pdo->fetchAll();
@@ -26,16 +26,20 @@
         <table id="resetuserdata" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]' data-page-length='50'>
             <thead>
                 <tr>
-                    <!--<th data-hide="true">ID</th>-->
-                    <td>Lehrer</td>
+                    <td>Name</td>
+                    <td>MAC</td>
+                    <td>Layout</td>
+                    <td>Location</td>
                     <td>Edit</td>
-                    <td>Löschen</td>
+                    <td>Delete</td>
                 </tr>
                 <tr>
-                    <!--<th data-hide="true">ID</th>-->
-                    <th>Lehrer</th>
-                    <th>Supplieren</th>
-                    <th>Löschen</th>
+                    <th>Name</th>
+                    <th>MAC</th>
+                    <th>Layout</th>
+                    <th>Location</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <?php
@@ -47,19 +51,24 @@
                         //<td>'.$row['p_id'].'</td>
                         //echo '<td></td>';
                     echo '                         
-                        <td>'.$row['d_id'].'</td>
-                        <td><a href="editSupp.php?id='.$row['u_id'].'&d='.($diff+$tage).'&day='.$day.'">Supplieren</td>
-                        <td><a href="delLehrer.php?id='.$row['u_id'].'&d='.($diff+$tage).'&day='.$day.'">Delete</td>';
+                        <td>'.$row['name'].'</td>
+                        <td>'.$row['mac'].'</td>
+                        <td>'.$row['layout'].'</td>
+                        <td>'.$row['location'].'</td>
+                        <td><a href="editSupp.php?id='.$row['id'].'">Edit</a></td>
+                        <td><a href="delLehrer.php?id='.$row['id'].'">Delete</a></td>';
                 }
                 echo '</tbody>
                     ';
             ?>
             <tfoot>
                 <tr>
-                    <!--<th data-hide="true">ID</th>-->
-                    <th>Lehrer</th>
+                    <th>Name</th>
+                    <th>MAC</th>
+                    <th>Layout</th>
+                    <th>Location</th>
                     <th>Edit</th>
-                    <th>Löschen</th>
+                    <td>Delete</td>
                 </tr>
             </tfoot>
         </table>
