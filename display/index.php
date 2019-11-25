@@ -13,9 +13,7 @@
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if($result === false){
-        header('Location: welcome.php');
-    }
+    
 
     $layout = 1;
     

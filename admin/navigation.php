@@ -15,9 +15,23 @@
             <a class="nav-link" href="index.php">HOME</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='displays.php') echo "active"; ?>">
-            <a class="nav-link" href="displays.php"><i class="fas fa-calendar"></i> DISPLAYS</a>
+            <a class="nav-link" href="displays.php"><i class="far fa-window-maximize"></i> DISPLAYS</a>
         </li>
-        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php') echo "active"; ?>">
+        <li class="nav-item dropdown 
+                <?php
+                     if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php' || basename($_SERVER["SCRIPT_FILENAME"])=='fehlendeLehrer.php' || basename($_SERVER["SCRIPT_FILENAME"])=='suppliertabelle.php' ) {  
+                        echo ' active"';
+                    }
+                ?>
+        ">
+            <a class="nav-link dropdown-toggle" href="#" id="suppliereb" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
+                <a class="dropdown-item" href="fehlendeLehrer.php"><i class="fas fa-address-book"></i> FEHLENDELEHRER</a>
+                <a class="dropdown-item" href="suppliertabelle.php"><i class="fas fa-table"></i> SUPPLIERTABELLE</a>
+            </div>
+        </li>
+        <!-- <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php') echo "active"; ?>">
             <a class="nav-link" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='suppliertabelle.php') echo "active"; ?>">
@@ -25,7 +39,7 @@
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='fehlendeLehrer.php') echo "active"; ?>">
             <a class="nav-link" href="fehlendeLehrer.php"><i class="fas fa-address-book"></i> FEHLENDELEHRER</a>
-        </li>
+        </li> -->
 
         <?php
             //----------------Admin Menu----------------

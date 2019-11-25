@@ -1,24 +1,18 @@
 <?php
     require_once "php/connection.php";
-
+	
     $MAC = exec('getmac'); 
     $MAC = strtok($MAC, ' '); 
     $sql = "SELECT mac
             FROM tb_infotainment_display
             where mac = :mac;
-			";
-	$mac = shell_exec("ifconfig -a | grep -Po 'HWaddr \K.*$'");
-
-	var_dump($mac);
+            ";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if($result != false){
-        header('Location: index.php');
-    }
-
+  
 ?>
 
 <html lang="en">
@@ -45,8 +39,8 @@
 		  	-webkit-justify-content:  center;
 		  	justify-content: center;
 			
-		  	height: 50%;
-		  	font-size:  5em;
+		  	height: 50vh;
+		  	font-size:  15vh;
 		  	border: none;
 			margin: 0px;
 			padding: 0px;
@@ -72,6 +66,9 @@
 			font-size: 15px;
 		}
         img {
+			height: 30vh;
+			max-width: 90vw;
+			width: auto;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -80,7 +77,7 @@
 </head>
 <body style="height: 720px;">
     <br>
-    <img src="img/infotainment_white.png" alt="Infotainment" width="900vw"><br>
+    <img src="img/infotainment_white.png" alt="Infotainment"><br>
 	<div class="welcome-section">
         <h3>Welcome!</h3>
 	</div>
