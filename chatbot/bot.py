@@ -9,11 +9,16 @@ import telepot
 
 def handle(msg):
     chat_id = msg['chat']['id']
-    command = msg['text']
+    command = ""
+    if msg['text']:
+    	command = msg['text']
+
+   	if msg['photo']:
+    	command = msg['photo']
 
     print 'Got command: %s' % command
 
-    if True:
+    if command:
         bot.sendMessage(chat_id,text="Button Pressed")
         time.sleep(0.2)
     
