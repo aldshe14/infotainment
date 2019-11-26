@@ -1,27 +1,24 @@
-import requests
-import json
-import configparser as cfg
+import sys
+import time
+import random
+import datetime
+import telepot
 
 
-class telegram_chatbot():
+def handle(msg):
+    chat_id = msg['chat']['id']
+    command = msg['text']
 
-    def __init__(self, config):
-        self.token = self.read_token_from_config_file(config)
-        self.base = "https://api.telegram.org/bot{}/".format(self.token)
+    print 'Got command: %s' % command
 
-    def get_updates(self, offset=None):
-        url = self.base + "getUpdates?timeout=100"
-        if offset:
-            url = url + "&offset={}".format(offset + 1)
-        r = requests.get(url)
-        return json.loads(r.content)
+    if True:
+        bot.sendMessage(chat_id,text="Button Pressed")
+        time.sleep(0.2)
+    
 
-    def send_message(self, msg, chat_id):
-        url = self.base + "sendMessage?chat_id={}&text={}".format(chat_id, msg)
-        if msg is not None:
-            requests.get(url)
+bot = telepot.Bot('960505913:AAG5EqEksnoiXLZj0C-VmZ9UdbvjuSvDg1g')
+bot.message_loop(handle)
+print 'I am listening...'
 
-    def read_token_from_config_file(self, config):
-        parser = cfg.ConfigParser()
-        parser.read(config)
-        return parser.get('creds', 'token')
+while 1:
+     time.sleep(10)
