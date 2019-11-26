@@ -2,32 +2,25 @@
 
 import sys
 import time
-import random
-import datetime
 import telepot
-
+from telepot.loop import MessageLoop
 
 def handle(msg):
-    chat_id = msg['chat']['id']
-    command = ""
-    if msg['text']:
-    	command = msg['text']
+    content_type, chat_type, chat_id = telepot.glance(msg)
+    print(content_type, chat_type, chat_id)
 
+    if content_type == 'text':
+        bot.sendMessage(chat_id, msg['text'])
 
-
-    file_id = message.voice.file_id
-	newFile = bot.get_file(file_id)
-	newFile.download('voice.ogg')
-
-    print 'Got command: %s' % command
-
-    if command:
-        bot.sendMessage(chat_id,text="Button Pressed")
-        time.sleep(0.2)
-    
+    if content_type == 'photo':
+    	bot.sendMessage(chat_id, "Image received")
 
 bot = telepot.Bot('960505913:AAG5EqEksnoiXLZj0C-VmZ9UdbvjuSvDg1g')
-bot.message_loop(handle)
+
+MessageLoop(bot, handle).run_as_thread()
+
+
+
 print 'I am listening...'
 
 while 1:
