@@ -13,8 +13,11 @@ def handle(msg):
     if msg['text']:
     	command = msg['text']
 
-   	if msg['photo']:
-    	command = msg['photo']
+
+
+    file_id = message.voice.file_id
+	newFile = bot.get_file(file_id)
+	newFile.download('voice.ogg')
 
     print 'Got command: %s' % command
 
