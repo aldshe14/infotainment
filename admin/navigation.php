@@ -49,7 +49,7 @@
             if($_SESSION['role']==777){
                 echo '<li class="nav-item dropdown';
                     if(basename($_SERVER["SCRIPT_FILENAME"])=='user_reset.php' || basename($_SERVER["SCRIPT_FILENAME"])=='users.php') {  
-                        echo ' active"';
+                        echo ' active';
                     }
                     echo '">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
