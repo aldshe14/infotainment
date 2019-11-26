@@ -1,6 +1,10 @@
 $(document).ready(function() {
-  $('#hide').remove(5000); // 5 seconds x 1000 milisec = 5000 milisec
+  wait(5000)
+  $('#hide').remove(); // 5 seconds x 1000 milisec = 5000 milisec
+
 });
+
+
 
   $(document).ready(function() {
     var t = $('#resetuserdata').DataTable({

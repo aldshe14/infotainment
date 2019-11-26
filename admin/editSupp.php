@@ -34,17 +34,18 @@
                     //header('Location: users.php?insert=done');
                     if($anz==$_POST['anz']){
                         echo "<div id='hide' class=\"alert alert-success \">";
-                        echo "<p>Dekreti u ndryshua me sukses!</p>";
+                        echo "<p>OK!</p>";
                         echo "</div>";
+                        echo '<script>window.location.href = "fehlendeLehrer.php?day='.$_GET['day'].'"</script>';
                     }
-                    header('Location: fehlendeLehrer.php?day='.$_GET['day']);
+                    //header('Location: fehlendeLehrer.php?day='.$_GET['day']);
 
                 } catch (PDOException $e) {
                     echo "<div id='hide' class=\"alert alert-danger \">";
                     echo "<p>Ndodhi nje gabim ju lutem provoni perseri!</p>" .$e->getMessage();
                     echo "</div>";
                     //header('Location: users.php?insert=err');
-                    //echo '<script>window.location.href = "users.php?insert=err";</script>';
+                    echo '<script>window.location.href = "users.php?insert=err";</script>';
                 }
             }
             }
