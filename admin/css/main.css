@@ -58,3 +58,14 @@ bottom: .5em;
         max-height: 250px;
         overflow-y: auto;
     }
+/* 
+table.dataTable tbody tr.selected {
+    color: white !important;
+    background-color: #303030 !important;
+}
+
+table.dataTable tbody tr.selected a{
+    color: white !important;
+    background-color: #303030 !important;
+}
+ */

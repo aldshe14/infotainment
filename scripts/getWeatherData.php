@@ -5,7 +5,7 @@
     $cityId = "";
 
     $sql = "SELECT * 
-    FROM  tb_infotainment_weather_info limit 1 ;";
+    FROM  tb_infotainment_apisettings limit 1 ;";
     $pdo = $con->prepare($sql);
     
     try {
@@ -13,8 +13,8 @@
         $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
         //echo $result['city_id'];
         foreach ($result as $row){
-            $apiKey = $row['appid'];
-            $cityId = $row['city_id'];
+            $apiKey = $row['weather_apikey'];
+            $cityId = $row['weather_cityid'];
         }
     }catch (PDOException $e) {
     	header("Location: getWeatherData.php");
