@@ -1,5 +1,29 @@
 <?php
-	require_once "connection.php";
+    require_once "connection.php";
+    
+    function fixBadUnicodeForJson($str) {
+        $str = preg_replace_callback(
+        '/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/',
+        function($matches) { return chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3")).chr(hexdec("$4")); },
+        $str
+    );
+        $str = preg_replace_callback(
+        '/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/',
+        function($matches) { return chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3")); },
+        $str
+    );
+        $str = preg_replace_callback(
+        '/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/',
+        function($matches) { return chr(hexdec("$1")).chr(hexdec("$2")); },
+        $str
+    );
+        $str = preg_replace_callback(
+        '/\\\\u00([0-9a-f]{2})/',
+        function($matches) { return chr(hexdec("$1")); },
+        $str
+    );
+        return $str;
+    }
 
     $sql = "SELECT * 
     FROM  tb_infotainment_website_posts 
@@ -56,8 +80,8 @@
 
             $blob = file_get_contents($post['jetpack_featured_media_url']);
 
-            $sth->bindValue(':title', $post['title']['rendered']);
-            $sth->bindValue(':content', $post['excerpt']['rendered']);
+            $sth->bindValue(':title', fixBadUnicodeForJson($post['title']['rendered']));
+            $sth->bindValue(':content', fixBadUnicodeForJson($post['excerpt']['rendered']));
             $sth->bindParam(':image', $blob, PDO::PARAM_LOB);
             $sth->bindValue(':datum', $post['date']);
 

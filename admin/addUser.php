@@ -7,15 +7,16 @@
         header('Location: signin.php');
     }
 
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_POST['role']) ){
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_POST['role']) && isset($_POST['nickname']) ){
  
         // Validate name
             // Prepare an insert statement
-            $sql = "Insert into tb_infotainment_users(u_email,u_role,u_pswd) VALUES (:email,:role,:pwd)";
+            $sql = "Insert into tb_infotainment_users(u_email,u_nickname,u_role,u_pswd) VALUES (:email,:nickname,:role,:pwd)";
              
             if($sth = $con->prepare($sql)){
                 // Bind variables to the prepared statement as parameters
                 $sth->bindParam(':email', $_POST["email"]);
+                $sth->bindParam(':nickname', $_POST["nickname"]);
                 $sth->bindParam(':role', $_POST["role"]);
                 $sth->bindValue(':pwd', password_hash("12345678",PASSWORD_DEFAULT));
                 try {
@@ -45,9 +46,13 @@
         <h1 class="mt-4">Shto User</h1>
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="form-group col-sm-3">
+            <div class="form-group col-sm-3">
                 <label>Email</label>
                 <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group col-sm-3">
+                <label>Name</label>
+                <input type="text" name="nickname" class="form-control" required>
             </div>
             <div class="dropdown col-sm-3">
             <label>Roli</label>
