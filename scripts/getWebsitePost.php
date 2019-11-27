@@ -19,14 +19,33 @@
     	//header("Location: getWebsitePost.php");
     }
    
+    $sql = "SELECT * 
+    FROM  tb_infotainment_apisettings limit 1 ;";
+    $pdo = $con->prepare($sql);
+    
+    $weburl = "";
+    try {
+        $pdo->execute();
+        $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        //echo $result['city_id'];
+        foreach ($result as $row){
+            $weburl= $row['website_url'];
+        }
+    }catch (PDOException $e) {
+    	header("Location: getWebsiteData.php");
+    }
 
-    $url="http://htl-shkoder.com/wp-json/wp/v2/posts";
+    $url= $weburl."/wp-json/wp/v2/posts";
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_URL,$url);
+
     $result=curl_exec($ch);
+
     $posts = json_decode($result, true);
+
     foreach ($posts as $post) { 
         if($post['title']['rendered'] != $title){
             

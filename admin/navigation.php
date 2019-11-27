@@ -65,15 +65,11 @@
                         if(basename($_SERVER["SCRIPT_FILENAME"])=='user_reset.php') echo " active";
                     echo '" href="user_reset.php">Password Reset</a>
                     </div>
-                </li>';
-                
-                echo '
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-                </div>';
+                </li>
+                <li class="nav-item '; if(basename($_SERVER["SCRIPT_FILENAME"])=='settings.php') echo 'active">
+                    <a class="nav-link" href="settings.php"><i class="far fa-cog"></i> SETTINGS</a>
+                </li>
+                ';
             }
             echo '<li class="nav-item ';
             if(basename($_SERVER["SCRIPT_FILENAME"])=='logout.php'){  
