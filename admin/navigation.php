@@ -40,6 +40,7 @@
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='fehlendeLehrer.php') echo "active"; ?>">
             <a class="nav-link" href="fehlendeLehrer.php"><i class="fas fa-address-book"></i> FEHLENDELEHRER</a>
         </li> -->
+        
 
         <?php
             //----------------Admin Menu----------------
@@ -66,7 +67,7 @@
                     echo '" href="user_reset.php">Password Reset</a>
                     </div>
                 </li>
-                <li class="nav-item '; if(basename($_SERVER["SCRIPT_FILENAME"])=='settings.php') echo 'active">
+                <li class="nav-item '; if(basename($_SERVER["SCRIPT_FILENAME"])=='settings.php') echo 'active'; echo '">
                     <a class="nav-link" href="settings.php"><i class="far fa-cog"></i> SETTINGS</a>
                 </li>
                 ';
