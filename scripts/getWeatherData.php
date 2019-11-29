@@ -20,7 +20,7 @@
     	header("Location: getWeatherData.php");
     }
 
-    $googleApiUrl = "http://api.openweathermap.org/data/2.5/weather?id=" . $cityId . "&units=metric&APPID=" . $apiKey;
+    $googleApiUrl = "http://api.openweathermap.org/data/2.5/weather?id=" . $cityId . "&units=metric&lang=de&APPID=" . $apiKey;
 
     $ch = curl_init();
 

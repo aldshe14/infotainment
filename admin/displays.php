@@ -17,9 +17,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3 mt-3">
+        <div class="col-md-4 mt-3">
         <h1>Displays</h1>
         </div>
+        <div class="col-md-2 mt-3">
+        <button type="button" class="btn btn-dark btn-lg"><a href="addDisplay.php">Add Display</a></button>
+        </div>
+        
+    </div>
+    <div class="text-center">
+    
     </div>
     <br>
     <div class="table-responsive">
@@ -55,8 +62,8 @@
                         <td>'.$row['mac'].'</td>
                         <td>'.$row['layout'].'</td>
                         <td>'.$row['location'].'</td>
-                        <td><a href="editSupp.php?id='.$row['id'].'">Edit</a></td>
-                        <td><a href="delLehrer.php?id='.$row['id'].'">Delete</a></td>';
+                        <td><a href="editDisplay.php?id='.$row['id'].'">Edit</a></td>
+                        <td><a href="delDisplay.php?id='.$row['id'].'">Delete</a></td>';
                 }
                 echo '</tbody>
                     ';

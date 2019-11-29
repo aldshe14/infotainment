@@ -62,8 +62,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3 mt-3">
-        <h1>Supplierplan</h1>
+        <div class="col-md-4 mt-3">
+        <h1>Fehlende Lehrer</h1>
         </div>
         <div class="form-group col-md-2 mt-4">
         <select name="day"class="form-control">

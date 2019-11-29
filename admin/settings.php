@@ -61,15 +61,15 @@
         <h3>Website</h3>
         <div class="form-row">
             <div class="form-group col-md-6">
-            <label>URL (example http://test.com)</label>
-            <input type="text" class="form-control" name="url" value="<?php echo $result[0]['website_url']?>" required>
+            <label>URL (ex. test.com)</label>
+            <input type="text" class="form-control" name="url" value="<?php echo $result[0]['website_url']?>" pattern="^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$" required>
             </div>
         </div>
         <br><h3>Chatbot</h3>
         <div class="form-row">
             <div class="form-group col-md-6">
             <label>Token</label>
-            <input type="text" class="form-control" name="token" value="<?php echo $result[0]['chatbot_token']?>" required>
+            <input type="text" class="form-control" name="token" value="<?php echo $result[0]['chatbot_token']?>" pattern="[0-9]{9}:[a-zA-Z0-9_-]{35}" required>
             </div>
         </div>
         
