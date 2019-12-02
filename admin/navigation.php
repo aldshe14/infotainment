@@ -29,7 +29,7 @@
                 <a class="dropdown-item" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
                 <a class="dropdown-item" href="fehlendeLehrer.php"><i class="fas fa-address-book"></i> FEHLENDELEHRER</a>
                 <a class="dropdown-item" href="suppliertabelle.php"><i class="fas fa-table"></i> SUPPLIERTABELLE</a>
-                <a class="dropdown-item" href="importStundenplan.php"><i class="fas fa-table"></i> IMPORT STUNDENPLAN</a>
+                <a class="dropdown-item" href="importStundenplan.php"><i class="fas fa-upload"></i> IMPORT STUNDENPLAN</a>
             </div>
         </li>
         <!-- <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php') echo "active"; ?>">
