@@ -1,18 +1,24 @@
 <?php
-        $url="http://htl-shkoder.com/wp-json/wp/v2/posts";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_URL,$url);
-        $result=curl_exec($ch);
-        $posts = json_decode($result, true);
-        foreach ($posts as $post) { ?>
-            <a href="<?php echo $post['link']; ?>" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"><?php echo $post['title']['rendered']; ?></h5>
-                <small><?php echo date('F j, Y', strtotime($post['date'])); ?></small>
-                </div>
-                <p class="mb-1"><?php echo $post['excerpt']['rendered']; ?></p>
-                <img width="50%" src="<?php echo $post['jetpack_featured_media_url']; ?>">Test
-            </a>
-            <?php } ?>
+	require_once "connection.php";
+
+    $sql = "SELECT * 
+    FROM  tb_infotainment_website_posts
+    order by datum desc limit 1 ;";
+    $pdo = $con->prepare($sql);
+
+    try {
+        $pdo->execute();
+        $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row){
+            echo "<h5 style= 'margin:0px;'>".$row['title']."</h5>";
+            //echo "<h5>".$row['content']."</h5>";
+            //echo "".$row['datum']."";
+            echo '<img src="data:image/jpeg;base64,'.base64_encode($row['image']) .'" width="70%" height=auto />';
+        }
+    }catch (PDOException $e) {
+
+    }
+   
+
+?>
+

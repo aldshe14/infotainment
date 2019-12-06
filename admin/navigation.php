@@ -17,6 +17,9 @@
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='displays.php') echo "active"; ?>">
             <a class="nav-link" href="displays.php"><i class="far fa-window-maximize"></i> DISPLAYS</a>
         </li>
+        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='layouts.php') echo "active"; ?>">
+            <a class="nav-link" href="layouts.php"><i class="far fa-window-maximize"></i> LAYOUTS</a>
+        </li>
         <li class="nav-item dropdown 
                 <?php
                      if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php' || basename($_SERVER["SCRIPT_FILENAME"])=='fehlendeLehrer.php' || basename($_SERVER["SCRIPT_FILENAME"])=='suppliertabelle.php' ) {  

@@ -1,7 +1,7 @@
 <?php
 
 
-$servername="185.62.175.221:33066";
+$servername="localhost";
 $usr="infotainment";
 $pswd="1nf0tainment";
 $dbname="infotainment_system";
