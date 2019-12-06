@@ -7,19 +7,16 @@ import time
 import sys
 def handle(msg):
     content_type,chat_type,chat_id=telepot.glance(msg)
- #@#   print(content_type, chat_type, chat_id)
     command=msg['text']
-    conn=MySQLdb.connect('localhost','prove','prove', 'prove')
+    conn=MySQLdb.connect('localhost','infotainment_system','infotainment', '1nf0tainment')
     curs=conn.cursor()
-    curs.execute("SELECT chat_id from users where role=1")
+    curs.execute("SELECT c_id, role from tb_infotainment_chatbot_users where c_id= %s") %(chat_id)
     variable=curs.fetchall()
     conn.commit()
-    curs.execute("SELECT chat_id from users")
-    variable1=curs.fetchall()
-    conn.commit()
-    #if variable1==variable:
+    if variable[1] == 777:
+
         if command == '/users':
-            curs.execute('Select chat_id from users')
+            curs.execute('SELECT c_id, role, status from tb_infotainment_chatbot_users')
             for result in curs.fetchall():
                 bot.sendMessage(chat_id, result [0])
         #if command == '/block %s':
