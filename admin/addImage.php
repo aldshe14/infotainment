@@ -46,7 +46,7 @@
                     echo "<p>Foto u shtua me sukses!</p>";
                     echo "</div>";
                     echo "<script> setTimeout(function(){
-                        window.location.href = 'importStundenplan.php';
+                        window.location.href = 'images.php';
                         }, 4000);</script>";
         }else{
             echo "<div id='hide' class=\"alert alert-danger \">";
