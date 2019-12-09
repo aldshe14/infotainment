@@ -2,13 +2,20 @@
 import telepot
 import MySQLdb
 from telepot.loop import MessageLoop
-import wget
+#import wget
+import urllib2 
+# pip install urllib2_file
 import time
 import sys
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton 
+
+
 conn=MySQLdb.connect('localhost','infotainment', '1nf0tainment', 'infotainment_system')
 curs=conn.cursor()
 button=""
+
+
+
 def handle(msg):
     content_type,chat_type,chat_id=telepot.glance(msg) 
     keyboard=InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Po', callback_data='press1'), InlineKeyboardButton(text='Jo', callback_data='press2')],])    
@@ -88,20 +95,22 @@ def handle(msg):
                     bot.sendMessage(chat_id, "Image received")
                     print (msg)
                     fileid=msg['photo'][2]['file_id']
-                    bot.sendPhoto(chat_id,fileid)
+                    #bot.sendPhoto(chat_id,fileid)
                     print(fileid)
                     file=bot.getFile(fileid)
                     filepath = file['file_path']
                     print (filepath)
                     url= "https://api.telegram.org/file/bot%s/%s" % (token,filepath)
-                    test='/home/pi/chatbot/%s' % (filepath)
-                    file1=wget.download(url,test) 
-                    insert_query =("insert into prove"\
-                       "(prove_id,image_path)"\
+                    filedata = urllib2.urlopen(url)
+                    blobImage = filedata.read()
+                    #test='/home/pi/chatbot/%s' % (filepath)
+                    #file1=wget.download(url,test) 
+                    insert_query =("insert into tb_infotainment_chatbot_images"\
+                       "(image, u_id)"\
                         "VALUES(%s, %s)")
-                    dickapalidhje=(0,file1)
+                    values=(blobImage,chat_id)
 
-                    curs.execute(insert_query,dickapalidhje)
+                    curs.execute(insert_query,values)
                     conn.commit()
 
         else:
