@@ -13,7 +13,7 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 conn=MySQLdb.connect('localhost','infotainment', '1nf0tainment', 'infotainment_system')
 curs=conn.cursor()
 button=""
-
+register=""
 
 
 def handle(msg):
@@ -34,40 +34,48 @@ def handle(msg):
         reply=msg["text"]
         if reply.isdigit()==True:
             if(len(reply)==10):
-                print reply
-                query3=("insert into tb_infotainment_chatbot_users" \
+                if reply[0] ==0 and reply[1]==6 and reply[2]==7 or reply[2]==9:
+                    print reply
+                    query3=("insert into tb_infotainment_chatbot_users" \
                     "(c_id, user_status, role, telefonnummer, checked)"  
                     "VALUES(%s, %s, %s, %s, %s)")
-                execute=(chat_id,1,555,reply,0)
-                curs.execute(query3,execute)
-                conn.commit()
-                global button
-                button = ""
-                bot.sendMessage(chat_id, "hine")
-                query_kontrolle=("Select c_id, checked from tb_infotainment_chatbot_users")
-                execute_kontrolle=curs.execute()
-                notchecked=curs.fetchall()
-                if notchecked[1] == 2:
-                    bot.sendMessage(chat_id, "Administrator hasn't confirmed you")
-                elif notchecked[1] == 1:
-                    bot.sendMessage(chat_id, "Congratulations, administrator has confirmed you")
+                    execute=(chat_id,1,555,reply,0)
+                    curs.execute(query3,execute)
+                    conn.commit()
+                    global button
+                    button = ""
+                    bot.sendMessage(chat_id, "Great! Your data has been sent to the administrator!")
+                    query_kontrolle=("Select c_id, checked from tb_infotainment_chatbot_users")
+                    execute_kontrolle=curs.execute()
+                    notchecked=curs.fetchall()
+                else:
+                    bot.sendMessage(chat_id, "Invalid phone number format")
+                #if notchecked[1] == 2:
+                 #   bot.sendMessage(chat_id, "Administrator hasn't confirmed you")
+                #elif notchecked[1] == 1:
+                 #   bot.sendMessage(chat_id, "Congratulations, administrator has confirmed you")
             else:
                 bot.sendMessage(chat_id, "The length of your phone number is not correct")
+                global register
+                register = "true"
         else:
             bot.sendMessage(chat_id, "Invalid phone number format")
     print username
     query=("SELECT c_id, role, user_status, checked, telefonnummer from tb_infotainment_chatbot_users where c_id = %s") %(int(chat_id))
     count=curs.execute(query)
+    global register
     if count > 0:
         user=curs.fetchone()
         
 
         if user[1] == 777 and user[3]==1:
             if command == '/users':
-                curs.execute('SELECT c_id, role, user_status from tb_infotainment_chatbot_users')
+                curs.execute('SELECT c_id, telefonnummer, (row_number() over (order by c_id)) from tb_infotainment_chatbot_users')
                 variable1=curs.fetchall()
+                users2=""
                 for users in variable1:
-                    bot.sendMessage(chat_id, users[1])
+                    users2+=(str(users[2])+" "+str(users[0])+" "+str(users[1])+"\n")
+                    bot.sendMessage(chat_id, users2)
             if command == '/see_unregistered_users':
                 curs.execute("Select c_id, telefonnummer, (row_number() over (order by c_id)) from tb_infotainment_chatbot_users where checked=0")
                 unconfirmed=curs.fetchall()
@@ -76,21 +84,24 @@ def handle(msg):
                     users+=(str(user[2])+" "+str(user[0])+" "+str(user[1])+"\n")
                 bot.sendMessage(chat_id,users)
             DoNotAccept=command.split()
-            if DoNotAccept[0] == '/DoNotAccept':
-                confirmationquery=("update tb_infotainment_chatbot_users set checked=2 where c_id= %s") %(int(DoNotAccept[1]))
-                curs.execute(confirmationquery)
-                conn.commit()
+            #if DoNotAccept[0] == '/DoNotAccept':
+             #   confirmationquery=("update tb_infotainment_chatbot_users set checked=2 where c_id= %s") %(int(DoNotAccept[1]))
+              #  curs.execute(confirmationquery)
+               # conn.commit()
             block=command.split()
             if  block[0]== '/block':
                 updatequery =("update tb_infotainment_chatbot_users set user_status='0' where c_id= %s") %(int(block[1]))
                 curs.execute(updatequery)
                 conn.commit()
+                bot.sendMessage(chat_id, "This user has been blocked")
         elif user[1] == 555 and user[3]==1:
             if command == '/users':
                 bot.sendMessage(chat_id,'Hi, you are not the admin')
+            if content_type == 'text':
+                bot.sendMessage(chat_id, 'Hi')
             if content_type == 'photo':
                 if user[2]== 0:
-                    bot.sendMessage(chat_id, "You're fucking blocked")
+                    bot.sendMessage(chat_id, "Your images will not be displayed anymore")
                 else:
                     bot.sendMessage(chat_id, "Image received")
                     print (msg)
@@ -115,6 +126,8 @@ def handle(msg):
 
         else:
             bot.sendMessage(chat_id, "Waiting for confirmation")
+    elif register=="true":
+        bot.sendMessage(chat_id, "Write your phone number again")
     else:
         bot.sendMessage(chat_id, "You're not registered")
         bot.sendMessage(chat_id, "Do you want to register?")
