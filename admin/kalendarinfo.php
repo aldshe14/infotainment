@@ -59,8 +59,8 @@
                         <td>'.$row['title'].'</td>
                         <td>'.$row['beschreibung'].'</td>
                         <td>'.$row['datum'].'</td>
-                        <td><a href="editDisplay.php?id='.$row['k_id'].'">Edit</a></td>
-                        <td><a href="delDisplay.php?id='.$row['k_id'].'">Delete</a></td>';
+                        <td><a href="editKalendarinfo.php?id='.$row['k_id'].'">Edit</a></td>
+                        <td><a href="delKalendarinfo.php?id='.$row['k_id'].'">Delete</a></td>';
                 }
                 echo '</tbody>
                     ';
