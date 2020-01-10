@@ -12,19 +12,19 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='index.php') echo "active"; ?>">
-            <a class="nav-link" href="index.php">HOME</a>
+            <a class="nav-link" href="index.php"><i class="fas fa-home"></i> HOME</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='displays.php') echo "active"; ?>">
-            <a class="nav-link" href="displays.php"><i class="far fa-window-maximize"></i> DISPLAYS</a>
+            <a class="nav-link" href="displays.php"><i class="fas fa-tv"></i> DISPLAYS</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='images.php') echo "active"; ?>">
-            <a class="nav-link" href="images.php"><i class="far fa-file-image-o"></i> IMAGES</a>
+            <a class="nav-link" href="images.php"><i class="fas fa-images"></i> IMAGES</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='layouts.php') echo "active"; ?>">
             <a class="nav-link" href="layouts.php"><i class="far fa-window-maximize"></i> LAYOUTS</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='kalendarinfo.php') echo "active"; ?>">
-            <a class="nav-link" href="kalendarinfo.php"><i class="far fa-window-maximize"></i> KALENDARINFO</a>
+            <a class="nav-link" href="kalendarinfo.php"><i class="fas fa-calendar-alt"></i> KALENDARINFO</a>
         </li>
         <li class="nav-item dropdown 
                 <?php
@@ -33,7 +33,7 @@
                     }
                 ?>
         ">
-            <a class="nav-link dropdown-toggle" href="#" id="suppliereb" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
+            <a class="nav-link dropdown-toggle" href="#" id="suppliereb" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-calendar-check"></i> SUPPLIERPLAN</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
                 <a class="dropdown-item" href="fehlendeLehrer.php"><i class="fas fa-address-book"></i> FEHLENDELEHRER</a>
@@ -67,7 +67,7 @@
                     </div>
                 </li>
                 <li class="nav-item '; if(basename($_SERVER["SCRIPT_FILENAME"])=='settings.php') echo 'active'; echo '">
-                    <a class="nav-link" href="settings.php"><i class="far fa-cog"></i> SETTINGS</a>
+                    <a class="nav-link" href="settings.php"><i class="fas fa-cog"></i> SETTINGS</a>
                 </li>
                 ';
             }
@@ -75,7 +75,7 @@
             if(basename($_SERVER["SCRIPT_FILENAME"])=='logout.php'){  
                 echo 'active"';
             }
-            echo '"><a class="nav-link" href="logout.php">LOGOUT</a></li>';
+            echo '"><a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> LOGOUT</a></li>';
 
             
         }

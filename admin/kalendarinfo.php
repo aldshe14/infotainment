@@ -21,7 +21,7 @@
         <h1>Layouts</h1>
         </div>
         <div class="col-md-4 mt-3">
-        <button type="button" class="btn btn-dark btn-lg"><a href="addLayout.php">Add Kalendarinfo</a></button>
+        <button type="button" class="btn btn-dark btn-lg"><a href="addKalendarinfo.php">Add Kalendarinfo</a></button>
         </div>
         
     </div>
@@ -56,11 +56,11 @@
                         //<td>'.$row['p_id'].'</td>
                         //echo '<td></td>';
                     echo '                         
-                        <td>'.$row['name'].'</td>
+                        <td>'.$row['title'].'</td>
                         <td>'.$row['beschreibung'].'</td>
-                        <td>'.$row['file'].'</td>
-                        <td><a href="editDisplay.php?id='.$row['l_id'].'">Edit</a></td>
-                        <td><a href="delDisplay.php?id='.$row['l_id'].'">Delete</a></td>';
+                        <td>'.$row['datum'].'</td>
+                        <td><a href="editDisplay.php?id='.$row['k_id'].'">Edit</a></td>
+                        <td><a href="delDisplay.php?id='.$row['k_id'].'">Delete</a></td>';
                 }
                 echo '</tbody>
                     ';
