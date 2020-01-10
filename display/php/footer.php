@@ -1,1 +1,1 @@
-<h6><marquee>Just some moving text to try if it really works</marwuee><h6>
+<h6><marquee>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </marwuee><h6>

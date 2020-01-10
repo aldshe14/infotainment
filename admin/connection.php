@@ -1,6 +1,6 @@
 <?php
 
-$servername="localhost";
+$servername="185.62.175.221:33066";
 
 //$usr="root";
 $usr="infotainment";

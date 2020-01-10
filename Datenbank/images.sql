@@ -4,3 +4,5 @@ create table tb_infotainment_images(
     image mediumblob not null,
     type varchar(10) not null
 );
+
+drop table tb_infotainment_images;
