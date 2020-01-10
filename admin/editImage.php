@@ -7,7 +7,7 @@
         header('Location: signin.php');
     }
 
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['image']) && isset($_POST['name'])) ){
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['image']) && isset($_POST['name'])){
             $tmpName = $_FILES['image']['tmp_name'];       // name of the temporary stored file name
             $fileSize = $_FILES['image']['size'];   // size of the uploaded file
             $fileType = $_FILES['image']['type'];

@@ -59,8 +59,8 @@
                         <td>'.$row['name'].'</td>
                         <td>'.$row['beschreibung'].'</td>
                         <td>'.$row['file'].'</td>
-                        <td><a href="editDisplay.php?id='.$row['l_id'].'">Edit</a></td>
-                        <td><a href="delDisplay.php?id='.$row['l_id'].'">Delete</a></td>';
+                        <td><a href="editLayout.php?id='.$row['l_id'].'">Edit</a></td>
+                        <td><a href="delLayout.php?id='.$row['l_id'].'">Delete</a></td>';
                 }
                 echo '</tbody>
                     ';
