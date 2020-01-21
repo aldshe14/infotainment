@@ -23,7 +23,7 @@
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if($result){
-        header('Location: index.php');
+        header('location:index.php');
     }
   
 ?>

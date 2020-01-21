@@ -24,8 +24,6 @@
 
     if(!$result){
         header('location:welcome.php');
-    }else{
-        echo "true";
     }
 
 
@@ -43,7 +41,6 @@
     $layout = $result[0]['file'];
     //Only for test
     $layout = "layout1";
-    echo $MAC;
     
 ?>
 
