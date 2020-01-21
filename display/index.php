@@ -24,7 +24,7 @@
 
     if(!$result){
         echo "false";
-        header('welcome.php');
+        header('Location: welcome.php');
     }else{
         echo "true";
     }
