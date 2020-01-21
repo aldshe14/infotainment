@@ -3,12 +3,12 @@
 
     function getMac(){
         $mac = false;
-        $arp = `arp -n`;
-        $lines = explode("\n", $arp);
+        $arp = `arp -an`;
+        //$lines = explode(" ", $arp);
         //$mac = explode("\t", $lines[1]);
-        $mac = explode(" ", $lines[1]);
+        $mac = explode(" ", $arp);
 
-        return $mac[20];
+        return $mac[3];
     }
 
     $MAC = getMac();
