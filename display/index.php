@@ -13,6 +13,20 @@
 
     $MAC = getMac();
 
+    $sql = "SELECT d_id
+            FROM tb_infotainment_display
+            where mac = :mac;
+            ";
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(":mac",$MAC);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if(!$result){
+        header('welcome.php');
+    }
+
+    
     $sql = "SELECT l.file
             FROM tb_infotainment_display d
             JOIN tb_infotainment_layout l

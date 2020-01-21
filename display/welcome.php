@@ -1,9 +1,19 @@
 <?php
     require_once "php/connection.php";
 	
-    $MAC = exec('getmac'); 
-    $MAC = strtok($MAC, ' '); 
-    $sql = "SELECT mac
+	function getMac(){
+        $mac = false;
+        $arp = `arp -n`;
+        $lines = explode("\n", $arp);
+        //$mac = explode("\t", $lines[1]);
+        $mac = explode(" ", $lines[1]);
+
+        return $mac[20];
+    }
+
+    $MAC = getMac();
+
+    $sql = "SELECT d_id
             FROM tb_infotainment_display
             where mac = :mac;
             ";
@@ -12,6 +22,9 @@
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    if($result){
+        header('index.php');
+    }
   
 ?>
 
