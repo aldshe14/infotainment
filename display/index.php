@@ -26,7 +26,7 @@
         header('welcome.php');
     }
 
-    
+
     $sql = "SELECT l.file
             FROM tb_infotainment_display d
             JOIN tb_infotainment_layout l
@@ -41,8 +41,10 @@
     $layout = $result[0]['file'];
     //Only for test
     $layout = "layout1";
+    echo $MAC;
     
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
