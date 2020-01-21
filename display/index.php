@@ -24,6 +24,8 @@
 
     if(!$result){
         header('welcome.php');
+    }else{
+        echo "true";
     }
 
 
