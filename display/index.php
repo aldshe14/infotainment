@@ -23,8 +23,7 @@
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if(!$result){
-        echo "false";
-        header('Location: welcome.php');
+        header('location:welcome.php');
     }else{
         echo "true";
     }
