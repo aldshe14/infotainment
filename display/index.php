@@ -4,9 +4,9 @@
     function getMac(){
         $mac = false;
         $arp = `arp -an`;
-        //$lines = explode(" ", $arp);
+        $lines = explode("\n", $arp);
         //$mac = explode("\t", $lines[1]);
-        $mac = explode(" ", $arp);
+        $mac = explode(" ", $lines[1]);
 
         return $mac[3];
     }
