@@ -28,7 +28,7 @@
 
         if($email == $emailConfirm){
             if(!$emailConfirm_error && !$email_error){
-                $sql = "SELECT u_id,u_email FROM tb_infotainment_users WHERE u_email = :email";
+                $sql = "SELECT u_id,u_email,u_nickname FROM tb_infotainment_users WHERE u_email = :email";
                 $stmt = $con->prepare($sql);
                 //Bind value.
                 $stmt->bindValue(':email', $email);
@@ -41,10 +41,69 @@
                     $emailConfirm_text = "Ky user nuk ekziston. Provo perseri.";
                     $emailConfirm_error = true;
                 }else{
-                    
-                        $login = true;
+                    $insert = false;
+                    $sql = "Select p_id FROM tb_infotainment_password_reset where u_id=:userid and timestampdiff(hour,expire,now())<0;";
+                    $stmt = $con->prepare($sql);
+                    $stmt->bindValue(':userid', $user['u_id']);
+                    if($stmt->execute()){
+                        if($stmt->rowCount()>0){
+                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            $sql = "UPDATE tb_infotainment_password_reset set expire=DATE_SUB(now(),INTERVAL 5 DAY) where p_id=:pid;";
+                            $stmt = $con->prepare($sql);
+                            foreach($result as $row){
+                                $stmt->bindValue(':pid', $row['p_id']);
+                                if($stmt->execute()){
+                                    $insert = true;
+                                }
+                            }
+                        }else{
+                            $insert = true;
+                        }
+
+                    }
+                    if($insert == true)
+                    $sql = "INSERT INTO tb_infotainment_password_reset(u_id) VALUES(:userid)";
+                    $stmt = $con->prepare($sql);
+                    //Bind value.
+                    $stmt->bindValue(':userid', $user['u_id']);
+                    //Execute.
+                    if($stmt->execute()){
+                        require ('reset_email.php');
+                        //Recipients
+                        $sql = "Select * FROM tb_infotainment_password_reset where u_id=:userid and timestampdiff(hour,expire,now())<0;";
+                        $stmt = $con->prepare($sql);
+                        $stmt->bindValue(':userid', $user['u_id']);
+                        if($stmt->execute()){
+                            $reset = $stmt->fetch(PDO::FETCH_ASSOC);
+                            try {
+                                
+                                $mail->addAddress($user['u_email'], $user['u_nickname']);     // Add a recipient
+
+                                // Content
+                                $mail->isHTML(true);                                  // Set email format to HTML
+                                $mail->Subject = 'Password Reset';
+                                $mail->Body    = '<h3>Reset your password</h3><br><br>
+                                Dear '.$user['u_nickname'].',</br></br>
+                                You told us you forgot your password. If you really did, click <b><a href="http://localhost:4444/infotainment/infotainment/admin/reset_password.php?id='.$reset['u_id']."-".$reset['id'].'">here</a></b> 
+                                to choose a new one.<br><br>
+                                If you didn\'t mean to reset your password, then you can just ignore this email; your password will not change.<br><br>
+                                This link will be available only during the next 24h.<br>
+                                If u have any problems please contact the administrator.<br><br>
+                                <b>Infotainment System</b>';
+                                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                                $mail->send();
+                                $login = true;
+                                //echo 'Message has been sent';
+                            } catch (Exception $e) {
+                                $login = false;
+                                //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                //echo "Message could not be sent.";
+                            }
+                        }
+                        
                         //header("location: login.php");
-                    
+                    }
                 }
             }
         }else{
@@ -57,7 +116,7 @@
 
 <link rel="stylesheet" href="css/signin.css">
 <form class="form-signin" action="reset.php" method="POST">
-    <img class="mb-4" src="images/logo.png" alt="" width="100%" height="auto">
+    <img class="mb-4" src="img/logo_b.png" alt="" width="100%" height="auto">
 
     <h1 class="h3 mb-3 font-weight-normal text-center">Reseto fjalekalimin</h1>
     

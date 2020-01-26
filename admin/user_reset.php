@@ -7,8 +7,10 @@
         header('Location: signin.php');
     }
 
-    $sql = "SELECT * 
-    FROM  tb_infotainment_kalendarinfo;";
+    $sql = "SELECT *,timestampdiff(minute,p.expire,now()) as exp
+    FROM  tb_infotainment_password_reset p
+    join tb_infotainment_users u
+    on u.u_id=p.u_id;";
     $pdo = $con->prepare($sql);
     $pdo->execute();
     $result = $pdo->fetchAll();
@@ -18,11 +20,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 mt-3">
-        <h1>Kalendarinfo</h1>
+        <h1>Password Reset</h1>
         </div>
-        <div class="col-md-4 mt-3">
-        <button type="button" class="btn btn-dark btn-lg"><a href="addKalendarinfo.php">Add Kalendarinfo</a></button>
-        </div>
+        
         
     </div>
     <div class="text-center">
@@ -33,18 +33,16 @@
         <table id="resetuserdata" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]' data-page-length='50'>
             <thead>
                 <tr>
-                    <td>Title</td>
-                    <td>Beschreibung</td>
+                    <td>Name</td>
+                    <td>Email</td>
                     <td>Datum</td>
-                    <td>Edit</td>
-                    <td>Delete</td>
+                    <td>Expired</td>
                 </tr>
                 <tr>
-                    <th>Title</th>
-                    <th>Beschreibung</th>
+                    <th>Name</th>
+                    <th>Email</th>
                     <th>Datum</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Expired</th>
                 </tr>
             </thead>
             <?php
@@ -56,22 +54,25 @@
                         //<td>'.$row['p_id'].'</td>
                         //echo '<td></td>';
                     echo '                         
-                        <td>'.$row['title'].'</td>
-                        <td>'.$row['beschreibung'].'</td>
+                        <td>'.$row['u_nickname'].'</td>
+                        <td>'.$row['u_email'].'</td>
                         <td>'.$row['datum'].'</td>
-                        <td><a href="editKalendarinfo.php?id='.$row['k_id'].'">Edit</a></td>
-                        <td><a href="delKalendarinfo.php?id='.$row['k_id'].'">Delete</a></td>';
+                        <td>';
+                    if($row['exp']>=0)
+                        echo "Yes";
+                    else
+                        echo "No";
+                
                 }
                 echo '</tbody>
                     ';
             ?>
             <tfoot>
                 <tr>
-                    <th>Title</th>
-                    <th>Beschreibung</th>
+                    <th>Name</th>
+                    <th>Email</th>
                     <th>Datum</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Expired</th>
                 </tr>
             </tfoot>
         </table>
