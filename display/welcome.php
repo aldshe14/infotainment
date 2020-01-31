@@ -24,7 +24,14 @@
 
     if($result){
         header('location:index.php');
-    }
+    }else{
+		$sql = "INSERT INTO tb_infotainment_display(name,mac) VALUES (:name, :mac);
+            ";
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(":name",$MAC);
+			$stmt->bindParam(":mac",$MAC);
+			$stmt->execute();
+	}
   
 ?>
 
