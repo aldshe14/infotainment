@@ -1,3 +1,4 @@
+<?php 
 function getMac(){
     $mac = false;
     $arp = `ip address | grep link/ether`;
@@ -17,3 +18,5 @@ function getIPAddress(){
     $ip = explode("/", $ip[5]);
     return $ip[0];
 }
+
+?>
