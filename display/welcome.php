@@ -50,6 +50,7 @@
 	$result1 = $stmt->fetch(PDO::FETCH_ASSOC);
 	
 	if($result1){
+		echo "in";
 		$sql = "SELECT l_id
 			FROM tb_infotainment_layout
 			where name like '-';
