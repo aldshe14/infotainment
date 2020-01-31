@@ -1,5 +1,6 @@
 <?php
     require_once "php/connection.php";
+    require_once "php/functions.php";
 
     $MAC = getMac();
 
