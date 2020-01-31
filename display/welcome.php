@@ -14,29 +14,44 @@
     $MAC = getMac();
 
     $sql = "SELECT d_id
+            FROM tb_infotainment_display d
+			join tb_infotainment_layout l
+			on d.layout_id = l.l_id
+            where mac = :mac and l.name not like '-';
+            ";
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(":mac",$MAC);
+    $stmt->execute();
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+	
+    
+	if($result){
+		header('location:index.php');
+	}
+	
+	$sql = "SELECT d_id
             FROM tb_infotainment_display
             where mac = :mac;
             ";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if($result){
-        header('location:index.php');
-    }else{
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+	if($result){
 		$sql = "SELECT l_id
-            FROM tb_infotainment_layout
-            where name like '-';
-            ";
+			FROM tb_infotainment_layout
+			where name like '-';
+			";
 		$stmt = $con->prepare($sql);
 		$stmt->execute();
 		$result = $stmt->fetch();
 
 		$sql = "SELECT l_id
-            FROM tb_infotainment_location
-            where name like '-';
-            ";
+			FROM tb_infotainment_location
+			where name like '-';
+			";
 		$stmt = $con->prepare($sql);
 		$stmt->execute();
 		$result1 = $stmt->fetch();
@@ -45,11 +60,12 @@
 		$sql = "INSERT INTO tb_infotainment_display(name,mac,layout_id,location_id) VALUES (:name, :mac,:layout, :location);
 		";
 		$stmt = $con->prepare($sql);
-		$stmt->bindParam(":name",$MAC);
+		$stmt->bindValue(":name","---");
 		$stmt->bindParam(":mac",$MAC);
 		$stmt->bindParam(":layout",$result[0]);
 		$stmt->bindParam(":location",$result1[0]);
 		$stmt->execute();
+	
 	}
   
 ?>

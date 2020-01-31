@@ -13,9 +13,11 @@
 
     $MAC = getMac();
 
-    $sql = "SELECT d_id
-            FROM tb_infotainment_display
-            where mac = :mac;
+    $sql = "SELECT d_id,file
+    FROM tb_infotainment_display d
+    join tb_infotainment_layout l
+    on d.layout_id = l.l_id
+    where mac = :mac and l.name not like '-';
             ";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
@@ -36,9 +38,9 @@
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->fetch();
 
-    $layout = $result[0]['file'];
+    $layout = $result['file'];
     //Only for test
     $layout = "layout1";
     
