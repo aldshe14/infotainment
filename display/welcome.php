@@ -18,7 +18,6 @@
 		//$mac = explode("\t", $lines[1]);
 		$ip = explode(" ", $lines[1]);
 		$ip = explode("/", $ip[5]);
-		print_r($ip);
 		return $ip[0];
     }
 
@@ -73,7 +72,7 @@
 		$stmt = $con->prepare($sql);
 		$stmt->bindValue(":name","---");
 		$stmt->bindParam(":mac",$MAC);
-		$stmt->bindParam(":mac",$IP);
+		$stmt->bindParam(":ip",$IP);
 		$stmt->bindParam(":layout",$result[0]);
 		$stmt->bindParam(":location",$result1[0]);
 		$stmt->execute();
