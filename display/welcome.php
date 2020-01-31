@@ -49,7 +49,7 @@
     $stmt->execute();
 	$result1 = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-	if($result1){
+	if($result1 == 0){
 		echo "in";
 		$sql = "SELECT l_id
 			FROM tb_infotainment_layout
