@@ -3,16 +3,26 @@
 	
 	function getMac(){
         $mac = false;
-        $arp = `arp -an`;
+        $arp = `ip address | grep link/ether`;
         $lines = explode("\n", $arp);
         //$mac = explode("\t", $lines[1]);
-        $mac = explode(" ", $lines[1]);
-
-        return $mac[3];
+        $mac = explode(" ", $lines[0]);
+		return $mac[1];
+		
+	}
+	
+	function getIPAddress(){
+        $ip = false;
+        $arp = `ip address | grep "inet "`;
+        $lines = explode("\n", $arp);
+        //$mac = explode("\t", $lines[1]);
+		$ip = explode(" ", $lines[1]);
+		$ip = explode("/", $ip);
+		return $ip[0];
     }
 
     $MAC = getMac();
-
+	$IP = getIPAddress();
     $sql = "SELECT d_id
             FROM tb_infotainment_display d
 			join tb_infotainment_layout l
@@ -37,9 +47,10 @@
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
-	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	$result1 = $stmt->fetch(PDO::FETCH_ASSOC);
+	echo "result1";
 	
-	if($result){
+	if($result1){
 		$sql = "SELECT l_id
 			FROM tb_infotainment_layout
 			where name like '-';
@@ -57,11 +68,12 @@
 		$result1 = $stmt->fetch();
 
 
-		$sql = "INSERT INTO tb_infotainment_display(name,mac,layout_id,location_id) VALUES (:name, :mac,:layout, :location);
+		$sql = "INSERT INTO tb_infotainment_display(name,mac,ip,layout_id,location_id) VALUES (:name, :mac, :ip, :layout, :location);
 		";
 		$stmt = $con->prepare($sql);
 		$stmt->bindValue(":name","---");
 		$stmt->bindParam(":mac",$MAC);
+		$stmt->bindParam(":mac",$IP);
 		$stmt->bindParam(":layout",$result[0]);
 		$stmt->bindParam(":location",$result1[0]);
 		$stmt->execute();
