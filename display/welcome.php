@@ -6,7 +6,8 @@
         $arp = `ip address | grep link/ether`;
         $lines = explode("\n", $arp);
         //$mac = explode("\t", $lines[1]);
-        $mac = explode(" ", $lines[0]);
+		$mac = explode(" ", $lines[0]);
+		print_r($mac);
 		return $mac[1];
 		
 	}
@@ -18,6 +19,7 @@
         //$mac = explode("\t", $lines[1]);
 		$ip = explode(" ", $lines[1]);
 		$ip = explode("/", $ip);
+		print_r($ip);
 		return $ip[0];
     }
 
@@ -48,7 +50,6 @@
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
 	$result1 = $stmt->fetch(PDO::FETCH_ASSOC);
-	echo "result1";
 	
 	if($result1){
 		$sql = "SELECT l_id
