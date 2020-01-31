@@ -14,14 +14,11 @@
 	function getIPAddress(){
         $ip = false;
 		$arp = `ip address | grep "inet "`;
-		print_r($arp);
         $lines = explode("\n", $arp);
 		//$mac = explode("\t", $lines[1]);
-		print_r($lines[1]);
 		$ip = explode(" ", $lines[1]);
+		$ip = explode("/", $ip[5]);
 		print_r($ip);
-		$ipa = explode("/", $ip);
-		print_r($ipa);
 		return $ip[0];
     }
 
