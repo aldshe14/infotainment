@@ -1,15 +1,7 @@
 <?php
     require_once "php/connection.php";
+    require_once "php/functions.php";
 
-    function getMac(){
-        $mac = false;
-        $arp = `arp -an`;
-        $lines = explode("\n", $arp);
-        //$mac = explode("\t", $lines[1]);
-        $mac = explode(" ", $lines[1]);
-
-        return $mac[3];
-    }
 
     $MAC = getMac();
 
@@ -18,7 +10,7 @@
     join tb_infotainment_layout l
     on d.layout_id = l.l_id
     where mac = :mac and l.name not like '-';
-            ";
+    ";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();

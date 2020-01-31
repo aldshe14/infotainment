@@ -1,25 +1,6 @@
 <?php
     require_once "php/connection.php";
-	
-	function getMac(){
-        $mac = false;
-        $arp = `ip address | grep link/ether`;
-        $lines = explode("\n", $arp);
-        //$mac = explode("\t", $lines[1]);
-		$mac = explode(" ", $lines[0]);
-		return $mac[5];
-		
-	}
-	
-	function getIPAddress(){
-        $ip = false;
-		$arp = `ip address | grep "inet "`;
-        $lines = explode("\n", $arp);
-		//$mac = explode("\t", $lines[1]);
-		$ip = explode(" ", $lines[1]);
-		$ip = explode("/", $ip[5]);
-		return $ip[0];
-    }
+	require_once "php/functions.php";
 
     $MAC = getMac();
 	$IP = getIPAddress();
@@ -49,7 +30,7 @@
     $stmt->execute();
 	$result1 = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-	if($result1 == 0){
+	if(!$result1){
 		echo "in";
 		$sql = "SELECT l_id
 			FROM tb_infotainment_layout
