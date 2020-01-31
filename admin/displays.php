@@ -35,6 +35,7 @@
                 <tr>
                     <td>Name</td>
                     <td>MAC</td>
+                    <td>IP Address</td>
                     <td>Layout</td>
                     <td>Location</td>
                     <td>Edit</td>
@@ -43,6 +44,7 @@
                 <tr>
                     <th>Name</th>
                     <th>MAC</th>
+                    <th>IP Address</th>
                     <th>Layout</th>
                     <th>Location</th>
                     <th>Edit</th>
@@ -60,6 +62,7 @@
                     echo '                         
                         <td>'.$row['name'].'</td>
                         <td>'.$row['mac'].'</td>
+                        <td>'.$row['ip'].'</td>
                         <td>'.$row['layout'].'</td>
                         <td>'.$row['location'].'</td>
                         <td><a href="editDisplay.php?id='.$row['id'].'">Edit</a></td>
@@ -72,6 +75,7 @@
                 <tr>
                     <th>Name</th>
                     <th>MAC</th>
+                    <th>IP Address</th>
                     <th>Layout</th>
                     <th>Location</th>
                     <th>Edit</th>
