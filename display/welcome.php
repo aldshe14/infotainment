@@ -18,8 +18,8 @@
         $lines = explode("\n", $arp);
         //$mac = explode("\t", $lines[1]);
 		$ip = explode(" ", $lines[1]);
-		$ip = explode("/", $ip);
-		print_r($ip);
+		$ipa = explode("/", $ip);
+		print_r($ipa);
 		return $ip[0];
     }
 
