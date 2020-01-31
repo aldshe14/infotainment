@@ -32,14 +32,14 @@ $stmt->bindParam(":mac",$MAC);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if($result[0]!="$IP"){
+if($result[0]!=$IP){
     $sql = "UPDATE tb_infotainment_display SET ip=:ip
             where mac = :mac;
             ";
-$stmt = $con->prepare($sql);
-$stmt->bindParam(":mac",$MAC);
-$stmt->bindParam(":ip",$IP);
-$stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(":mac",$MAC);
+    $stmt->bindParam(":ip",$IP);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
