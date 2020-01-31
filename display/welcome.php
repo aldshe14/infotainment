@@ -25,12 +25,31 @@
     if($result){
         header('location:index.php');
     }else{
-		$sql = "INSERT INTO tb_infotainment_display(name,mac) VALUES (:name, :mac);
+		$sql = "SELECT l_id
+            FROM tb_infotainment_layout
+            where name like '-';
             ";
-			$stmt = $con->prepare($sql);
-			$stmt->bindParam(":name",$MAC);
-			$stmt->bindParam(":mac",$MAC);
-			$stmt->execute();
+		$stmt = $con->prepare($sql);
+		$stmt->execute();
+		$result = $stmt->fetch();
+
+		$sql = "SELECT l_id
+            FROM tb_infotainment_location
+            where name like '-';
+            ";
+		$stmt = $con->prepare($sql);
+		$stmt->execute();
+		$result1 = $stmt->fetch();
+
+
+		$sql = "INSERT INTO tb_infotainment_display(name,mac,layout_id,location_id) VALUES (:name, :mac,:layout, :location);
+		";
+		$stmt = $con->prepare($sql);
+		$stmt->bindParam(":name",$MAC);
+		$stmt->bindParam(":mac",$MAC);
+		$stmt->bindParam(":layout",$result[0]);
+		$stmt->bindParam(":location",$result1[0]);
+		$stmt->execute();
 	}
   
 ?>
