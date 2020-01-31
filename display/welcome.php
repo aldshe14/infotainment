@@ -13,7 +13,7 @@
 	
 	function getIPAddress(){
         $ip = false;
-		$arp = `ip address | grep inet`;
+		$arp = `ip address | grep "inet "`;
 		print_r($arp);
         $lines = explode("\n", $arp);
 		//$mac = explode("\t", $lines[1]);
