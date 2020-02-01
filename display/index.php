@@ -27,7 +27,7 @@
     $result = $stmt->fetch();
 
     $layout = $result['layout'];
-    $reloadtime = $result['reloadtime'];
+    $reloadtime = $result['reloadtime'] * 1000;
     //Only for test
     //$layout = "layout1";
     
