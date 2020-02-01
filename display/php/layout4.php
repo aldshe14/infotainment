@@ -8,5 +8,5 @@
 	<div class="grid-container">
 		<div class="body"><?php require_once('php/body.php'); ?></div>
 	</div>
-</body>s
+</body>
 </html>
