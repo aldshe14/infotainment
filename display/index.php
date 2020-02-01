@@ -11,7 +11,7 @@
     where mac = :mac and l.name not like '-';
     ";
     $stmt = $con->prepare($sql);
-    $stmt->bindValue(":mac",$MAC);
+    $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -27,7 +27,7 @@
             where d.mac = :mac;
             ";
     $stmt = $con->prepare($sql);
-    $stmt->bindValue(":mac",$MAC);
+    $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch();
 
