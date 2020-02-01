@@ -20,18 +20,14 @@
     }
 
 
-    $sql = "SELECT l.file as file
-            FROM tb_infotainment_display d
-            JOIN tb_infotainment_layout l
-            ON d.layout_id = l.l_id
-            where d.mac = :mac;
-            ";
+    $sql = "call sp_getLayout(:mac);";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch();
 
-    $layout = $result['file'];
+    $layout = $result['layout'];
+    $reloadtime = $result['reloadtime'];
     //Only for test
     //$layout = "layout1";
     
@@ -61,4 +57,13 @@
         ?>
     </div>
 </body>
+<script>
+			
+		$(document).ready(function() {
+			setTimeout(function() {
+				window.location.reload(1);
+			}, <?php echo $reloadtime;?>);
+		});
+
+	</script>
 </html>
