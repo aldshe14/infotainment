@@ -68,7 +68,7 @@
                 <select name="layout" class="form-control">
                     <?php
                         $sql = "SELECT *
-                        FROM tb_infotainment_layout;";
+                        FROM tb_infotainment_layout where name not like '-';";
                         $pdo = $con->prepare($sql);
                         $pdo->execute();
                         $layout = $pdo->fetchAll();
@@ -90,7 +90,7 @@
                 <select name="location" class="form-control">
                     <?php
                         $sql = "SELECT *
-                        FROM tb_infotainment_location;";
+                        FROM tb_infotainment_location where name not like '-';";
                         $pdo = $con->prepare($sql);
                         $pdo->execute();
                         $location = $pdo->fetchAll();

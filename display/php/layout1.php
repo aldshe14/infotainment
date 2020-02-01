@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Layout 1</title>
+	<title>Display - Layout 1</title>
 	<link rel="stylesheet" href="layout1.css">
 	
 </head>

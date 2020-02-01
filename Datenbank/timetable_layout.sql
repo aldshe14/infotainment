@@ -12,3 +12,4 @@ create table tb_infotainment_timetable_layout(
     foreign key(display_id)
     references tb_infotainment_display(d_id)
 );
+

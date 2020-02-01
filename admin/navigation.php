@@ -26,6 +26,9 @@
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='kalendarinfo.php') echo "active"; ?>">
             <a class="nav-link" href="kalendarinfo.php"><i class="fas fa-calendar-alt"></i> KALENDARINFO</a>
         </li>
+        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='layouttimetable.php') echo "active"; ?>">
+            <a class="nav-link" href="layouttimetable.php"><i class="fas fa-calendar-alt"></i> Layouttimetable</a>
+        </li>
         <li class="nav-item dropdown 
                 <?php
                      if(basename($_SERVER["SCRIPT_FILENAME"])=='supplierplan.php' || basename($_SERVER["SCRIPT_FILENAME"])=='fehlendeLehrer.php' || basename($_SERVER["SCRIPT_FILENAME"])=='suppliertabelle.php' ) {  
