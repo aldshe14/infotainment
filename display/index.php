@@ -20,7 +20,7 @@
     }
 
 
-    $sql = "SELECT l.file
+    $sql = "SELECT l.file as file
             FROM tb_infotainment_display d
             JOIN tb_infotainment_layout l
             ON d.layout_id = l.l_id
