@@ -145,8 +145,8 @@
 	<script>
 			
 		$(document).ready(function() {
-			setInterval(function() {
-				refresh();
+			setTimeout(function() {
+				window.location.reload(1);
 			}, 10000);
 		});
 
