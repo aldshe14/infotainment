@@ -2,11 +2,11 @@
 <html>
 <head>
 	<title>Display - Layout 4</title>
-	<link rel="stylesheet" href="/css/layout4.css">
+	<link rel="stylesheet" href="layout4.css">
 </head>
 <body>
 	<div class="grid-container">
-		<div class="body"><?php require_once('/php/body.php'); ?></div>
+		<div class="body"><?php require_once('php/body.php'); ?></div>
 	</div>
 </body>s
 </html>

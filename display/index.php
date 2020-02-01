@@ -27,7 +27,7 @@
     $result = $stmt->fetch();
 
     if(!$result){
-        $layout = "layout1";
+        $layout = "layout4";
         $reloadtime = 60000;
     }else{
         $layout = $result['layout'];
