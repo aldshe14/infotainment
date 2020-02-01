@@ -121,6 +121,7 @@
             margin-right: auto;
         }
 	</style>
+	<script src="js/jquery.js"></script>
 </head>
 <body style="height: 720px;">
     <br>
