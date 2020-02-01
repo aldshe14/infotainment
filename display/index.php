@@ -19,7 +19,7 @@
         !header('location:welcome.php');
     }
 
-
+    $reloadtime = null;
     $sql = "call sp_getLayout(:mac);";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
@@ -41,13 +41,11 @@
             require_once "php/".$layout.".php";
         ?>
 
-<script>
-			
-		$(document).ready(function() {
-			setTimeout(function() {
-				window.location.reload(1);
-			}, <?php echo $reloadtime;?>);
-		});
-
-	</script>
+    <script>	
+        $(document).ready(function() {
+            setTimeout(function() {
+                window.location.reload(1);
+            }, <?php echo $reloadtime;?>);
+        });
+    </script>
 </html>

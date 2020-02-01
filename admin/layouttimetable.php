@@ -63,15 +63,15 @@
 
                         <td>'.$row['von'].'</td>
                         <td>'.$row['bis'].'</td>
-                        <td><a href="editLayout.php?id='.$row['l_id'].'">Edit</a></td>
-                        <td><a href="delLayout.php?id='.$row['l_id'].'">Delete</a></td>';
+                        <td><a href="editLayout.php?id='.$row['t_id'].'">Edit</a></td>
+                        <td><a href="delLayout.php?id='.$row['t_id'].'">Delete</a></td>';
                 }
                 echo '</tbody>
                     ';
             ?>
             <tfoot>
                 <tr>
-                <th>Display</th>
+                    <th>Display</th>
                     <th>Layout</th>
                     <th>Von</th>
                     <th>Bis</th>
