@@ -1,5 +1,6 @@
 <?php
     require_once "php/connection.php";
+    require_once "php/functions.php";
 
     $MAC = getMac();
 	$IP = getIPAddress();
@@ -17,7 +18,7 @@
 	
     
 	if($result){
-		header('location:index.php');
+		!header('location:index.php');
 	}
 	
 	$sql = "SELECT d_id
