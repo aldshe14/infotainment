@@ -2,36 +2,6 @@
     require_once "php/connection.php";
     require_once "php/functions.php";
 
-    $MAC = getMac();
-
-    $sql = "SELECT d_id,file
-    FROM tb_infotainment_display d
-    join tb_infotainment_layout l
-    on d.layout_id = l.l_id
-    where mac = :mac and l.name not like '-';
-    ";
-    $stmt = $con->prepare($sql);
-    $stmt->bindParam(":mac",$MAC);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if(!$result){
-        !header('location:welcome.php');
-    }
-
-
-    $sql = "SELECT l.file as file
-            FROM tb_infotainment_display d
-            JOIN tb_infotainment_layout l
-            ON d.layout_id = l.l_id
-            where d.mac = :mac;
-            ";
-    $stmt = $con->prepare($sql);
-    $stmt->bindParam(":mac",$MAC);
-    $stmt->execute();
-    $result = $stmt->fetch();
-
-    $layout = $result['file'];
     //Only for test
     $layout = "layout1";
     
