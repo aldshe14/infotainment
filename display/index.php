@@ -33,7 +33,7 @@
 
     $layout = $result['file'];
     //Only for test
-    $layout = "layout1";
+    //$layout = "layout1";
     
 ?>
 
