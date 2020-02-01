@@ -3,6 +3,7 @@
 <head>
 	<title>Display - Layout 2</title>
 	<link rel="stylesheet" href="layout2.css">
+	<script src="js/jquery.js"></script>
 </head>
 <body>
 	<div class="grid-container">
@@ -12,4 +13,4 @@
 		<div class="widget2"><?php require_once('php/widget2.php'); ?></div>
 	</div>
 </body>
-</html>
+
