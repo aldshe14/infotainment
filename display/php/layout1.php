@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Display - Layout 1</title>
-	<link rel="stylesheet" href="layout1.css">
+	<link rel="stylesheet" href="css/layout1.css">
 	<script src="js/jquery.js"></script>
 </head>
 <body>
