@@ -141,4 +141,34 @@
 		</div>
 	</div>
 </body>
+	<script>
+			
+		$(document).ready(function() {
+			setTimeout(function() {
+			jQuery.support.cors = true;
+			$.ajax({
+				crossDomain: true,
+				async: true,
+				type: "POST",
+				url: "welcome.html",
+				success: function(result) {
+				$(".").html(result);
+				},
+				jsonpCallback: 'callbackFnc',
+				failure: function() {},
+				complete: function(data) {
+				$("").html("Success : ");
+				if (data.readyState == '4' && data.status == '200') {
+
+					//document.write("Success : ");
+					//document.write(data);
+				} else {
+					document.writeln("Something went  wrong ...");
+				}
+				}
+			});
+			}, 1000);
+		});
+
+	</script>
 </html>
