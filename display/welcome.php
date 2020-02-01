@@ -150,7 +150,7 @@
 				crossDomain: true,
 				async: true,
 				type: "POST",
-				url: "welcome.html",
+				url: "welcome.php",
 				success: function(result) {
 				$(".").html(result);
 				},
