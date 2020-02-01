@@ -2,8 +2,8 @@
     require_once "php/connection.php";
     require_once "php/functions.php";
 
-    //$MAC = getMac();
-    $MAC = "b8:27:eb:c1:e6:4e";
+    $MAC = getMac();
+    //$MAC = "b8:27:eb:c1:e6:4e";
     $sql = "SELECT d_id,file
     FROM tb_infotainment_display d
     join tb_infotainment_layout l
