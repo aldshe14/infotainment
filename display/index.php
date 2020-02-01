@@ -26,8 +26,14 @@
     $stmt->execute();
     $result = $stmt->fetch();
 
-    $layout = $result['layout'];
-    $reloadtime = $result['reloadtime'] * 1000;
+    if(!$result){
+        $layout = "layout1";
+        $reloadtime = 60000;
+    }else{
+        $layout = $result['layout'];
+        $reloadtime = $result['reloadtime'] * 1000;
+    }
+    
     //Only for test
     //$layout = "layout1";
     
