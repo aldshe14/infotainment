@@ -31,7 +31,7 @@
             <?php
         }
     }catch (PDOException $e) {
-        echo "Error";
+        echo "Error ".$e->getMessage();
     }
    
 
