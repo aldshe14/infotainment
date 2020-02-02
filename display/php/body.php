@@ -2,12 +2,6 @@
 
   require_once('php/supplierplan.php'); 
 
-  $sql = "call sp_getLayout(:mac);";
-  $stmt = $con->prepare($sql);
-  $stmt->bindParam(":mac",$MAC);
-  $stmt->execute();
-  $result = $stmt->fetch();
-
 ?>
 
 <script>
