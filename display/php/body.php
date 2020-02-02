@@ -27,7 +27,7 @@
         jsonpCallback: 'callbackFnc',
         failure: function() {}
       });
-    }, 4000);
+    }, 10000);
   });
       
 </script>
