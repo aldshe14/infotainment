@@ -1,4 +1,6 @@
-<?php require_once('php/weather1.php'); ?>
+<?php 
+  require_once('php/weather1.php'); 
+?>
 
 <script>
         
