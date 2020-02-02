@@ -18,7 +18,8 @@
       });
   }
           
-  $(document).ready(fetchbody(), 10000);
+  $(document).ready(function(){
+ setInterval(fetchbody, 10000);
   });
       
 </script>
