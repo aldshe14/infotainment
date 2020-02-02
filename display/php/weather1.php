@@ -7,7 +7,7 @@
 
     try {
         $pdo->execute();
-        $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        $result = $pdo->fetchAll();
         foreach ($result as $row){?>
             <div class="report-container">
                 <h2><?php echo $row['city_name']; ?> Weather Status</h2>
