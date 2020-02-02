@@ -4,7 +4,7 @@
 
 <script>
         
-  $(document).ready(function() {
+        $(document).ready(function() {
     // Instead of button click, change this.
     setInterval(function() {
       jQuery.support.cors = true;
@@ -12,14 +12,14 @@
         crossDomain: true,
         async: true,
         type: "POST",
-        url: "php/weather1.php",
+        url: "php/supplierplan.php",
         success: function(result) {
-          $(".widget1").html(result);
+          $(".body").html(result);
         },
         jsonpCallback: 'callbackFnc',
         failure: function() {}
       });
-    }, 60000);
+    }, 10000);
   });
       
 </script>
