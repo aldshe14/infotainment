@@ -14,7 +14,7 @@
         crossDomain: true,
         async: true,
         type: "POST",
-        url: "php/supplierplan.php",
+        url: "php/weather1.php",
         success: function(result) {
           $(".body").html(result);
         },
