@@ -14,13 +14,13 @@
         
   $(document).ready(function() {
     // Instead of button click, change this.
-    setTimeout(function() {
+    setInterval(function() {
       jQuery.support.cors = true;
       $.ajax({
         crossDomain: true,
         async: true,
         type: "POST",
-        url: "php/weather1.php",
+        url: "php/supplierplan.php",
         success: function(result) {
           $(".body").html(result);
         },
