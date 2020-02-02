@@ -5,23 +5,20 @@
 ?>
 
 <script>
-        
-  $(document).ready(function() {
-    // Instead of button click, change this.
-    setInterval(function() {
-      jQuery.support.cors = true;
+
+  
+  function fetchbody(){
       $.ajax({
-        crossDomain: true,
-        async: true,
-        type: "POST",
-        url: "php/weather1.php",
-        success: function(result) {
-          $(".body").html(result);
-        },
-        jsonpCallback: 'callbackFnc',
-        failure: function() {}
+          url: 'weather1.php',
+          type: 'post',
+          success: function(response){
+          // Perform operation on the return value
+            $(".body").html(response);
+          }
       });
-    }, 10000);
+  }
+          
+  $(document).ready(fetchbody(), 10000);
   });
       
 </script>
