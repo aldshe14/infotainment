@@ -1,5 +1,5 @@
 <?php
-	require_once "connection.php";
+	//require_once "connection.php";
     
     $rawDate = date("Y-m-d");
     $day = date('N', strtotime($rawDate));
