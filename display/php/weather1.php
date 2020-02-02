@@ -1,5 +1,4 @@
 <?php
-	require_once "connection.php";
 
     $sql = "SELECT * 
     FROM  tb_infotainment_weather
@@ -32,7 +31,7 @@
             <?php
         }
     }catch (PDOException $e) {
-
+        echo "Error";
     }
    
 
