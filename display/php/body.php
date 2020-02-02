@@ -1,4 +1,14 @@
-<?php require_once('php/supplierplan.php'); ?>
+<?php 
+
+  require_once('php/supplierplan.php'); 
+
+  $sql = "call sp_getLayout(:mac);";
+  $stmt = $con->prepare($sql);
+  $stmt->bindParam(":mac",$MAC);
+  $stmt->execute();
+  $result = $stmt->fetch();
+
+?>
 
 <script>
         
@@ -10,7 +20,7 @@
         crossDomain: true,
         async: true,
         type: "POST",
-        url: "php/supplierplan.php",
+        url: "php/weather1.php",
         success: function(result) {
           $(".body").html(result);
         },

@@ -1,6 +1,8 @@
 create table tb_infotainment_timetable(
 	t_id int primary key auto_increment,
     tl_id int not null,
+    name varchar(50) not null,
+    a_id int not null,
     lsection_id int not null,
     von time not null,
     bis time not null,
