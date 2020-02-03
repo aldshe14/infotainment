@@ -21,8 +21,8 @@ curs.execute(multilanguage)
 txt=curs.fetchall()
 defaultadminmsgen = "Hi admin, below the following options:\n/users\n/see_unregistered_users\n/Accept\n/DoNotAccept\n/block\n/setLanguage DE|EN"
 defaultadminmsgde= "Hallo Administrator, unten stehen die folgenden Optionen:\n/users\n/see_unregistered_users\n/Accept\n/DoNotAccept\n/block\n/setLanguage DE|EN"
-defaultusermsgen = "Hi User, \nbelow the following options:\n-You can send an image and this image will be automatically displayed on the screen.\n/setLanguage DE|EN"
-defaultusermsgde="Hallo Benutzer, \nunten stehen die folgenden Optionen:\n/-Sie koennen ein Bild schicken und es wird am Bildschirm dargestellt.\n/setLanguage DE|EN"
+defaultusermsgen = "Hi User, \nbelow the following options:\n/sendImages\n/setLanguage DE|EN"
+defaultusermsgde="Hallo Benutzer, \nunten stehen die folgenden Optionen:\n/sendImages\n/setLanguage DE|EN"
 sprache="Type EN for english and DE for german"
 def handle(msg):
     content_type,chat_type,chat_id=telepot.glance(msg) 
@@ -41,8 +41,9 @@ def handle(msg):
     if button == 'pressed':
         reply=msg["text"]
         if reply.isdigit()==True:
+            print(reply[0])
             if(len(reply)==10):
-                if reply[0] =='0' and reply[1]=='6' and (reply[2]=='7' or reply[2]=='9'):
+                if reply[0] ==0 and reply[1]==6 and (reply[2]==7 or reply[2]==9):
                     print reply
                     query3=("insert into tb_infotainment_chatbot_users" \
                     "(c_id, user_status, role, telefonnummer, checked)"  
@@ -53,11 +54,11 @@ def handle(msg):
                     global button
                     button = ""
                     bot.sendMessage(chat_id, "Great! Your data has been sent to the administrator!")
+                    query_kontrolle=("Select c_id, checked from tb_infotainment_chatbot_users")
+                    execute_kontrolle=curs.execute()
+                    notchecked=curs.fetchall()
                 else:
                     bot.sendMessage(chat_id, "Invalid phone number format")
-                query_kontrolle=("Select c_id, checked from tb_infotainment_chatbot_users")
-                execute_kontrolle=curs.execute(query_kontrolle)
-                notchecked=curs.fetchall()
                 if notchecked[1] == 2:
                    bot.sendMessage(chat_id, "Administrator hasn't confirmed you")
                 elif notchecked[1] == 1:
@@ -153,36 +154,40 @@ def handle(msg):
                 else:
                     bot.sendMessage(chat_id, "Hallo Administrator. Dieser Befehl ist nicht valid. Bitte probieren Sie /info aus.")
         elif user[1] == 555 and user[3]==1:
-            if content_type == 'text':
-                usermsg=command.split()
-                if command=='/info':
-                    if language==1:
-                        bot.sendMessage(chat_id,defaultusermsgen)
-                    else:
-                        bot.sendMessage(chat_id,defaultusermsgde)
-                elif usermsg[0] == '/setLanguage':
-                    global language
-                    language=1
-                    if usermsg[1]=='EN':
-                        language=1
-                        bot.sendMessage(chat_id, txt[12][language])
-                    elif usermsg[1]=='DE':
-                        language=2
-                        bot.sendMessage(chat_id, txt[12][language])
-                    else:
-                        bot.sendMessage(chat_id, txt[17][language])
+            usermsg=command.split()
+            if command== '/info':
+                if language==1:
+                    bot.sendMessage(chat_id, defaultusermsgen)
                 else:
-                    if language==1:
-                        bot.sendMessage(chat_id, "Hi User. That is not a valid command. Please try /info.")
+                    bot.sendMessage(chat_id, defaultusermsgde)
+            elif usermsg[0] == '/setLanguage':
+                global language
+                language=1
+                if usermsg[1]=='EN':
+                    language=1
+                    bot.sendMessage(chat_id, txt[12][language])
+                elif usermsg[1]=='DE':
+                    language=2
+                    bot.sendMessage(chat_id, txt[12][language])
+                else:
+                    bot.sendMessage(chat_id, txt[17][language])
+            elif command == '/sendImages':
+                bot.sendMessage(chat_id, "Please send an image")
+
+                if command == [msg]['text']:
+                    bot.sendMessage(chat_id, "This is not an image")
+                else:
+                    #bot.sendMessage(chat_id, "Super")
+                #if content_type == 'text':
+                 #   bot.sendMessage(chat_id, 'This is not an image')
+                #if content_type == 'photo':
+                    if user[2]== 0:
+                        bot.sendMessage(chat_id, "Your images will not be displayed anymore")
                     else:
-                        bot.sendMessage(chat_id, "Hallo Benutzer. Dieser Befehl ist nicht valid. Bitte probieren Sie /info aus.")
-            else:
-                    if user[2]== 1:
-                        bot.sendMessage(chat_id, txt[5][language])
-                    else:
-                        bot.sendMessage(chat_id, txt[6][language])
+                        bot.sendMessage(chat_id, "Image received")
                         print (msg)
                         fileid=msg['photo'][2]['file_id']
+                        #bot.sendPhoto(chat_id,fileid)
                         print(fileid)
                         file=bot.getFile(fileid)
                         filepath = file['file_path']
@@ -190,6 +195,8 @@ def handle(msg):
                         url= "https://api.telegram.org/file/bot%s/%s" % (token,filepath)
                         filedata = urllib2.urlopen(url)
                         blobImage = filedata.read()
+                    #test='/home/pi/chatbot/%s' % (filepath)
+                    #file1=wget.download(url,test) 
                         insert_query =("insert into tb_infotainment_chatbot_images"\
                         "(image, u_id)"\
                             "VALUES(%s, %s)")
@@ -197,36 +204,23 @@ def handle(msg):
 
                         curs.execute(insert_query,values)
                         conn.commit()
+            else:
+                if language==1:
+
+                    bot.sendMessage(chat_id, "Hi User. That is not a valid command. Please try /info")
+                else:
+                    bot.sendMessage(chat_id, "Hallo Benutzer. Das ist kein valider Befehl. Bitte probieren Sie /info aus")
+
+
 
         else:
             bot.sendMessage(chat_id, "Waiting for confirmation")
     elif register=="true":
         bot.sendMessage(chat_id, "Write your phone number again")
-    else:   
-            usermlg=command.split()
-            if command=='/info':
-                if language==1:
-                    bot.sendMessage(chat_id,defaultadminmsgen)
-                else:
-                    bot.sendMessage(chat_id,defaultadminmsgde)
-            
-            elif usermlg[0] == '/setLanguage':
-                global language
-                language=1
-                if usermlg[1]=='EN':
-                    language=1
-                    bot.sendMessage(chat_id, txt[12][language])
-                elif usermlg[1]=='DE':
-                    language=2
-                    bot.sendMessage(chat_id, txt[12][language])
-                else:
-                    bot.sendMessage(chat_id, txt[17][language])
-            elif command == '/register':
-                bot.sendMessage(chat_id, "You're not registered")
-                bot.sendMessage(chat_id, "Do you want to register?")
-                bot.sendMessage(chat_id, 'Inline Keyboard', reply_markup=keyboard)
-            else:
-                bot.sendMessage(chat_id, 'Ca ban')
+    else:
+        bot.sendMessage(chat_id, "You're not registered")
+        bot.sendMessage(chat_id, "Do you want to register?")
+        bot.sendMessage(chat_id, 'Inline Keyboard', reply_markup=keyboard)
 
 def on_callback_query(msg):
     query_id, from_id, query_data=telepot.glance(msg,flavor='callback_query')
