@@ -12,8 +12,8 @@ network={
 sudo apt-get update 
 sudo apt-get upgrade 
 
-timedatectl set-timezone "Europe/Tirane"
-timedatectl set-timezone UTC
+sudo timedatectl set-timezone "Europe/Tirane"
+sudo timedatectl
 
 sudo apt-get install -y vim
 sudo apt-get install -y git
@@ -37,7 +37,9 @@ sudo apt-get install -y unclutter
 sudo sh -c '@xset s off
 @xset -dpms
 @xset s noblank
-@unclutter -idle 0
 @chromium-browser –incognito –kiosk http://localhost/infotainment/display" > /etc/xdg/lxsession/LXDE-pi/autostart'
+
+sudo sh -c '[Seat:*]
+xserver-command=X -nocursor" >> /etc/lightdm/lightdm.conf'
 
 sudo reboot
