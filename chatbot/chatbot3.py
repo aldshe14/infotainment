@@ -12,7 +12,8 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
 conn=MySQLdb.connect('localhost','infotainment', '1nf0tainment', 'infotainment_system')
 curs=conn.cursor()
-button=""
+#global button
+button="1"
 register=""
 global language
 language=1
@@ -23,10 +24,12 @@ defaultadminmsgen = "Hi admin, below the following options:\n/users\n/see_unregi
 defaultadminmsgde= "Hallo Administrator, unten stehen die folgenden Optionen:\n/users\n/see_unregistered_users\n/Accept\n/DoNotAccept\n/block\n/setLanguage DE|EN"
 defaultusermsgen = "Hi User, \nbelow the following options:\n-You can send an image and this image will be automatically displayed on the screen.\n/setLanguage DE|EN"
 defaultusermsgde="Hallo Benutzer, \nunten stehen die folgenden Optionen:\n/-Sie koennen ein Bild schicken und es wird am Bildschirm dargestellt.\n/setLanguage DE|EN"
+defaultunregistrierten="Hi, This is the Infotainment System. Below the following options:\n/register\n/setLanguage DE|EN"
+defaultunregistriertde="Hallo, Willkommen zu Infotainment System. Unten stehen die folgenden Optionen:\n/register\n/setLanguage DE|EN"
 sprache="Type EN for english and DE for german"
 def handle(msg):
     content_type,chat_type,chat_id=telepot.glance(msg) 
-    keyboard=InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Po', callback_data='press1'), InlineKeyboardButton(text='Jo', callback_data='press2')],])    
+    keyboard=InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Yes', callback_data='press1'), InlineKeyboardButton(text='No', callback_data='press2')],])    
     #query_id, from_id, query_data=telepot.glance(msg, flavor=flavor)
     username=msg['from']['first_name']
 
@@ -35,14 +38,17 @@ def handle(msg):
         command=msg['text']
     elif content_type == 'photo':
         command=msg['photo']
-    print "Test"
+    print "TTT"
     global button
     print button
     if button == 'pressed':
         reply=msg["text"]
-        if reply.isdigit()==True:
-            if(len(reply)==10):
-                if reply[0] =='0' and reply[1]=='6' and (reply[2]=='7' or reply[2]=='9'):
+        lastcharacter=len(reply)-1
+        string=reply[1:lastcharacter]
+        print "TESTTTTTT"
+        print reply
+        if reply[0]=='+' and string.isdigit()==True:
+            if(len(string)>=10) and (len(string)<=12):
                     print reply
                     query3=("insert into tb_infotainment_chatbot_users" \
                     "(c_id, user_status, role, telefonnummer, checked)"  
@@ -52,22 +58,20 @@ def handle(msg):
                     conn.commit()
                     global button
                     button = ""
-                    bot.sendMessage(chat_id, "Great! Your data has been sent to the administrator!")
-                else:
-                    bot.sendMessage(chat_id, "Invalid phone number format")
-                query_kontrolle=("Select c_id, checked from tb_infotainment_chatbot_users")
-                execute_kontrolle=curs.execute(query_kontrolle)
-                notchecked=curs.fetchall()
-                if notchecked[1] == 2:
-                   bot.sendMessage(chat_id, "Administrator hasn't confirmed you")
-                elif notchecked[1] == 1:
-                    bot.sendMessage(chat_id, "Congratulations, administrator has confirmed you")
+                    bot.sendMessage(chat_id, txt[0][language])
+                    query_kontrolle=("Select c_id, checked from tb_infotainment_chatbot_users")
+                    execute_kontrolle=curs.execute(query_kontrolle)
+                    notchecked=curs.fetchall()
+                    if notchecked[1] == 2:
+                        bot.sendMessage(chat_id, txt[15][language])
+                    elif notchecked[1] == 1:
+                        bot.sendMessage(chat_id, txt[16][language])
+                    global register
+                    register="true"
             else:
-                bot.sendMessage(chat_id, "The length of your phone number is not correct")
-                global register
-                register = "true"
+                bot.sendMessage(chat_id, txt[3][language])
         else:
-            bot.sendMessage(chat_id, "Invalid phone number format")
+            bot.sendMessage(chat_id, txt[1][language])
     print username
     query=("SELECT c_id, role, user_status, checked, telefonnummer from tb_infotainment_chatbot_users where c_id = %s") %(int(chat_id))
     count=curs.execute(query)
@@ -199,16 +203,16 @@ def handle(msg):
                         conn.commit()
 
         else:
-            bot.sendMessage(chat_id, "Waiting for confirmation")
+            bot.sendMessage(chat_id, txt[7][language])
     elif register=="true":
-        bot.sendMessage(chat_id, "Write your phone number again")
+        bot.sendMessage(chat_id, txt[8][language])
     else:   
             usermlg=command.split()
             if command=='/info':
                 if language==1:
-                    bot.sendMessage(chat_id,defaultadminmsgen)
+                    bot.sendMessage(chat_id,defaultunregistrierten)
                 else:
-                    bot.sendMessage(chat_id,defaultadminmsgde)
+                    bot.sendMessage(chat_id,defaultunregistriertde)
             
             elif usermlg[0] == '/setLanguage':
                 global language
@@ -222,34 +226,40 @@ def handle(msg):
                 else:
                     bot.sendMessage(chat_id, txt[17][language])
             elif command == '/register':
-                bot.sendMessage(chat_id, "You're not registered")
-                bot.sendMessage(chat_id, "Do you want to register?")
-                bot.sendMessage(chat_id, 'Inline Keyboard', reply_markup=keyboard)
+                bot.sendMessage(chat_id, txt[9][language])
+                bot.sendMessage(chat_id, txt[10][language])
+                bot.sendMessage(chat_id,'Inline Keyboard',reply_markup=keyboard)
             else:
-                bot.sendMessage(chat_id, 'Ca ban')
+                if language==1:
+                    bot.sendMessage(chat_id, 'This is not a valid command. Please try /info')
+                else:
+                    bot.sendMessage(chat_id, 'Dieser Befehl ist nicht valid. Bitte probieren Sie /info aus')
 
 def on_callback_query(msg):
     query_id, from_id, query_data=telepot.glance(msg,flavor='callback_query')
     bot.answerCallbackQuery(query_id, text='getIt')
     print(query_data)
     if query_data=='press1':
-         bot.sendMessage(from_id,text="ok")
+         #bot.sendMessage(from_id,text="ok")
          query2=("Select c_id from tb_infotainment_chatbot_users where c_id =%s") %(int(from_id))
          count1=curs.execute(query2)
          if count1 > 0:
-             bot.sendMessage(from_id, text="You have been registered")
+             if language==1:
+                 bot.sendMessage(from_id, text="You have been registered")
+             else:
+                 bot.sendMessage(from_id, text="Sie sind schon registriert")
          else:
-             bot.sendMessage(from_id, text="Please write your phone number below")
-             #bot.register_next_step_handler(msg, process_name_step)
-             
-             
-             
-             global button
-             button="pressed"
+            if language==1:
+                bot.sendMessage(from_id, text="Please write your phone number below.")
+            else:
+                bot.sendMessage(from_id, text="Bitte schreiben Sie Ihre Telefonnummer.")
+                #bot.register_next_step_handler(msg, process_name_step)
+                global button
+                button="pressed"
              #print "irenamoj"
 
     else:
-         bot.sendMessage(from_id, text="nvm")
+         bot.sendMessage(from_id, text="OK!")
 
 
 token= '960505913:AAG5EqEksnoiXLZj0C-VmZ9UdbvjuSvDg1g'
