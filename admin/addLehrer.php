@@ -7,6 +7,7 @@
     if(!isset($_SESSION['loggedin']) && !isset($_SESSION['email']) && !isset($_SESSION['role']) && !isset($_SESSION['user_id'])){
         header('Location: signin.php');
     }
+    
     $sql = "INSERT INTO  tb_infotainment_fehlendelehrer (u_id,woche) VALUES (:id,:woche);";
     $sth = $con->prepare($sql);
     $sth->bindParam(':id', $_GET["id"]);

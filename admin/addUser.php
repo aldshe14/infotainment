@@ -3,10 +3,6 @@
     require_once "header.php";
     require_once "navigation.php";
 
-    if(!isset($_SESSION['loggedin']) && !isset($_SESSION['email']) && !isset($_SESSION['role']) && !isset($_SESSION['user_id'])){
-        header('Location: signin.php');
-    }
-
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_POST['role']) && isset($_POST['nickname']) ){
  
         // Validate name

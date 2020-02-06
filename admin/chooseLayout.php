@@ -3,9 +3,6 @@
     require_once "header.php";
     require_once "navigation.php";
 
-    if(!isset($_SESSION['loggedin']) && !isset($_SESSION['email']) && !isset($_SESSION['role']) && !isset($_SESSION['user_id'])){
-        header('Location: signin.php');
-    }
 
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['layout']) && isset($_POST['von']) && isset($_POST['bis']) 
     && (isset($_POST['mon']) || isset($_POST['tue']) || isset($_POST['wed']) || isset($_POST['thu']) || isset($_POST['fri']) 
@@ -136,7 +133,7 @@
                     <div class="form-check form-check-inline">
                         <br><br>
                         <input class="form-check-input" type="checkbox" name="sat">
-                        <label class="form-check-label"">Sat</label>
+                        <label class="form-check-label">Sat</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <br><br>
@@ -154,7 +151,9 @@
             </div>
         </form>
     </div>
+    
 
 <?php
+    require_once "timetableLayout.php";
     require_once "footer.php";
 ?>

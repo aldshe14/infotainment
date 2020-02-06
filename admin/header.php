@@ -23,6 +23,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="shortcut icon" href="img/favicon_1.png" type="image/x-icon"/>
 
+	<!-- Timetables -->
+	<script>document.getElementsByTagName("html")[0].className += " js";</script>
+  	<link rel="stylesheet" href="timetable/css/style.css">
+	
+	
   	<!-- Bootstrap CSS File-->
   	<link rel="stylesheet" href="css/bootstrap.min.css">
 
@@ -69,7 +74,7 @@
 	<!-- CanvasJS -->
 	<script type="text/javascript" src="js/canvasjs.min.js"></script>
 
-
+	
 </head>
 
 <body>

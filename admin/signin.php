@@ -2,6 +2,7 @@
 	require_once "connection.php";
     require_once "header.php";
     //require_once "navigation.php";
+    
     if(isset($_SESSION['loggedin'])){
         header('Location: index.php');
     }
