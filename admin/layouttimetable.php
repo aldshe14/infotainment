@@ -63,8 +63,8 @@
 
                         <td>'.$row['von'].'</td>
                         <td>'.$row['bis'].'</td>
-                        <td><a href="editLayout.php?id='.$row['t_id'].'">Edit</a></td>
-                        <td><a href="delLayout.php?id='.$row['t_id'].'">Delete</a></td>';
+                        <td><a class="edit-table" href="editLayout.php?id='.$row['t_id'].'">Edit <i class="fas fa-edit"></i></a></td>
+                        <td><a class="delete-table" href="delLayout.php?id='.$row['t_id'].'">Delete <i class="fas fa-trash"></i></a></td>';
                 }
                 echo '</tbody>
                     ';

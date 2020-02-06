@@ -193,7 +193,7 @@
             <input type="text" name="date" value="<?php echo date('Y-m-d', strtotime($rawDate . ' +'.$_GET['d'].' day')); ?>" hidden>
             <br>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg" value="Submit">Ndrysho</button>
+                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Ndrysho</button>
             </div>
         </form>
     </div>    

@@ -15,6 +15,15 @@ table thead td{
     font-weight: bold !important;
 }
 
+.edit-table{
+    color:rgb(3, 97, 185);
+    text-decoration: none ;
+}
+
+.delete-table{
+    color:red; 
+    text-decoration: none;
+}
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting:before,
 table.dataTable thead .sorting_asc:after,

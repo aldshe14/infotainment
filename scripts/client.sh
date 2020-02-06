@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo passwd pi
+echo "1nf0tainment" | passwd --stdin 1nf0tainment
 sudo sh -c 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=GB
