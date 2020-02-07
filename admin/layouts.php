@@ -3,9 +3,6 @@
     require_once "header.php";
     require_once "navigation.php";
 
-    if(!isset($_SESSION['loggedin']) && !isset($_SESSION['email']) && !isset($_SESSION['role']) && !isset($_SESSION['user_id'])){
-        header('Location: signin.php');
-    }
 
     $sql = "SELECT * 
     FROM  tb_infotainment_layout where name not like '-';";

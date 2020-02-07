@@ -24,7 +24,6 @@
 	<link rel="shortcut icon" href="img/favicon_1.png" type="image/x-icon"/>
 
 	<!-- Timetables -->
-	<script>document.getElementsByTagName("html")[0].className += " js";</script>
   	<link rel="stylesheet" href="timetable/css/style.css">
 	
 	

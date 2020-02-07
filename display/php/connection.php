@@ -1,6 +1,6 @@
 <?php
 
-$servername="185.62.175.221:33066";
+$servername="10.2.7.100";
 $usr="infotainment";
 $pswd="1nf0tainment";
 $dbname="infotainment_system";
@@ -12,6 +12,9 @@ try{
 	$con= new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$usr,$pswd);
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }catch(PDOException $e){
+    $servername="localhost";
+    $con= new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$usr,$pswd);
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $message = "Connection failed:". $e->getMessage();
 }
 

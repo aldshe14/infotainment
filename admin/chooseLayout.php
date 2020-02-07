@@ -152,7 +152,7 @@
         </form>
     </div>
     
-
+    
 <?php
     require_once "timetableLayout.php";
     require_once "footer.php";
