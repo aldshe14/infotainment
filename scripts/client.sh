@@ -20,8 +20,8 @@ sudo timedatectl
 sudo apt-get install -y vim
 sudo apt-get install -y git
 sudo apt-get install -y apache2
-sudo apt-get install -y mariadb-server-10.0
-sudo apt-get install -y php php-mbstring php-mysqldb
+sudo apt-get install -y mariadb-server php-mysql
+sudo apt-get install -y php php-mbstring
 
 sudo chown -R pi:pi /var/www/html/
 sudo chown -R 770 /var/www/html/

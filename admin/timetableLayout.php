@@ -1,7 +1,20 @@
 <?php
+
+  if(!isset($_GET['did'])){
+    $sql = "SELECT *
+    FROM tb_infotainment_display
+    where name not like '-';";
+    $pdo = $con->prepare($sql);
+    $pdo->execute();
+    $display = $pdo->fetchAll();
+    $did = $display[0]['d_id'];
+  }else{
+    $did = $_GET['did'];
+  }
+
   $sql = "call sp_getTimetableLayout(:did,@min,@max)";
   $pdo = $con->prepare($sql);
-  $pdo->bindParam(':did',$_GET['did']);
+  $pdo->bindParam(':did',$did);
   try{
     $pdo->execute();
     $timetable = $pdo->fetchAll(PDO::FETCH_ASSOC);
@@ -52,13 +65,29 @@
           // }
         ?>
         <li><span>00:01</span></li>
+        <li><span>01:00</span></li>
+        <li><span>02:00</span></li>
+        <li><span>03:00</span></li>
+        <li><span>04:00</span></li>
+        <li><span>05:00</span></li>
         <li><span>06:00</span></li>
-        <li><span>06:00</span></li>
+        <li><span>07:00</span></li>
+        <li><span>08:00</span></li>
         <li><span>09:00</span></li>
+        <li><span>10:00</span></li>
+        <li><span>11:00</span></li>
         <li><span>12:00</span></li>
+        <li><span>13:00</span></li>
+        <li><span>14:00</span></li>
         <li><span>15:00</span></li>
+        <li><span>16:00</span></li>
+        <li><span>17:00</span></li>
         <li><span>18:00</span></li>
+        <li><span>19:00</span></li>
+        <li><span>20:00</span></li>
         <li><span>21:00</span></li>
+        <li><span>22:00</span></li>
+        <li><span>23:00</span></li>
         <li><span>23:59</span></li>
       </ul>
     </div> <!-- .cd-schedule__timeline -->
