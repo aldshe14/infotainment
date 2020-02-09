@@ -10,14 +10,14 @@ begin
     on tl.layout_id = ls.layout_id
     join tb_infotainment_display d
     on tl.display_id = d.d_id
-    WHERE t_id = i_id;
-    
+    WHERE t_id = i_id
+    order by tl.von;
     
 end //
 delimiter ;
 
 drop procedure sp_getTimetableLayoutDetails;
-call sp_getTimetableLayoutDetails(33);
+call sp_getTimetableLayoutDetails(34);
 
 select @min as min, @max as max;     
 
