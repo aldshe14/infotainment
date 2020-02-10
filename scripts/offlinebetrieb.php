@@ -1,7 +1,7 @@
 <?php
 	// Erster Schritt -> Array mit Tabellenname
 
-	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings','tb_infotainment_chatbot_images','tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_images','tb_infotainment_kalenderinfo','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_password_reset', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts']
+	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings' ,'tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_images','tb_infotainment_kalenderinfo','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_password_reset', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts'];
 
 	// 2. Schritt -> Connection mit Server(local)
 
@@ -27,11 +27,11 @@
     $stmt = $con->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    //print_r($result);
     //4. Schritt -> Dem Array durchgehen
      foreach($result as $row){
      	// 5. Schritt -> Connection mit jedem Display
-     	$ip=$row[2];
+     	$ip=$row['ip'];
      	$user="infotainment";
      	$pwd="1nf0tainment";
      	$dbname="infotainment_system";
@@ -42,35 +42,105 @@
      	try{
 			$Connection= new PDO("mysql:host=$ip;dbname=$dbname;charset=utf8",$user,$pwd);
     		$Connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}catch(PDOException $e){
-    		$msg = "Connection failed:". $e->getMessage();
-		}
-		// 6. Schritt fuer die Array Tables oben
-		for($i=0; $i < strlen($tables); $i++){
-			
-
+    		for($i=0; $i < sizeof($tables); $i++){
 				// 7. Schritt -> Select die aktuelle Tabelle from server
-				$statement="Select * from ?;"
-				$stmt = $con->prepare($sql);
-				$statement->execute($tables[i])
-				$arr = $statement->fetchAll(PDO::FETCH_ASSOC);
+				echo $tables[$i];
+				$statement="Select * from ".$tables[$i].";";
+				$pdo = $con->prepare($statement);
+				//$pdo->bindParam(1,$tables[$i],PDO::PARAM_STR);
+				//$pdo->execute([$tables[$i]]);
+				$pdo->execute();
+				$arr = $pdo->fetchAll(PDO::FETCH_ASSOC);
 
 				//8. Schritt -> Select die aktuelle Tabelle from display
-				$st="Select * from ?"
-				$st = $Connection->prepare($sql);
-				$st->execute($tables[i])
-				$arrr = $st->fetchAll(PDO::FETCH_ASSOC);
+				$st="Select * from ".$tables[$i].";";
+				$pdo = $Connection->prepare($st);
+				$pdo->execute();
+				$arrr = $pdo->fetchAll(PDO::FETCH_ASSOC);
+				//print_r array_diff($arr,$arrr);
+				 $diff=array_diff($arr, $arrr);
+				//echo array_diff($arr, $arrr);
+				 print_r($arrr);
+				 print_r($arr);
 
-				$res=array_diff($arr, $arrr)	
-				if ($arr==$arrr){
-					echo "Nothing has changed"
+				if (is_null($diff)){
+					echo "Nothing has changed";
 				}
+				
 				else {
+					$st="SHOW COLUMNS FROM ".$tables[$i].";";
+					$pdo = $Connection->prepare($st);
+					$pdo->execute();
+					$res = $pdo->fetchAll(PDO::FETCH_ASSOC);
+					print_r($res);
+					$st="INSERT into ".$tables[$i];
+					$st .="(";
 
-					$insertstatement= "insert into ?(?,?,?) values(?,?,?;"
-					$insertstatement->bind_param($a, $lastname, $email);
+					for($j=0; $j<sizeof($res); $j++){
+						if($j==sizeof($res)-1){
+							$st .= $res[$j]['Field'];
+							$st .= ")";
+						}
+						else{
+							$st .= $res[$j]['Field'];
+							$st .= ",";
 
-				}
+							}
+					}
+					$st .= "VALUES";
+				    $st .= "(";
+					for($a=0; $a<sizeof($res); $a++){
+						if($a==sizeof($res)-1){
+							$st .="?";
+							$st .= ")";
+						}
+						else{
+							
+							$st .= "?";
+							$st .= ",";
+
+						}
+
+					}
+					for($b=0; $b<sizeof($res); $b++){
+						if (is_null($diff)){
+						echo "Nothing has changed i swear";
+						}
+						else{
+							$dicka=array_diff($arrr, $arr);
+							// $difference = array_merge(array_diff($arrr, $arr), array_diff($arr, $arrr));
+							print_r($dicka);
+							foreach ($dicka as $valuea){
+								$pdo = $con->prepare($st);
+								//$pattern="=>[]";
+								//if(preg_match($pattern, $valuea)){
+								//	$pdo->bindParam($valuea);
+								//	$pdo->execute();
+								//	echo "Die Aenderungen wurden gespeichert";
+								//}
+								//else{
+								//	echo "Es hat nicht funktioniert";
+								//}
+								$pdo->bindParam($valuea);
+								$pdo->execute();
+								echo "Die Aenderungen wurden gespeichert";
+
+							}
+							
+
+						}
+					}
+
+					echo $st;
+
+					
+	
+					}
+
+					//$pdo = $Connection->prepare($st);
+					//$pdo->execute();
+					//$res = $pdo->fetchAll(PDO::FETCH_ASSOC);
+									
 
 					
 
@@ -78,16 +148,12 @@
 
 
 		}
-
+		}catch(PDOException $e){
+    		$msg = "Connection failed:". $e->getMessage();
 		}
+		// 6. Schritt fuer die Array Tables oben
+		
+
 	}
-
-
-
-
-
-
-
-     }
 
 ?>
