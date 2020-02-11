@@ -7,7 +7,7 @@
 	// 2. Schritt -> Connection mit Server(local)
 
 
-	$servername="185.62.175.221:33066";
+	$servername="10.2.7.100:22";
 	$usr="infotainment";
 	$pswd="1nf0tainment";
 	$dbname="infotainment_system";

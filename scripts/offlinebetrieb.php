@@ -1,13 +1,13 @@
 <?php
 	// Erster Schritt -> Array mit Tabellenname
 
-	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings' ,'tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_images','tb_infotainment_kalenderinfo','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_password_reset', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts'];
+	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings' ,'tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_password_reset', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts'];
 
 	$tables1=['chatbotMultiLanguage'];
 	// 2. Schritt -> Connection mit Server(local)
 
 
-	$servername="185.62.175.221:33066";
+	$servername="185.62.175.221:3306";
 	$usr="infotainment";
 	$pswd="1nf0tainment";
 	$dbname="infotainment_system";
@@ -261,14 +261,6 @@
 				//echo array_diff($arr, $arrr);
 				// print_r($arrr);
 				// print_r($arr);
-
-				
-
-					
-
-
-
-
 		}
 		}catch(PDOException $e){
     		$msg = "Connection failed:". $e->getMessage();
