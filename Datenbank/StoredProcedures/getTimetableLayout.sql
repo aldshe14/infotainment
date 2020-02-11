@@ -1,8 +1,11 @@
 delimiter //
 create procedure sp_getTimetableLayout(i_id int, out min time, out max time)
 begin 
-	SELECT * 
-    FROM tb_infotainment_timetable_layout
+	SELECT tl.t_id as t_id, tl.display_id as display_id, tl.layout_id as layout_id, tl.von as von, tl.bis as bis, tl.dayofweek as dayofweek,
+    l.file as file
+    FROM tb_infotainment_timetable_layout tl
+    JOIN tb_infotainment_layout l
+    ON tl.layout_id = l.l_id
     WHERE display_id = i_id;
     
     SELECT DATE_ADD(DATE_ADD(von,INTERVAL (IF(SECOND(von) < 30, 0, 60) - SECOND(von)) SECOND),INTERVAL (IF(MINUTE(von) <= 60, 0, 60) - MINUTE(von)) MINUTE) into min

@@ -103,7 +103,7 @@
               foreach($timetable as $event){
                 if($event['dayofweek'] & 2){
                   echo '<li class="cd-schedule__event">
-                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="'.$event['file'].'" href="#0">
                           <em class="cd-schedule__name">Abs Circuit</em>
                         </a>
                       </li>';
@@ -122,7 +122,7 @@
               foreach($timetable as $event){
                 if($event['dayofweek'] & 4){
                   echo '<li class="cd-schedule__event">
-                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="'.$event['file'].'" href="#0">
                           <em class="cd-schedule__name">Abs Circuit</em>
                         </a>
                       </li>';
@@ -140,7 +140,7 @@
               foreach($timetable as $event){
                 if($event['dayofweek'] & 8){
                   echo '<li class="cd-schedule__event">
-                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="'.$event['file'].'" href="#0">
                           <em class="cd-schedule__name">Abs Circuit</em>
                         </a>
                       </li>';
@@ -158,7 +158,7 @@
               foreach($timetable as $event){
                 if($event['dayofweek'] & 16){
                   echo '<li class="cd-schedule__event">
-                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="'.$event['file'].'" href="#0">
                           <em class="cd-schedule__name">Abs Circuit</em>
                         </a>
                       </li>';
@@ -176,7 +176,7 @@
               foreach($timetable as $event){
                 if($event['dayofweek'] & 32){
                   echo '<li class="cd-schedule__event">
-                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="'.$event['file'].'" href="#0">
                           <em class="cd-schedule__name">Abs Circuit</em>
                         </a>
                       </li>';
@@ -193,7 +193,7 @@
               foreach($timetable as $event){
                 if($event['dayofweek'] & 64){
                   echo '<li class="cd-schedule__event">
-                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="'.$event['file'].'" href="#0">
                           <em class="cd-schedule__name">Abs Circuit</em>
                         </a>
                       </li>';
@@ -210,7 +210,7 @@
               foreach($timetable as $event){
                 if($event['dayofweek'] & 1){
                   echo '<li class="cd-schedule__event">
-                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                          <a data-start="'.$event['von'].'" data-end="'.$event['bis'].'" data-content="event-abs-circuit" data-event="'.$event['file'].'" href="#0">
                           <em class="cd-schedule__name">Abs Circuit</em>
                         </a>
                       </li>';

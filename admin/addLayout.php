@@ -3,17 +3,26 @@
     require_once "header.php";
     require_once "navigation.php";
 
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name']) && isset($_POST['beschreibung']) && isset($_POST['file']) ){
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name']) && isset($_POST['beschreibung']) && isset($_POST['file']) && isset($_POST['file']) ){
  
         // Validate name
             // Prepare an insert statement
-            $sql = "Insert into tb_infotainment_layout(name,beschreibung,file) VALUES (:name,:beschreibung,:file)";
+            $sql = "Insert into tb_infotainment_layout(name,beschreibung,file,icon) VALUES (:name,:beschreibung,:file,:icon)";
+
+            $tmpName = $_FILES['image']['tmp_name'];       // name of the temporary stored file name
+            $fileSize = $_FILES['image']['size'];   // size of the uploaded file
+            $fileType = $_FILES['image']['type'];
+            $fp = fopen($tmpName, 'r');  // open a file handle of the temporary file
+            $imgContent  = fread($fp, filesize($tmpName)); // read the temp file
+
+            fclose($fp); // close the file handle
              
             if($sth = $con->prepare($sql)){
                 // Bind variables to the prepared statement as parameters
                 $sth->bindParam(':name', $_POST["name"]);
                 $sth->bindParam(':beschreibung', $_POST["beschreibung"]);
                 $sth->bindParam(':file', $_POST["file"]);
+                $sth->bindParam(':icon', $imgContent);
                 try {
                     $sth->execute();
                     //header('Location: users.php?insert=done');
@@ -52,6 +61,10 @@
             <div class="form-group col-sm-3">
                 <label>File</label>
                 <input type="text" name="file" class="form-control" required>
+            </div>
+            <div class="form-group col-sm-3">
+                <label>Icon</label>
+                <input type="file" name="image" class="form-control" required>
             </div>
             <br>
             <div class="form-group col-sm-3">
