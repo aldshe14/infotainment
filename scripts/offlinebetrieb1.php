@@ -1,7 +1,7 @@
 <?php
 	// Erster Schritt -> Array mit Tabellenname
 
-	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings' ,'tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_images','tb_infotainment_kalenderinfo','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_password_reset', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts'];
+	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings' ,'tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_kalenderinfo','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_password_reset', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts','tb_infotainment_images'];
 
 	$tables1=['chatbotMultiLanguage'];
 	// 2. Schritt -> Connection mit Server(local)
@@ -65,26 +65,9 @@
 					$stmt="CREATE TABLE IF NOT EXISTS ".$tables[$i]."(";
 					for($k=0; $k<sizeof($res);$k++) {
 						if($k!=sizeof($res)-1){
-							$stmt.=' '.$res[$k]['Field'].' '.$res[$k]['Type'].' ';
-							if($res[$k]['Null']=="NO"){
-								$stmt.='NOT NULL ';
-							}
-							if($res[$k]['Key']=="PRI"){
-								$stmt.='PRIMARY KEY '.$res[$k]['Extra'].' ,';
-							}else{
-								$stmt.=',';
-							}
-
+							$stmt.=' '.$res[$k]['Field'].' '.$res[$k]['Type'].',';
 						}else{
-							$stmt.=' '.$res[$k]['Field'].' '.$res[$k]['Type'].' ';
-							if($res[$k]['Null']=="NO"){
-								$stmt.='NOT NULL ';
-							}
-							if($res[$k]['Key']=="PRI"){
-								$stmt.='PRIMARY KEY '.$res[$k]['Extra'].');';
-							}else{
-								$stmt.=');';
-							}
+							$stmt.=' '.$res[$k]['Field'].' '.$res[$k]['Type'].');';
 						}
 					}
 					//echo $stmt;
@@ -114,54 +97,58 @@
 				foreach ($arr as $tbl) {
 					if(!empty($arrr)){
 						foreach ($arrr as $cmp) {
+							echo "<br>cmp<br>";
+						print_r($cmp);
 						$diff = array_diff($tbl, $cmp);
 						echo "<br>Diff<br>";
 						print_r($diff);
 						echo "<br><br>";
 						if (empty($diff)){
 							echo "Nothing has changed";
+							break;
 						}else {
 							
 							$st="INSERT into ".$tables[$i];
 							$st .="(";
 
 							for($j=0; $j<sizeof($res); $j++){
-								if($res[$j]['Key']==""){
-									if($j==sizeof($res)-1){
-										$st .= $res[$j]['Field'];
-										$st .= ")";
-									}
-									else{
-										$st .= $res[$j]['Field'];
-										$st .= ",";
-
-									}
+								if($j==sizeof($res)-1){
+									$st .= $res[$j]['Field'];
+									$st .= ")";
 								}
+								else{
+									$st .= $res[$j]['Field'];
+									$st .= ",";
+
+								}
+								
 								
 							}
 							$index = 0;
 							$st .= "VALUES";
 						    $st .= "(";
 							for($a=0; $a<sizeof($res); $a++){
-								if($res[$a]['Key']==""){
-									if($a==sizeof($res)-1){
-										$st .="?";
-										$st .= ");";
-										$index++;
-									}
-									else{
-										$index++;
-										$st .= "?";
-										$st .= ",";
 
-									}
+								if($a==sizeof($res)-1){
+									$st .="?";
+									$st .= ");";
+									$index++;
 								}
+								else{
+									$index++;
+									$st .= "?";
+									$st .= ",";
+
+								}
+							
 
 							}
 							echo "<br>Statement<br>".$st."<br>";
 							echo "<br>".$index."<br>";
-							foreach ($diff as $valuea){
-								$pdo = $Connection->prepare($st);
+							$pdo = $Connection->prepare($st);
+							$insert = 1;
+							foreach ($diff as $in) {
+															
 								//$pattern="=>[]";
 								//if(preg_match($pattern, $valuea)){
 								//	$pdo->bindParam($valuea);
@@ -171,66 +158,63 @@
 								//else{
 								//	echo "Es hat nicht funktioniert";
 								//}
-								try{
-									$insert = 0;
-									while($index>1){
-										$pdo->bindParam($insert,$valuea);
-										$index--;
-										$insert++;
-									}
-									$pdo->execute();
-									
-									echo "Die Aenderungen wurden gespeichert";
-								}catch(PDOException $e){
-						    		echo "Connection failed:". $e->getMessage();
-								}
+								echo "<br>".$insert." value ".$in."<br>"; 
+								$pdo->bindValue($insert,$in);
+								$insert ++;
 														
 
 							}
-						}
+							
+						}try{										
+								$pdo->execute();
+								
+								echo "Die Aenderungen wurden gespeichert";
+								break;
+							}catch(PDOException $e){
+					    		echo "Connection failed:". $e->getMessage();
+							}
 					}
 					}else{
+						$diff = array_diff($tbl, $arrr);
 						$st="INSERT into ".$tables[$i];
 							$st .="(";
 
 							for($j=0; $j<sizeof($res); $j++){
-								if($res[$j]['Key']==""){
-
-									if($j==sizeof($res)-1){
-										$st .= $res[$j]['Field'];
-										$st .= ")";
-									}
-									else{
-										$st .= $res[$j]['Field'];
-										$st .= ",";
-
-									}
+								if($j==sizeof($res)-1){
+									$st .= $res[$j]['Field'];
+									$st .= ")";
 								}
+								else{
+									$st .= $res[$j]['Field'];
+									$st .= ",";
+
+								}
+							
 							}
 							$index = 0;
 							$st .= "VALUES";
 						    $st .= "(";
 							for($a=0; $a<sizeof($res); $a++){
-								if($res[$a]['Key']==""){
-
-									if($a==sizeof($res)-1){
-										$st .="?";
-										$st .= ");";
-										$index++;
-									}
-									else{
-										$index++;
-										$st .= "?";
-										$st .= ",";
-
-									}
+								if($a==sizeof($res)-1){
+									$st .="?";
+									$st .= ");";
+									$index++;
 								}
+								else{
+									$index++;
+									$st .= "?";
+									$st .= ",";
+
+								}
+							
 
 							}
-							echo "<br>Statement<br>".$st."<br>";
+							echo "<br>Statement1<br>".$st."<br>";
 							echo "<br>".$index."<br>";
-							foreach ($tbl as $valuea){
-								$pdo = $Connection->prepare($st);
+							$pdo = $Connection->prepare($st);
+							$insert = 1;
+							foreach ($diff as $in) {
+															
 								//$pattern="=>[]";
 								//if(preg_match($pattern, $valuea)){
 								//	$pdo->bindParam($valuea);
@@ -240,19 +224,18 @@
 								//else{
 								//	echo "Es hat nicht funktioniert";
 								//}
-								try{
-									$insert = 0;
-									while($index>1){
-										$pdo->bindParam($insert,$valuea);
-										$index--;
-										$insert++;
-									}
+								echo "<br>".$insert." value ".$in."<br>"; 
+								$pdo->bindValue($insert,$in);
+								$insert ++;
+														
+
+							}
+							try{										
 									$pdo->execute();
 									
-									//echo "Die Aenderungen wurden gespeichert";
+									echo "Die Aenderungen wurden gespeichert";
 								}catch(PDOException $e){
-						    		echo "Insert Failed". $e->getMessage();
-								}
+						    		echo "Connection failed:". $e->getMessage();
 							}
 					}
 					
