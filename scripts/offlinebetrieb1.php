@@ -1,13 +1,15 @@
 <?php
 	// Erster Schritt -> Array mit Tabellenname
 
-	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings' ,'tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_kalenderinfo','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_password_reset', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts','tb_infotainment_images'];
+	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings' ,'tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_kalendarinfo','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 
+	'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts','tb_infotainment_images'];
 
 	$tables1=['chatbotMultiLanguage'];
 	// 2. Schritt -> Connection mit Server(local)
 
 
-	$servername="10.2.7.100:22";
+	$servername="185.62.175.221:33066";
+	
 	$usr="infotainment";
 	$pswd="1nf0tainment";
 	$dbname="infotainment_system";
@@ -19,7 +21,7 @@
 		$con= new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$usr,$pswd);
     	$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}catch(PDOException $e){
-    	$message = "Connection failed:". $e->getMessage();
+    	echo "Connection failed:". $e->getMessage();
 	}
 
 	// 3.Schritt -> Displays selektieren
@@ -48,6 +50,7 @@
 				echo $tables[$i];
 				$statement="Select * from ".$tables[$i].";";
 				$pdo = $con->prepare($statement);
+				echo $statement;
 				//$pdo->bindParam(1,$tables[$i],PDO::PARAM_STR);
 				//$pdo->execute([$tables[$i]]);
 				$pdo->execute();
@@ -105,7 +108,7 @@
 						echo "<br><br>";
 						if (empty($diff)){
 							echo "Nothing has changed";
-							break;
+							//break;
 						}else {
 							
 							$st="INSERT into ".$tables[$i];
@@ -141,7 +144,7 @@
 
 								}
 							
-
+							break;
 							}
 							echo "<br>Statement<br>".$st."<br>";
 							echo "<br>".$index."<br>";
@@ -254,7 +257,7 @@
 
 		}
 		}catch(PDOException $e){
-    		$msg = "Connection failed:". $e->getMessage();
+    		echo "Connection failed:". $e->getMessage();
 		}
 		// 6. Schritt fuer die Array Tables oben
 		
