@@ -3,7 +3,7 @@
     require_once "header.php";
     require_once "navigation.php";
 
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name']) && isset($_POST['beschreibung']) && isset($_POST['file']) && isset($_POST['file']) ){
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name']) && isset($_POST['beschreibung']) && isset($_POST['file']) && isset($_FILES['image']) ){
  
         // Validate name
             // Prepare an insert statement
@@ -49,7 +49,7 @@
 <div class="container">
         <h1 class="mt-4">Shto Layout</h1>
         <br>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
             <div class="form-group col-sm-3">
                 <label>Name</label>
                 <input type="text" name="name" class="form-control" required>

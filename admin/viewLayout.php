@@ -7,12 +7,19 @@
         die();
     }
 
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        echo "fsdfksadfkasjdfjdg";
+    }
+
     $sql = "call sp_getTimetableLayoutDetails(:id);";
     $pdo = $con->prepare($sql);
     $pdo->bindParam(':id',$_GET['id']);
     $pdo->execute();
     $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
 
+    if(!isset($result[0]['displayname'])){
+        die();
+    }
 
    
 ?>
@@ -77,7 +84,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-success" id="submit">
+                    <button type="button" class="btn btn-success" id="submit" onclick="submitForm("'.$part['layoutsection'].'")">Submit</button>
                 </div>
                 </div>
             </div>
@@ -86,27 +93,23 @@
     ?>  
 
 <script>
-    $(document).ready(function(){	
-	$("#contactForm").submit(function(event){
-		submitForm();
-		return false;
+
+    function submitForm(id){
+	 $.ajax({
+		type: "POST",
+		url: "saveEvents.php?id="+id,
+		cache: false,
+		data: $('form#contactForm').serialize(),
+		success: function(response){
+			$("#contact").html(response)
+            $("#"+id).modal('hide');
+            alert("#"+id));
+		},
+		error: function(){
+			alert("Error");
+		}
 	});
-    function submitForm(){
-            $.ajax({
-                type: "POST",
-                url: "viewLayout.php",
-                cache:false,
-                data: $('form#contactForm').serialize(),
-                success: function(response){
-                    $("#contact").html(response)
-                    $("#exampleModalLong").modal('hide');
-                },
-                error: function(){
-                    alert("Error");
-                }
-            });
-        }
-});
+}   
 </script>
 
 <?php

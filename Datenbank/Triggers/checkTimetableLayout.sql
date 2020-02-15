@@ -6,6 +6,10 @@ begin
 	declare anz int;
     set anz = 0;
     
+    if new.bis<new.von then
+		signal sqlstate '45000' set message_text = 'My Error Message';
+	end if;
+    
 	Select count(*) into anz
     From tb_infotainment_timetable_layout 
     where display_id = new.display_id and ((new.von <= von and new.bis <= bis and new.bis>=von)

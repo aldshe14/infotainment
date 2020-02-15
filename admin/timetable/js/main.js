@@ -301,8 +301,8 @@
 	      }
 	    }
 		};
-		httpRequest.open('GET', content+'.html');
-    httpRequest.send();
+		httpRequest.open('GET', 'events.php?layout='+content);
+    	httpRequest.send();
 	};
 
 	ScheduleTemplate.prototype.getEventContent = function(string) {

@@ -75,7 +75,7 @@
                     <label>Layout</label>
                     <select name="layout" class="form-control">
                         <?php
-                            $sql = "SELECT *
+                            $sql = "SELECT l_id,name
                             FROM tb_infotainment_layout
                             where name not like '-';";
                             $pdo = $con->prepare($sql);
@@ -84,6 +84,8 @@
 
                             foreach($layout as $row){
                                 
+                                //echo '<option data-thumbnail="data:image/jpeg;base64,'.base64_encode($row['icon']).'" value="'.$row['l_id'].'"><div>'.$row['name'].'</option>
+                                //';
                                 echo '<option value="'.$row['l_id'].'"><div>'.$row['name'].'</option>
                                 ';
                                 
