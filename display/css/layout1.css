@@ -13,7 +13,7 @@ body{
 
 .header {
     background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     grid-row-start: 1;
     grid-row-end: 3;
     max-height: 12.5vh;
@@ -29,7 +29,7 @@ body{
 
 .body {
     background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(211, 127, 127, 0.2;
     grid-row-start: 3;
     grid-row-end: 15;
     font-size: 30px;
@@ -41,7 +41,7 @@ body{
 
 .widget1 {
     background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     grid-row-start: 3;
     grid-row-end: 9;
     font-size: 30px;
@@ -52,7 +52,7 @@ body{
 }
 .widget2 {
     background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     grid-row-start: 9;
     grid-row-end: 15;
     font-size: 30px;
@@ -65,7 +65,7 @@ body{
 
 .footer{
     background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     grid-row-start: 15;
     grid-row-end: 17;
     font-size: 30px;
