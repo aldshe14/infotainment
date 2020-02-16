@@ -24,8 +24,18 @@
         echo '<div class="flex-'.strtolower($layout).'">';
         foreach($timetable as $part){
             echo '<div class="flex-'.$part['layoutsection'].'" data-toggle="modal" data-target="#'.$part['layoutsection'].'">';
-
-            echo '</div>';
+            $sql = "call sp_getTimetableDetails(:id);";
+                $pdo = $con->prepare($sql);
+                $pdo->bindParam(':id',$part['t_id']);
+                $pdo->execute();
+                $res = $pdo->fetchAll(PDO::FETCH_ASSOC);
+                echo '<table>';
+                    foreach($res as $section){
+                        if($section['sectionname']==$part['layoutsection']){
+                            echo '<tr><td><h5> '.$section['name']." </h5></td><td><h5>".$section['von']." - ".$section['bis']."</h5></td></tr>";
+                        }
+                    }
+            echo '</table></div>';
         }
         echo '</div>';
         echo '<br><br><div class="form-group">
