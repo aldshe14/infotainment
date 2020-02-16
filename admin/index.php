@@ -33,9 +33,42 @@
         <?php
         }
         echo '</select>';
+
+        $sql = "SELECT *
+        FROM tb_infotainment_display_status ds
+        JOIN tb_infotainment_display d
+        ON d.d_id = ds.d_id
+        where d.d_id=:id
+        limit 1;";
+        $pdo = $con->prepare($sql);
+        $pdo->bindParam(':id',$did);
+        $pdo->execute();
+        $status = $pdo->fetchAll(PDO::FETCH_ASSOC);
+
     ?>
     </div>
-</div>
+    </div>
+    <br>
+    <div class="row justify-content-md-center">
+    <div class="col col-lg-3">
+    <h5>Status  
+    <?php
+        if($status[0]['status'])
+            echo '  <span class="online"></span></h5> Last checked: '.$status[0]['lastChecked'];
+        else
+        echo '  <span class="offline"></span></h5> Last checked: '.$status[0]['lastChecked'];
+        echo '</div>
+        <div class="col col-lg-3">
+          <h5>IP Address: '.$status[0]['ip'].'</h5>
+        </div>';
+        echo '
+        <div class="col col-lg-3">
+          <h5>MAC: '.$status[0]['mac'].'</h5>
+        </div>';
+    ?>
+  </div>
+  </div>
+
 </div>
 
 
@@ -53,14 +86,6 @@
 
         });
     })();
-    
-    $(document).ready(function(){
-    $(".test").click(function(){
-            $(this).next().show();
-            $(this).next().hide();
-        });
-
-    });
     
 </script>
 

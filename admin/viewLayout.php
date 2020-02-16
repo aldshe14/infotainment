@@ -2,13 +2,14 @@
 	require_once "connection.php";
     require_once "header.php";
     require_once "navigation.php";
+    require_once "functions.php";
 
     if(!isset($_GET['id'])){
         die();
     }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        echo "fsdfksadfkasjdfjdg";
+        
     }
 
     $sql = "call sp_getTimetableLayoutDetails(:id);";
@@ -28,13 +29,21 @@
     <div class="row">
         <div class="col-md-4 mt-3">
             <h1><?php echo $result[0]['displayname']." - ".$result[0]['layoutname']; ?></h1>
-            <?php echo $result[0]['von']." - ".$result[0]['bis']; ?>
+            <?php 
+            
+                echo $result[0]['von']." - ".$result[0]['bis'].' | '; 
+                getDayName($result[0]['dayofweek']);
+            
+            ?>
+
         </div>
 
     </div>
     <br>
-    <div class="flex-layout1">
+    
         <?php
+            $layout = str_replace(" ","",$result[0]['layoutname']);
+            echo '<div class="flex-'.strtolower($layout).'">';
             foreach($result as $part){
                 echo '<div class="flex-'.$part['layoutsection'].'" data-toggle="modal" data-target="#'.$part['layoutsection'].'"></a>';
                 $sql = "call sp_getTimetableDetails(:id);";
@@ -55,62 +64,45 @@
     <br>
     <?php
         foreach($result as $part){
-            echo '<div class="modal fade" id="'.$part['layoutsection'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">'.$part['layoutsection'].'</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            echo '<div class="modal fade" id="'.$part['layoutsection'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                  <h5 class="modal-title" id="exampleModalLabel">'.ucfirst($part['layoutname']).' - '.ucfirst($part['layoutsection']).'</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                    </button>
+                  </button>
                 </div>
-                <div class="modal-body">
-                <form id="contactForm" name="contact" role="form">
-                        <div class="form-group col-sm-3">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" required>
+                <form action="';echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id'].'&section='.$part['layoutsection'];
+                echo '" method="post">
+                  <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">';
+                            if($part['layoutsection']=="header")
+                                getHeaderOptions();
+                            else if($part['layoutsection']=="body")
+                                getBodyOptions();
+                            else if($part['layoutsection']=="widget1")
+                                getWidget1Options();
+                            else if($part['layoutsection']=="widget2")
+                                getWidget2Options();
+                            else
+                                getFooterOptions();
+                    
+                        echo '</div>
                         </div>
-                        <div class="form-group col-sm-3">
-                        <label>Beschreibung</label>
-                            <input type="text" name="beschreibung" class="form-control" required>
-                        </div>
-                        <div class="form-group col-sm-3">
-                            <label>File</label>
-                            <input type="text" name="file" class="form-control" required>
-                        </div>
-                        <br>
-    
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" id="submit" onclick="submitForm("'.$part['layoutsection'].'")">Submit</button>
-                </div>
-                </div>
+                    </div>
+                  <div class="modal-footer border-top-0 ">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                  </div>
+                </form>
+              </div>
             </div>
-        </div>';
+          </div>';
         }
     ?>  
-
-<script>
-
-    function submitForm(id){
-	 $.ajax({
-		type: "POST",
-		url: "saveEvents.php?id="+id,
-		cache: false,
-		data: $('form#contactForm').serialize(),
-		success: function(response){
-			$("#contact").html(response)
-            $("#"+id).modal('hide');
-            alert("#"+id));
-		},
-		error: function(){
-			alert("Error");
-		}
-	});
-}   
-</script>
+    
 
 <?php
 	require_once "footer.php";

@@ -86,7 +86,7 @@
                                 
                                 //echo '<option data-thumbnail="data:image/jpeg;base64,'.base64_encode($row['icon']).'" value="'.$row['l_id'].'"><div>'.$row['name'].'</option>
                                 //';
-                                echo '<option value="'.$row['l_id'].'"><div>'.$row['name'].'</option>
+                                echo '<option value="'.$row['l_id'].'">'.$row['name'].'</option>
                                 ';
                                 
                             }
