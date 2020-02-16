@@ -15,7 +15,7 @@ for display in displays:
     if (response == 0):
         status = 1
 
-    query=("Select d_id,ip from tb_infotainment_display d join tb_infotainment_display_status ds on d.d_id = ds.d_id where d.d_id = %s ") %(display[0])
+    query=("Select d.d_id, d.ip from tb_infotainment_display d join tb_infotainment_display_status ds on d.d_id = ds.d_id where d.d_id = %s ") %(display[0])
     curs.execute(query)
     result=curs.fetchall()
 
