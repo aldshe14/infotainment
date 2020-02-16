@@ -1,6 +1,6 @@
 <?php
 
-$servername="htl-server.com:33066";
+$servername="localhost";
 
 //$usr="root";
 $usr="infotainment";
