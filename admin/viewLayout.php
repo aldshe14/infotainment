@@ -67,7 +67,7 @@
             echo '<div class="modal fade" id="'.$part['layoutsection'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
-                <div class="modal-header border-bottom-0">
+                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">'.ucfirst($part['layoutname']).' - '.ucfirst($part['layoutsection']).'</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -91,7 +91,58 @@
                     
                         echo '</div>
                         </div>
+                        <div class="form-row">
+                        <div class="form-group col-sm-3">
+                            <label>Von</label>
+                            <input type="time" name="von" class="form-control" required>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>Bis</label>
+                            <input type="time" name="bis" class="form-control" required>
+                        </div>
                     </div>
+                    <div class="form-row">
+                    <div class="form-group col">
+                        <label>Repeat</label><br>
+                        <div class="form-check form-check-inline">
+                            <br><br>
+                            <input class="form-check-input" type="checkbox" name="mon">
+                            <label class="form-check-label">Mon</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <br><br>
+                            <input class="form-check-input" type="checkbox" name="tue">
+                            <label class="form-check-label">Tue</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <br><br>
+                            <input class="form-check-input" type="checkbox" name="wed">
+                            <label class="form-check-label">Wed</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <br><br>
+                            <input class="form-check-input" type="checkbox" name="thu">
+                            <label class="form-check-label">Thu</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <br><br>
+                            <input class="form-check-input" type="checkbox" name="fri">
+                            <label class="form-check-label">Fri</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <br><br>
+                            <input class="form-check-input" type="checkbox" name="sat">
+                            <label class="form-check-label">Sat</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <br><br>
+                            <input class="form-check-input" type="checkbox" name="sun">
+                            <label class="form-check-label">Sun</label>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
                   <div class="modal-footer border-top-0 ">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-dark">Submit</button>
