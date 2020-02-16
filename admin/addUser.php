@@ -2,6 +2,8 @@
 	require_once "connection.php";
     require_once "header.php";
     require_once "navigation.php";
+    require_once "functions.php";
+    require_once "reset_email.php";
 
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_POST['role']) && isset($_POST['nickname']) ){
  
@@ -14,9 +16,27 @@
                 $sth->bindParam(':email', $_POST["email"]);
                 $sth->bindParam(':nickname', $_POST["nickname"]);
                 $sth->bindParam(':role', $_POST["role"]);
-                $sth->bindValue(':pwd', password_hash("12345678",PASSWORD_DEFAULT));
+                $passwd = generateStrongPassword();
+                $sth->bindValue(':pwd', password_hash($passwd,PASSWORD_DEFAULT));
                 try {
                     $sth->execute();
+                    $mail->addAddress($_POST["email"], $_POST["nickname"]);     // Add a recipient
+
+                    // Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Customer Registration - InfotainmentSystem';
+                    $mail->Body    = '<h3>Welcome to InfotainmentSystem '.$_POST['nickname'].'</h3><br><br>
+                    Your new account</br></br>
+                    
+                    Email: '.$_POST['email'].'<br><br>
+                    Password: '.$passwd.'<br>
+                    Please use the above credentials to login.<br><br>
+                    Click <b><a href="http://htl-server.com:88/infotainment/admin">here</a> to login</b> 
+                    <br><br>
+                    <b>Infotainment System</b>';
+                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                    $mail->send();
                     //header('Location: users.php?insert=done');
                     echo "<div id='hide' class=\"alert alert-success \">";
                     echo "<p>Useri u shtua me sukses!</p>";
@@ -71,7 +91,6 @@
 
                 ?>
                 </select>
-                
             </div>
             <br>
             <div class="form-group col-sm-3">
