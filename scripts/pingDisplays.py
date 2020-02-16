@@ -1,9 +1,7 @@
 #!/usr/bin/python
 import os
 
-hostsfile=open("hosts", "r")
-
-lines=hostsfile.readlines()
+lines=('10.2.7.10','10.2.7.1')
 
 for line in lines:
     response=os.system("ping -c 1 " + line)
