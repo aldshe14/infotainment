@@ -20,7 +20,7 @@ for display in displays:
     result=curs.fetchall()
 
     if (result):
-        update=("UPDATE tb_infotainment_display_status SET status=%s where d_id=%s") % (status,display[0])
+        update=("UPDATE tb_infotainment_display_status SET status=%s,lastChecked=now() where d_id=%s") % (status,display[0])
         curs.execute(update)
         conn.commit()
     else:
