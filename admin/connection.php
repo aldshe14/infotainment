@@ -20,7 +20,10 @@ try{
 
 
 }catch(PDOException $e){
+    $servername="185.62.175.221:33066";
+    $con= new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$usr,$pswd);
 
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $message = "Connection failed:". $e->getMessage();
 
 }

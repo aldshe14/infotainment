@@ -39,7 +39,7 @@
         }
         echo '</div>';
         echo '<br><br><div class="form-group">
-            <a class="btn btn-dark float-right" href="viewLayout.php?id='.$_GET['id'].'" role="button">View Layout</a>
+            <a class="btn btn-dark float-right" href="viewLayout.php?id='.$_GET['id'].'" role="button">Edit Layout</a>
         </div>';
     }catch (PDOException $e) {
         echo $e->getMessage();

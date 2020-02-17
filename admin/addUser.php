@@ -31,7 +31,7 @@
                     Email: '.$_POST['email'].'<br><br>
                     Password: '.$passwd.'<br>
                     Please use the above credentials to login.<br><br>
-                    Click <b><a href="http://htl-server.com:88/infotainment/admin">here</a> to login</b> 
+                    Click <b><a href="https://10.2.7.100/admin/signin.php">here</a> to login</b> 
                     <br><br>
                     <b>Infotainment System</b>';
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
