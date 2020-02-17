@@ -102,10 +102,10 @@
                 <div class="form-group col-sm-3">
                     <label>Bis</label>
                     <input type="time" name="bis" class="form-control" required>
-                        </div>
+                </div>
             </div>
             <div class="form-row">
-            <div class="form-group col-sm-8">
+                <div class="form-group col-sm-8">
                     <label>Repeat</label><br>
                     <div class="form-check form-check-inline">
                         <br><br>
