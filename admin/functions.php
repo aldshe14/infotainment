@@ -88,13 +88,26 @@
     }
 
     function selectOption($option,$details,$text){
-        echo '<label>Content</label>';
-        echo '<select name="'.$text.'" class="form-control" onchange="document.forms["frmAdm"].submit();">';
+        echo '<div class="form-row">
+        <div class="form-group col-md-6">
+        <label>Content</label>';
+        echo '<select name="'.$text.'" id="'.$text.'" class="form-control">';
         for($i=0; $i<sizeof($details); $i++){
             echo '<option value="'.$option[$i].'">'.$details[$i].'</option>';
-           
-        }       
-        echo '</select>';
+        }
+        echo '</select>
+        </div></div>';
+        selectAssets($text);
+    }
+
+    function selectAssets($text){
+        if($text == "body"){
+            echo '<label>Image</label>';
+            echo '<input id="image1" list="image" name="image" class="form-control" required>';
+            echo '<datalist id="image">';
+            echo '<option>Mff</option>';
+            echo '</datalist>';
+        }
     }
 
     function generateStrongPassword($length = 13, $add_dashes = false, $available_sets = 'luds')

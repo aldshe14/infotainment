@@ -76,8 +76,7 @@
                 <form action="';echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id'].'&section='.$part['layoutsection'];
                 echo '" method="post">
                   <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">';
+                    ';
                             if($part['layoutsection']=="header")
                                 getHeaderOptions();
                             else if($part['layoutsection']=="body")
@@ -89,8 +88,7 @@
                             else
                                 getFooterOptions();
                     
-                        echo '</div>
-                        </div>
+                        echo '
                         <div class="form-row">
                         <div class="form-group col-sm-3">
                             <label>Von</label>
@@ -153,7 +151,21 @@
           </div>';
         }
     ?>  
-    
+    <script>
+     $('#body').change(function(){
+        var state_id = $('#body').val();
+        //$('#image1').hide();
+        alert(state_id);
+        if(state_id == 'image')
+        {
+            $('#image1').show();
+        }
+        else
+        {
+            $('#image1').hide();
+        }
+        });
+    </script>
 
 <?php
 	require_once "footer.php";
