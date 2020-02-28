@@ -22,7 +22,7 @@
     <?php
         $sql = "SELECT *
         FROM tb_infotainment_display
-        where name not like '-';";
+        where name not like '---';";
         $pdo = $con->prepare($sql);
         $pdo->execute();
         $display = $pdo->fetchAll(PDO::FETCH_ASSOC);

@@ -4,11 +4,11 @@
 
     $MAC = getMac();
 	$IP = getIPAddress();
-    $sql = "SELECT d_id
+    $sql = "SELECT d.d_id
             FROM tb_infotainment_display d
 			join tb_infotainment_layout l
 			on d.layout_id = l.l_id
-            where mac = :mac and l.name not like '-';
+            where d.mac = :mac and l.name not like '-';
             ";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
@@ -18,7 +18,7 @@
 	
     
 	if($result){
-		!header('location:index.php');
+		header('location:index.php');
 	}
 	
 	$sql = "SELECT d_id
