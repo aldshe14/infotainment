@@ -26,7 +26,7 @@
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch();
-    $con = null;
+    
     if(!$result){
         $layout = "layout1";
         $reloadtime = 60000;
