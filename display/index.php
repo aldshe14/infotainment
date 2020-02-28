@@ -15,7 +15,7 @@
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    $stmt->closeCursor();
     if(!$result){
         header('location:welcome.php');
     }
@@ -25,14 +25,14 @@
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
-    $result = $stmt->fetchAll();
-
+    $result = $stmt->fetch();
+    $stmt->closeCursor();
     if(!$result){
         $layout = "layout1";
         $reloadtime = 60000;
     }else{
-        $layout = $result[0]['layout'];
-        $reloadtime = $result[0]['reloadtime'] * 1000;
+        $layout = $result['layout'];
+        $reloadtime = $result['reloadtime'] * 1000;
     }
     
     //Only for test
