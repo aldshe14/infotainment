@@ -3,7 +3,7 @@
     require_once "php/functions.php";
 
     $MAC = getMac();
-    $MAC = "";
+    //$MAC = "";
     //$MAC = "b8:27:eb:c1:e6:4e";
     $sql = "SELECT d.d_id,l.file
     FROM tb_infotainment_display d
@@ -17,7 +17,7 @@
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if(!$result){
-        //header('location:welcome.php');
+        header('location:welcome.php');
     }
 
     $reloadtime = null;
