@@ -33,7 +33,7 @@ function getTimetable($section,$displayid,$MAC){
     $stmt->bindParam(":mac",$MAC);
     $stmt->bindParam(":section",$section);
     $stmt->bindParam(":display",$display);
-    $stmt->bindParam(":day",getDay());
+    $stmt->bindParam(":day",getDayBinary());
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -43,6 +43,27 @@ function getTimetable($section,$displayid,$MAC){
 function getDay(){
     $rawDate = date("Y-m-d");
     $day = date('N', strtotime($rawDate));
+    return $day;
+}
+
+function getDayBinary(){
+    $rawDate = date("Y-m-d");
+    $day = date('N', strtotime($rawDate));
+    if($day==1){
+        $day=2;
+    }else if ($day==2){
+        $day=4;
+    }else if ($day==3){
+        $day=8;
+    }else if ($day==4){
+        $day=16;
+    }else if ($day==5){
+        $day=32;
+    }else if ($day==6){
+        $day=64;
+    }else{
+        $day=1;
+    }
     return $day;
 }
 ?>
