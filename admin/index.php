@@ -44,7 +44,6 @@
         $pdo->bindParam(':id',$did);
         $pdo->execute();
         $status = $pdo->fetchAll(PDO::FETCH_ASSOC);
-
     ?>
     </div>
     </div>

@@ -26,7 +26,7 @@
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
     $result = $stmt->fetch();
-
+    $con = null;
     if(!$result){
         $layout = "layout1";
         $reloadtime = 60000;
@@ -39,8 +39,8 @@
     //$layout = "layout1";
     
 
-            require_once "php/".$layout.".php";
-        ?>
+    require_once "php/".$layout.".php";
+?>
 
     <script>	
         $(document).ready(function() {
