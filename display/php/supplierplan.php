@@ -1,8 +1,6 @@
 <?php
 	//require_once "connection.php";
-    
-    $rawDate = date("Y-m-d");
-    $day = date('N', strtotime($rawDate));
+    $day = getDay();
 
     $sql = "SELECT u.stunde as stunde, u.fach as fach, u.lehrer as lehrer, u.raum as raum, 
             s.supplierer as supplierer, s.beschreibung as beschreibung, u.klasse as klasse

@@ -1,5 +1,5 @@
 <?php 
-  //getTimetable($section,$displayid,$MAC){
+  //getTimetable($section,$displayid,$MAC);
   require_once('php/supplierplan.php'); 
 
 ?>
