@@ -17,7 +17,7 @@
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if(!$result){
-        !header('location:welcome.php');
+        //header('location:welcome.php');
     }
 
     $reloadtime = null;
