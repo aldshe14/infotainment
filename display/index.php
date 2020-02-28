@@ -31,8 +31,8 @@
         $layout = "layout1";
         $reloadtime = 60000;
     }else{
-        $layout = $result['layout'];
-        $reloadtime = $result['reloadtime'] * 1000;
+        $layout = $result[0]['layout'];
+        $reloadtime = $result[0]['reloadtime'] * 1000;
     }
     
     //Only for test
