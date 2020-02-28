@@ -38,8 +38,9 @@
             echo '</table></div>';
         }
         echo '</div>';
-        echo '<br><br><div class="form-group">
-            <a class="btn btn-dark float-right" href="viewLayout.php?id='.$_GET['id'].'" role="button">Edit Layout</a>
+        echo '<br><br><div class="form-group float-right">
+            <a class="btn btn-dark" href="viewLayout.php?id='.$_GET['id'].'" role="button">Edit Layout</a>
+            <a class="btn btn-danger" href="viewLayout.php?id='.$_GET['id'].'" role="button">Delete</a>
         </div>';
     }catch (PDOException $e) {
         echo $e->getMessage();
