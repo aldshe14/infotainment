@@ -25,8 +25,8 @@
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
     $stmt->execute();
-    $result = $stmt->fetch();
-    
+    $result = $stmt->fetchAll();
+
     if(!$result){
         $layout = "layout1";
         $reloadtime = 60000;
