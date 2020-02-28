@@ -7,20 +7,18 @@ function getMac(){
     //$mac = explode("\t", $lines[1]);
     $mac = explode(" ", $lines[0]);
     return $mac[5];
-    
 }
 
 function getIPAddress(){
     $ip = false;
-    $arp = `ip address | grep "inet "`;
+    $arp = `hostname -I`;
     $lines = explode("\n", $arp);
     //$mac = explode("\t", $lines[1]);
-    $ip = explode(" ", $lines[1]);
-    $ip = explode("/", $ip[5]);
-    return $ip[0];
+    $ip = $lines[0];
+    return $ip;
 }
 
-getTimetable($section,$displayid,$MAC){
+function getTimetable($section,$displayid,$MAC){
     $sql = "SELECT *
     FROM tb_infotainment_timetable t
     JOIN tb_infotainment_layout_section ls

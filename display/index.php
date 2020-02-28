@@ -3,12 +3,13 @@
     require_once "php/functions.php";
 
     $MAC = getMac();
+    $MAC = "";
     //$MAC = "b8:27:eb:c1:e6:4e";
-    $sql = "SELECT d_id,file
+    $sql = "SELECT d.d_id,l.file
     FROM tb_infotainment_display d
     join tb_infotainment_layout l
     on d.layout_id = l.l_id
-    where mac = :mac and l.name not like '-';
+    where d.mac = :mac and l.name not like '-';
     ";
     $stmt = $con->prepare($sql);
     $stmt->bindParam(":mac",$MAC);
