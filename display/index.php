@@ -34,7 +34,7 @@
         $layout = $result['layout'];
         $reloadtime = $result['reloadtime'] * 1000;
     }
-    $sql = "SELECT l.name as name, ls.name as 'section'
+    $sql = "SELECT l.name as name, ls.name as 'section', l.file as file
             FROM tb_infotainment_layout_sections ls 
             JOIN tb_infotainment_layout l
             ON l.l_id = ls.layout_id
@@ -49,8 +49,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Display - Layout 1</title>
-	<link rel="stylesheet" href="css/layout1.css">
+	<title>Display - <?php echo $sections[0]['name']; ?></title>
+	<link rel="stylesheet" href="css/<?php echo $sections[0]['file']; ?>.css">
 	<script src="js/jquery.js"></script>
 </head>
 <body>
