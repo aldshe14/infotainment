@@ -1,5 +1,4 @@
 <?php
-    require_once('connection.php');
 
     function getDayName($dayofweek){
         
@@ -64,7 +63,7 @@
 
     function getBodyOptions(){
         $options = ['supplierplan','image'];
-        $optionsDetails = ['Supplierplan','Image'];
+        $optionsDetails = ['Supplierplan','Image','Stundenplan','Leere Klassen'];
         selectOption($options,$optionsDetails,"body");
 
     }
@@ -102,16 +101,31 @@
 
     function selectAssets($text){
         if($text == "body"){
+            echo '<div class="form-row">';
+            echo '<div class="form-group col-md-12" id="'.$text.'image">';
             echo '<label>Image</label>';
-            echo '<input id="image1" list="image" name="image" class="form-control" required>';
+            echo '<input list="image" name="image" class="form-control" required>';
             echo '<datalist id="image">';
-            echo '<option>Mff</option>';
+            global $con;
+            global $stmt, $pdo;
+            $pdo->closeCursor();
+            $sql = "SELECT name
+                    from tb_infotainment_images";
+            $stmt = $con->prepare($sql);
+            $stmt->execute();
+            $images= $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($images as $image){
+                echo '<option>'.$image['name'].'</option>';
+            }
             echo '</datalist>';
+            echo '</div></div>';
         }
     }
 
-    function generateStrongPassword($length = 13, $add_dashes = false, $available_sets = 'luds')
-    {
+    function generateStrongPassword(){
+        $length = 13; 
+        $add_dashes = false;
+        $available_sets = 'luds';
         $sets = array();
         if(strpos($available_sets, 'l') !== false)
             $sets[] = 'abcdefghjkmnpqrstuvwxyz';

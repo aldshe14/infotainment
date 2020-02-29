@@ -6,7 +6,7 @@
     where name not like '-';";
     $pdo = $con->prepare($sql);
     $pdo->execute();
-    $display = $pdo->fetchAll();
+    $display = $pdo->fetchAll(PDO::FETCH_ASSOC);
     $did = $display[0]['d_id'];
   }else{
     $did = $_GET['did'];
@@ -23,7 +23,7 @@
     $stmt = $con->prepare($st);
     try{
       $stmt->execute();
-      $result = $stmt->fetchAll();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       $min = $result[0]['min'];
       $max = $result[0]['max'];
     }catch (PDOException $e) {

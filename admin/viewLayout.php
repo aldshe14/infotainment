@@ -152,17 +152,18 @@
         }
     ?>  
     <script>
+    $('#bodyimage').hide();
      $('#body').change(function(){
-        var state_id = $('#body').val();
+        var state_id = $('#body :selected').val();
         //$('#image1').hide();
-        alert(state_id);
+        //alert(state_id);
         if(state_id == 'image')
         {
-            $('#image1').show();
+            $('#bodyimage').show();
         }
         else
         {
-            $('#image1').hide();
+            $('#bodyimage').hide();
         }
         });
     </script>
