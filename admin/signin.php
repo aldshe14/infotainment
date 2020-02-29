@@ -13,7 +13,7 @@
 
         // Versuchen, ob die E-Mail Adresse leer ist
         if(empty(trim($_POST["email"]))){
-            $email_text = "Ju lutem shkruani emailin tuaj.";
+            $email_text = "Bitte geben Sie Ihre E-Mail-Adresse ein.";
             $email_error = true;
         } else{
             $email = trim($_POST["email"]);
@@ -21,7 +21,7 @@
         
         // Versuchen, ob das Passwort leer ist
         if(empty(trim($_POST["password"]))){
-            $password_text = "Ju lutem shkruani passwordin tuaj.";
+            $password_text = "Bitte geben Sie Ihr Passwort ein.";
             $password_error = true;
         } else{
             $password = trim($_POST["password"]);
@@ -40,7 +40,7 @@
             
             
             if($user === false){
-                $email_text = "Ky user nuk ekziston. Provo perseri.";
+                $email_text = "Dieser Benutzer existiert nicht.";
                 $email_error = true;
                 $password_error = false;
             }else{
@@ -62,13 +62,13 @@
                     exit;
                     
                 } else if(strlen($password)<8 || strlen($password)>20){
-                    $password_text = "Passwordi duhet te jete (8-20) karaktere.";
+                    $password_text = "Das Passwort muss aus (8-20) Zeichen bestehen.";
                     $password_error = true;
                     $email_error = false;
                 }           
                 else{
                     //$validPassword was FALSE. Passwords do not match.
-                    $password_text = "Passwordi eshte i pasakte.";
+                    $password_text = "Passwort ist falsch.";
                     $password_error = true;
                     $email_error = false;
                 }
@@ -81,10 +81,10 @@
 <form class="form-signin" action="signin.php" method="POST">
     <img class="mb-4" src="img/logo_b.png" alt="" width="100%" height="auto">
 
-    <h1 class="h3 mb-3 font-weight-normal text-center">Identifikohu</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center">Anmeldung</h1>
     
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" 
+    <label for="inputEmail" class="sr-only">E-Mail-Addresse</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail-Addresse" name="email" 
     <?php 
         if(isset($email)) echo 'value="'.$email.'"'; 
         if(isset($password_error) && isset($email_error)){
@@ -103,8 +103,8 @@
             }
         }
     ?>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" 
+    <label for="inputPassword" class="sr-only">Passwort</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" name="password" 
     <?php 
         if(isset($email_error) && isset($password_error)){
             if($password_error==true) 
@@ -120,7 +120,7 @@
         }
 
         
-            echo '<p><small class="text-info"><a href="reset.php">Keni harruar fjalekalimin</a></small></p>';
+            echo '<p><small class="text-info"><a href="reset.php">Passwort zurücksetzen</a></small></p>';
         
     ?>
 

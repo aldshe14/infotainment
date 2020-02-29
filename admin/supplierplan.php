@@ -73,7 +73,7 @@
                 <option value="5" <?php if($day==5){ echo 'selected';}?>>Freitag</option>
             </select>
         </div>
-        <div class="col-md-2 mt-4">
+        <div class="col-md-3 mt-4">
             <h2><?php echo "".date('d-m-Y',strtotime($rawDate . ' +'.($diff+$tage).' day')); ?></h2>
         </div>
         <div class="col-md-3 mt-4">

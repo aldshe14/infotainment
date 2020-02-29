@@ -76,22 +76,22 @@
                         header('Location: index.php');
                         $login = true;
                     }catch (PDOException $e) {
-                        $passwordConfirm_text = "Passwordi nuk u resetua. Provo perseri.";
+                        $passwordConfirm_text = "E-Mail konnte nicht gesendet werden.<br>";
                         $passwordConfirm_error = true;
                     }
                         exit();    
                 }else if(strlen($password)<8 || strlen($password)>20){
-                    $password_text = "Passwordi duhet te jete (8-20) karaktere.";
+                    $password_text = "Das Passwort muss aus (8-20) Zeichen bestehen.<br>";
                     $password_error = true;
                     $email_error = false;
                 }   
                 else{
-                    $passwordConfirm_text = "Passwordi duhet te jete i ndryshem nga 12345678";
+                    $passwordConfirm_text = "Bitte wählen Sie ein anderes Passwort als 12345678.<br>";
                     $passwordConfirm_error = true;
                 }
             }
         }else{
-                $passwordConfirm_text = "Passwordet nuk perputhen.";
+                $passwordConfirm_text = "Passwörter stimmen nicht überein.<br>";
                 $passwordConfirm_error = true;
                 $password_error = false;
         }
@@ -105,10 +105,10 @@
 <form class="form-signin" action="?uid=<?php echo $id[0]; ?>" method="POST">
     <img class="mb-4" src="img/logo_b.png" alt="" width="100%" height="auto">
 
-    <h1 class="h3 mb-3 font-weight-normal text-center">Ndrysho fjalekalimin</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center">Passwort ändern</h1>
     
-    <label for="inputpassword" class="sr-only">Password</label>
-    <input type="password" id="inputpassword" class="form-control" placeholder="Password" name="password" 
+    <label for="inputpassword" class="sr-only">Passwort</label>
+    <input type="password" id="inputpassword" class="form-control" placeholder="Passwort" name="password" 
     <?php 
         if(isset($password))
             echo 'value="'.$password.'"'; 
@@ -130,18 +130,18 @@
             }
         }
     ?>
-    <label for="inputpasswordConfirm" class="sr-only">Konfirmo Passwordin</label>
-    <input type="password" id="inputpasswordConfirm" class="form-control" placeholder="Konfirmo passwordin" name="passwordConfirm" <?php if(isset($passwordConfirm)) echo 'value="'.$passwordConfirm.'"'; ?> required>
+    <label for="inputpasswordConfirm" class="sr-only">Passwort bestätigen</label>
+    <input type="password" id="inputpasswordConfirm" class="form-control" placeholder="Passwort bestätigen" name="passwordConfirm" <?php if(isset($passwordConfirm)) echo 'value="'.$passwordConfirm.'"'; ?> required>
     <?php
         if(isset($passwordConfirm_error) && isset($passwordConfirm_text)){
             if($passwordConfirm_error){
                 echo '<small id="passwordConfirmHelp" class="text-danger">'.$passwordConfirm_text.'</small>';
             }
         }
-        echo '<br><br>';
+        
         if(isset($login)){
             if($login==true){
-                echo '<p  class="text-success">Passwordi u resetua me sukses ...</p>';
+                echo '<p  class="text-success">E-Mail wurde gesendet. Bitte kontrollieren Sie Ihren Posteingang...</p>';
                 header('Refresh: 2; URL=signin.php');
             }
         }
@@ -154,6 +154,6 @@
         </label>
     </div>
     -->
-    <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Reset</button>
+    <button class="btn btn-lg btn-dark btn-block" type="submit" name="login">Reset</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; Infotainment System <?php echo date("Y");?></p>
 </form>

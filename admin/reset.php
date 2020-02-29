@@ -12,7 +12,7 @@
 
         // Provo nese emaili eshte bosh
         if(empty(trim($_POST["email"]))){
-            $email_text = "Ju lutem shkruani emailin tuaj.";
+            $email_text = "Bitte geben Sie Ihre E-Mail-Adresse ein.";
             $email_error = true;
         } else{
             $email = trim($_POST["email"]);
@@ -20,7 +20,7 @@
         
         // Provo nese emailConfirmi eshte bosh
         if(empty(trim($_POST["emailConfirm"]))){
-            $emailConfirm_text = "Ju lutem konfirmoni emailin tuaj.";
+            $emailConfirm_text = "Bitte bestätigen Sie Ihre E-Mail.";
             $emailConfirm_error = true;
         } else{
             $emailConfirm = trim($_POST["emailConfirm"]);
@@ -38,7 +38,7 @@
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                 if($user === false){
-                    $emailConfirm_text = "Ky user nuk ekziston. Provo perseri.";
+                    $emailConfirm_text = "Dieser Benutzer existiert nicht.";
                     $emailConfirm_error = true;
                 }else{
                     $insert = false;
@@ -107,7 +107,7 @@
                 }
             }
         }else{
-                $emailConfirm_text = "Emailet nuk perputhen.";
+                $emailConfirm_text = "E-Mail-Adressen stimmen nicht überein.";
                 $emailConfirm_error = true;
                 $email_error = false;
         }
@@ -118,10 +118,10 @@
 <form class="form-signin" action="reset.php" method="POST">
     <img class="mb-4" src="img/logo_b.png" alt="" width="100%" height="auto">
 
-    <h1 class="h3 mb-3 font-weight-normal text-center">Reseto fjalekalimin</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center">Password zurücksetzen</h1>
     
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" 
+    <label for="inputEmail" class="sr-only">E-Mail-Addresse</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail-Addresse" name="email" 
     <?php 
         if(isset($email))
             echo 'value="'.$email.'"'; 
@@ -144,7 +144,7 @@
         }
     ?>
     <label for="inputEmailConfirm" class="sr-only">emailConfirm</label>
-    <input type="email" id="inputEmailConfirm" class="form-control" placeholder="Konfirmo emailin" name="emailConfirm" <?php if(isset($emailConfirm)) echo 'value="'.$emailConfirm.'"'; ?> required>
+    <input type="email" id="inputEmailConfirm" class="form-control" placeholder="E-Mail-Adresse bestätigen" name="emailConfirm" <?php if(isset($emailConfirm)) echo 'value="'.$emailConfirm.'"'; ?> required>
     <?php
         if(isset($emailConfirm_error) && isset($emailConfirm_text)){
             if($emailConfirm_error){
@@ -153,10 +153,10 @@
         }
 
         
-            echo '<p><small class="text-info"><a href="mailto:">Kontakto Administratorin</a></small><small class="text-info" style="float: right;"><a href="signin.php">Identifikohu</a></small></p>';
+            echo '<p><small class="text-info"><a href="mailto:">Admin Kontaktieren</a></small><small class="text-info" style="float: right;"><a href="signin.php">Anmelden</a></small></p>';
         if(isset($login)){
             if($login==true){
-                echo '<p  class="text-success">Passwordi u resetua me sukses ...</p>';
+                echo '<p  class="text-success">E-Mail wurde gesendet. Bitte sehen Sie Ihren Posteingang ...</p>';
                 header('Refresh: 2; URL=signin.php');
             }
         }
@@ -169,6 +169,6 @@
         </label>
     </div>
     -->
-    <button class="btn btn-lg btn-dark btn-block" type="submit" name="login">Reset</button>
+    <button class="btn btn-lg btn-dark btn-block" type="submit" name="login">Zurücksetzen</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; Infotainment System <?php echo date("Y");?></p>
 </form>
