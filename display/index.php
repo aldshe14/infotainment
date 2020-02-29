@@ -58,8 +58,7 @@
         <?php 
            foreach($sections as $section){
                echo '<div class="'.$section['section'].'">';
-               $require = "'php/".$section['section'].".php'";
-               require_once($require);
+               require_once('php/'.$section['section'].'.php');
                echo '</div>';
            }
         ?>
