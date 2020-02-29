@@ -3,8 +3,8 @@
     require_once "php/functions.php";
 
     $MAC = getMac();
-    //$MAC = "";
     //$MAC = "b8:27:eb:c1:e6:4e";
+    
     $sql = "SELECT d.d_id,l.file
     FROM tb_infotainment_display d
     join tb_infotainment_layout l
@@ -34,13 +34,38 @@
         $layout = $result['layout'];
         $reloadtime = $result['reloadtime'] * 1000;
     }
+    $sql = "SELECT l.name as name, ls.name as 'section'
+            FROM tb_infotainment_layout_sections ls 
+            JOIN tb_infotainment_layout l
+            ON l.l_id = ls.layout_id
+            where l.file = :file";
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(":file",$layout);
+    $stmt->execute();
+    $sections= $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //require_once "php/".$layout.".php";
     
-    //Only for test
-    //$layout = "layout1";
-    
-
-    require_once "php/".$layout.".php";
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Display - Layout 1</title>
+	<link rel="stylesheet" href="css/layout1.css">
+	<script src="js/jquery.js"></script>
+</head>
+<body>
+	<div class="grid-container">
+        <?php 
+           foreach($sections as $section){
+               echo '<div class="'.$section['section'].'">';
+               $require = "'php/".$section['section'].".php'";
+               require_once($require);
+               echo '</div>';
+           }
+        ?>
+		
+	</div>
+</body>
 
     <script>	
         $(document).ready(function() {

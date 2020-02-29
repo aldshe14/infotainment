@@ -1,7 +1,6 @@
 <?php
 	//require_once "connection.php";
-    $day = getDay();
-    echo $day;
+
     $sql = "SELECT u.stunde as stunde, u.fach as fach, u.lehrer as lehrer, u.raum as raum, 
             s.supplierer as supplierer, s.beschreibung as beschreibung, u.klasse as klasse
             FROM tb_infotainment_supplieren s
@@ -10,7 +9,7 @@
             where u.tag = :tag and s.woche = :woche
             order by u.stunde asc;";
     $stmt = $con->prepare($sql);
-    $stmt->bindValue(":tag",$day);
+    $stmt->bindValue(":tag",getDay());
     $stmt->bindValue(":woche",date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate)));
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
