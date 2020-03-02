@@ -20,5 +20,6 @@
         echo "<td>".$row['stunde']."</td><td>".$row['klasse']."</td><td>".$row['lehrer']."</td><td>".$row['supplierer']."</td><td>".$row['raum']."</td><td>".$row['beschreibung']."</td>";
         echo "</tr>";
     }
+    echo date('Y',strtotime($rawDate)).''.date('W',strtotime($rawDate));
     echo "</table>";
 ?>
