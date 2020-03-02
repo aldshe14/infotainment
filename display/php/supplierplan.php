@@ -1,6 +1,7 @@
 <?php
 	//require_once "connection.php";
-
+    $rawDate = date("Y-m-d");
+    
     $sql = "SELECT u.stunde as stunde, u.fach as fach, u.lehrer as lehrer, u.raum as raum, 
             s.supplierer as supplierer, s.beschreibung as beschreibung, u.klasse as klasse
             FROM tb_infotainment_supplieren s
