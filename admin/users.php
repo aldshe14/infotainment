@@ -36,9 +36,14 @@
    
 ?>
 <div class="container">
-    <br>
-    <div class="text-center">
-    <button type="button" class="btn btn-dark btn-lg"><a href="addUser.php">Shto User</a></button>
+
+    <div class="row">
+        <div class="col-md-4 mt-3">
+            <h1>Benutzer</h1>
+        </div>
+        <div class="col-md-2 mt-3">
+        <button type="button" class="btn btn-dark btn-lg"><a href="addUser.php">Benutzer hinzufügen</a></button>
+        </div>
     </div>
     <br><br>
     <div class="table-responsive">
@@ -47,13 +52,13 @@
                 <tr>
                     <td>Name</td>
                     <td>Email</td>
-                    <td>Role</td>
+                    <td>Rolle</td>
                     <td>Date</td>
                 </tr>
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Role</th>
+                    <th>Rolle</th>
                     <th>Date</th>
                 </tr>
             </thead>

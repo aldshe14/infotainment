@@ -20,7 +20,7 @@
                     $sth->execute();
                     //header('Location: users.php?insert=done');
                     echo "<div id='hide' class=\"alert alert-success \">";
-                    echo "<p>Display u ndryshua me sukses!</p>";
+                    echo "<p>Die Änderungen wurden erfolgreich gespeichert!</p>";
                     echo "</div>";
                     echo "<script> setTimeout(function(){
                         window.location.href = 'kalendarinfo.php';
@@ -28,7 +28,7 @@
 
                 } catch (PDOException $e) {
                     echo "<div id='hide' class=\"alert alert-danger \">";
-                    echo "<p>Ndodhi nje gabim ju lutem provoni perseri!</p>";
+                    echo "<p>Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut!</p>";
                     echo "</div>";
                     //header('Location: users.php?insert=err');
                     //echo '<script>window.location.href = "users.php?insert=err";</script>';
@@ -45,7 +45,7 @@
 ?>
 
 <div class="container">
-    <h1 class="mt-4">Edit Display</h1>
+    <h1 class="mt-4">Kalendarinfo ändern</h1>
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id']; ?>" method="post">
 

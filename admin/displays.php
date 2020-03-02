@@ -15,10 +15,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 mt-3">
-        <h1>Displays</h1>
+        <h1>Anzeige</h1>
         </div>
         <div class="col-md-2 mt-3">
-        <button type="button" class="btn btn-dark btn-lg"><a href="addDisplay.php">Add Display</a></button>
+        <button type="button" class="btn btn-dark btn-lg"><a href="addDisplay.php">Anzeige hinzufügen</a></button>
         </div>
         
     </div>
@@ -31,19 +31,19 @@
             <thead>
                 <tr>
                     <td>Name</td>
-                    <td>MAC</td>
-                    <td>IP Address</td>
+                    <td>MAC-Adresse</td>
+                    <td>IP-Adresse</td>
                     <td>Layout</td>
-                    <td>Location</td>
+                    <td>Standort</td>
                     <td>Edit</td>
                     <td>Delete</td>
                 </tr>
                 <tr>
                     <th>Name</th>
-                    <th>MAC</th>
-                    <th>IP Address</th>
+                    <th>MAC-Adresse</th>
+                    <th>IP-Adresse</th>
                     <th>Layout</th>
-                    <th>Location</th>
+                    <th>Standort</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -71,10 +71,10 @@
             <tfoot>
                 <tr>
                     <th>Name</th>
-                    <th>MAC</th>
-                    <th>IP Address</th>
+                    <th>MAC-Adresse</th>
+                    <th>IP-Adresse</th>
                     <th>Layout</th>
-                    <th>Location</th>
+                    <th>Standort</th>
                     <th>Edit</th>
                     <td>Delete</td>
                 </tr>

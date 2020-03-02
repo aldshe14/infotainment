@@ -17,7 +17,7 @@
 
 ?>
 <div class="container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center row">
     <div class="form-group col-md-3 mt-4">
     <?php
         $sql = "SELECT *
@@ -45,6 +45,11 @@
         $pdo->execute();
         $status = $pdo->fetchAll(PDO::FETCH_ASSOC);
     ?>
+    </div>
+    <div class="form-group col-md-2">
+    </div>
+    <div class="form-group col-md-3 mt-3">
+    <button type="button" class="btn btn-dark btn-lg"><a href="chooseLayout.php?did=<?php echo $did;?>">Layout hinzufügen</a></button>
     </div>
     </div>
     <br>

@@ -47,7 +47,7 @@
 ?>
 
 <div class="container">
-        <h1 class="mt-4">Shto Layout</h1>
+        <h1 class="mt-4">Layout hinzufügen</h1>
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
             <div class="form-group col-sm-3">
@@ -59,7 +59,7 @@
                 <input type="text" name="beschreibung" class="form-control" required>
             </div>
             <div class="form-group col-sm-3">
-                <label>File</label>
+                <label>Datei</label>
                 <input type="text" name="file" class="form-control" required>
             </div>
             <div class="form-group col-sm-3">
@@ -68,7 +68,7 @@
             </div>
             <br>
             <div class="form-group col-sm-3">
-                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Shto</button>
+                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Hinzufügen</button>
             </div>
         </form>
     </div>

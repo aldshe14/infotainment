@@ -1,0 +1,12 @@
+DELIMITER //
+
+CREATE TRIGGER add24hours
+BEFORE INSERT
+ON tb_infotainment_password_reset FOR EACH ROW
+
+BEGIN
+
+SET NEW.expire = CURRENT_TIMESTAMP + INTERVAL 7 HOUR;
+
+END //
+DELIMITER ;

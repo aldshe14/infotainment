@@ -17,7 +17,7 @@
         <h1>Kalendarinfo</h1>
         </div>
         <div class="col-md-4 mt-3">
-        <button type="button" class="btn btn-dark btn-lg"><a href="addKalendarinfo.php">Add Kalendarinfo</a></button>
+        <button type="button" class="btn btn-dark btn-lg"><a href="addKalendarinfo.php">Kalendarinfo hinzufügen</a></button>
         </div>
         
     </div>

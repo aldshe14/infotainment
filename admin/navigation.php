@@ -21,19 +21,16 @@
             <a class="nav-link" href="index.php"><i class="fas fa-home"></i> HOME</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='displays.php') echo "active"; ?>">
-            <a class="nav-link" href="displays.php"><i class="fas fa-tv"></i> DISPLAYS</a>
+            <a class="nav-link" href="displays.php"><i class="fas fa-tv"></i> ANZEIGE</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='images.php') echo "active"; ?>">
-            <a class="nav-link" href="images.php"><i class="fas fa-images"></i> IMAGES</a>
+            <a class="nav-link" href="images.php"><i class="fas fa-images"></i> BILDER</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='layouts.php') echo "active"; ?>">
             <a class="nav-link" href="layouts.php"><i class="far fa-window-maximize"></i> LAYOUTS</a>
         </li>
         <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='kalendarinfo.php') echo "active"; ?>">
             <a class="nav-link" href="kalendarinfo.php"><i class="fas fa-calendar-alt"></i> KALENDARINFO</a>
-        </li>
-        <li class="nav-item <?php if(basename($_SERVER["SCRIPT_FILENAME"])=='layouttimetable.php') echo "active"; ?>">
-            <a class="nav-link" href="layouttimetable.php"><i class="fas fa-calendar-alt"></i> Layouttimetable</a>
         </li>
         <li class="nav-item dropdown 
                 <?php
@@ -47,7 +44,7 @@
                 <a class="dropdown-item" href="supplierplan.php"><i class="fas fa-calendar"></i> SUPPLIERPLAN</a>
                 <a class="dropdown-item" href="fehlendeLehrer.php"><i class="fas fa-address-book"></i> FEHLENDELEHRER</a>
                 <a class="dropdown-item" href="suppliertabelle.php"><i class="fas fa-table"></i> SUPPLIERTABELLE</a>
-                <a class="dropdown-item" href="importStundenplan.php"><i class="fas fa-upload"></i> IMPORT STUNDENPLAN</a>
+                <a class="dropdown-item" href="importStundenplan.php"><i class="fas fa-upload"></i> STUNDENPLAN IMPORTIEREN</a>
             </div>
         </li>
 
@@ -62,21 +59,21 @@
                     }
                     echo '">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user"></i> USERS
+                    <i class="fas fa-user"></i> BENUTZER
                     </a>';
                     echo '
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item';
                         if(basename($_SERVER["SCRIPT_FILENAME"])=='users.php') echo " active";
-                    echo '" href="users.php">All Users</a>';
+                    echo '" href="users.php">Alle Benutzer</a>';
                     echo '
                         <a class="dropdown-item';
                         if(basename($_SERVER["SCRIPT_FILENAME"])=='user_reset.php') echo " active";
-                    echo '" href="user_reset.php">Password Reset</a>
+                    echo '" href="user_reset.php">Password ändern</a>
                     </div>
                 </li>
                 <li class="nav-item '; if(basename($_SERVER["SCRIPT_FILENAME"])=='settings.php') echo 'active'; echo '">
-                    <a class="nav-link" href="settings.php"><i class="fas fa-cog"></i> SETTINGS</a>
+                    <a class="nav-link" href="settings.php"><i class="fas fa-cog"></i> EINSTELLUNGEN</a>
                 </li>
                 ';
             }

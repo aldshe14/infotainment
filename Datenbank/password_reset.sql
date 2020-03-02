@@ -3,7 +3,7 @@ create table tb_infotainment_password_reset(
     u_id int not null,
     datum datetime default now(),
     id varchar(250),
-    expire datetime default DATE_ADD(now(),INTERVAL 24 HOUR)
+    expire datetime default now()
 );
 
 drop table tb_infotainment_password_reset;

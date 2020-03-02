@@ -40,7 +40,7 @@
 ?>
 
 <div class="container">
-    <h1 class="mt-4">Add Display</h1>
+    <h1 class="mt-4">Anzeige hinzufügen</h1>
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="form-row">
@@ -49,7 +49,7 @@
             <input type="text" class="form-control" name="name" value="" required>
             </div>
             <div class="form-group col-md-4">
-            <label>MAC</label>
+            <label>MAC-Adresse</label>
             <input type="text" class="form-control" name="mac" value="" placeholder="ac-de-da-7y-fe-s2" pattern="([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"  required>
             </div>
         </div>
@@ -74,7 +74,7 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label>Location</label>
+                <label>Standort</label>
                 <select name="location" class="form-control">
                     <?php
                         $sql = "SELECT *
@@ -96,7 +96,7 @@
         
             <br>
             <div class="form-group">
-                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Add</button>
+                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Hinzufügen</button>
             </div>
         </form>
 	</div>

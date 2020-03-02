@@ -110,7 +110,7 @@
             <div class="form-group col-md-1">
                 <label>Raum</label>
             </div>
-            <div class="form-group col-md-1">
+            <div class="form-group col-md-2">
                 <label>Supplierer</label>
             </div>
             <div class="form-group col-md-2">
@@ -143,7 +143,7 @@
                 <div class="form-group col-md-1">
                 <input type="text" class="form-control" name="raum'.$anz.'" value="'.$row["raum"].'" readonly>
                 </div>
-                <div class="form-group col-md-1">';
+                <div class="form-group col-md-2">';
 
                 $sql = "SELECT u.lehrer as lehrer
                         from tb_infotainment_unterricht u
@@ -167,17 +167,33 @@
 
                 echo '
                     <select name="suplehrer'.$anz.'" class="form-control">';
-                    if($supplierer)    
+                     
                     echo '<option value="---">----</option>';
+                    if(strlen($row['klasse'])>2){
+                        $stmt->closeCursor();
+                        $othergroup = substr($row['klasse'],0,2)."%";
+                        $sql2 = "SELECT lehrer
+                        from tb_infotainment_unterricht
+                        where tag =:tag and stunde=:stunde and klasse like :gruppe
+                        and klasse not like :klasse";
+                        $pdo = $con->prepare($sql2);
+                        $pdo->bindParam(":tag",$row['tag']);
+                        $pdo->bindParam(":stunde",$row['stunde']);
+                        $pdo->bindParam(":gruppe",$othergroup);
+                        $pdo->bindParam(":klasse",$row['klasse']);
+                        $pdo->execute();
+                        $gruppe = $pdo->fetchAll(PDO::FETCH_ASSOC);
+                        echo '<option value="'.$gruppe[0]['lehrer'].'">'.$gruppe[0]['lehrer'].' - Ganze Klasse</option>';
+                    }
                     foreach($supplierer as $row){
-                        echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].' - Bereit</option>
-                    ';}
+                        echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].' - Bereit</option>';
+                    }
                     
                     echo '
                     <option value="---">----</option>';
                     foreach($supplierer1 as $row){
-                        echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].'</option>
-                    ';}
+                        echo '<option value="'.$row['lehrer'].'">'.$row['lehrer'].'</option>';
+                    }
                     echo '
                     </select>
                 </div>
@@ -191,7 +207,7 @@
             <input type="text" name="date" value="<?php echo date('Y-m-d', strtotime($rawDate . ' +'.$_GET['d'].' day')); ?>" hidden>
             <br>
             <div class="form-group">
-                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Ndrysho</button>
+                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Speichern</button>
             </div>
         </form>
     </div>    

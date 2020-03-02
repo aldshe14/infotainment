@@ -14,10 +14,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 mt-3">
-        <h1>Images</h1>
+        <h1>Bilder</h1>
         </div>
         <div class="col-md-2 mt-3">
-        <button type="button" class="btn btn-dark btn-lg"><a href="addImage.php">Add Image</a></button>
+        <button type="button" class="btn btn-dark btn-lg"><a href="addImage.php">Bilder hinzufügen</a></button>
         </div>
         
     </div>
@@ -30,12 +30,12 @@
             <thead>
                 <tr>
                     <td>Name</td>
-                    <td>Type</td>
+                    <td>Bildtyp</td>
                     <td>Delete</td>
                 </tr>
                 <tr>
                     <th>Name</th>
-                    <th>Type</th>
+                    <th>Bildtyp</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -60,7 +60,7 @@
             <tfoot>
                 <tr>
                     <th>Name</th>
-                    <th>Type</th>
+                    <th>Bildtyp</th>
                     <th>Edit</th>
                     <td>Delete</td>
                 </tr>

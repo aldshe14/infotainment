@@ -21,7 +21,7 @@
                     $sth->execute();
                     //header('Location: users.php?insert=done');
                     echo "<div id='hide' class=\"alert alert-success \">";
-                    echo "<p>Display u ndryshua me sukses!</p>";
+                    echo "<p>Die Änderungen wurden erfolgreich gespeichert!</p>";
                     echo "</div>";
                     echo "<script> setTimeout(function(){
                         window.location.href = 'displays.php';
@@ -29,7 +29,7 @@
 
                 } catch (PDOException $e) {
                     echo "<div id='hide' class=\"alert alert-danger \">";
-                    echo "<p>Ndodhi nje gabim ju lutem provoni perseri!</p>";
+                    echo "<p>Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut!</p>";
                     echo "</div>";
                     //header('Location: users.php?insert=err');
                     //echo '<script>window.location.href = "users.php?insert=err";</script>';
@@ -46,7 +46,7 @@
 ?>
 
 <div class="container">
-    <h1 class="mt-4">Edit Display</h1>
+    <h1 class="mt-4">Anzeige ändern</h1>
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?id='.$_GET['id']; ?>" method="post">
         <div class="form-row">
@@ -55,7 +55,7 @@
             <input type="text" class="form-control" name="name" value="<?php echo $result[0]['name']?>" required>
             </div>
             <div class="form-group col-md-4">
-            <label>MAC</label>
+            <label>MAC-Adresse</label>
             <input type="text" class="form-control" name="mac" value="<?php echo $result[0]['mac']?>" required>
             </div>
         </div>
@@ -83,7 +83,7 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label>Location</label>
+                <label>Standort</label>
                 <select name="location" class="form-control">
                     <?php
                         $sql = "SELECT *
@@ -108,7 +108,7 @@
         
             <br>
             <div class="form-group">
-                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Edit</button>
+                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Speichern</button>
             </div>
         </form>
 	</div>

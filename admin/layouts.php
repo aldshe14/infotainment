@@ -18,7 +18,7 @@
         <h1>Layouts</h1>
         </div>
         <div class="col-md-2 mt-3">
-        <button type="button" class="btn btn-dark btn-lg"><a href="addLayout.php">Add Layout</a></button>
+        <button type="button" class="btn btn-dark btn-lg"><a href="addLayout.php">Layout hinzufügen</a></button>
         </div>
         
     </div>
@@ -32,14 +32,14 @@
                 <tr>
                     <td>Name</td>
                     <td>Beschreibung</td>
-                    <td>File</td>
+                    <td>Datei</td>
                     <td>Edit</td>
                     <td>Delete</td>
                 </tr>
                 <tr>
                     <th>Name</th>
                     <th>Beschreibung</th>
-                    <th>File</th>
+                    <th>Datei</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -66,7 +66,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Beschreibung</th>
-                    <th>File</th>
+                    <th>Datei</th>
                     <th>Edit</th>
                     <td>Delete</td>
                 </tr>

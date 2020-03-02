@@ -64,12 +64,12 @@
             <input type="text" name="name" class="form-control" required>
         </div>
         <div class="form-group col-sm-3">
-            <label>File</label>
+            <label>Datei</label>
             <input type="file" name="image" class="form-control" required>
         </div>
         <br>
         <div class="form-group col-sm-3">
-            <button type="submit" class="btn btn-dark btn-lg" value="Submit">Upload</button>
+            <button type="submit" class="btn btn-dark btn-lg" value="Submit">Hochladen</button>
         </div>
 
     </form>
