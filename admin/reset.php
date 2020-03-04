@@ -84,7 +84,7 @@
                                 $mail->Subject = 'Password Reset';
                                 $mail->Body    = '<h3>Reset your password</h3><br><br>
                                 Dear '.$user['u_nickname'].',</br></br>
-                                You told us you forgot your password. If you really did, click <b><a href="http://localhost:4444/infotainment/infotainment/admin/reset_password.php?id='.$reset['u_id']."-".$reset['id'].'">here</a></b> 
+                                You told us you forgot your password. If you really did, click <b><a href="http://htl-server.com:88/infotainment/admin/reset_password.php?id='.$reset['u_id']."-".$reset['id'].'">here</a></b> 
                                 to choose a new one.<br><br>
                                 If you didn\'t mean to reset your password, then you can just ignore this email; your password will not change.<br><br>
                                 This link will be available only during the next 24h.<br>

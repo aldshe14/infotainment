@@ -51,6 +51,7 @@
                 $pdo->bindParam(':id',$part['t_id']);
                 $pdo->execute();
                 $res = $pdo->fetchAll(PDO::FETCH_ASSOC);
+                echo '<i class="fas fa-edit"></i><br>';
                     foreach($res as $section){
                         if($section['sectionname']==$part['layoutsection']){
                             echo $section['name']." ".$section['von']." ".$section['bis']."<br>";

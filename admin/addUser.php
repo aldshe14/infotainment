@@ -25,11 +25,9 @@
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Customer Registration - InfotainmentSystem';
-                    $mail->Body    = '<h3>Welcome to InfotainmentSystem '.$_POST['nickname'].'</h3><br><br>
-                    Your new account</br></br>
-                    
-                    Email: '.$_POST['email'].'<br><br>
-                    Password: '.$passwd.'<br>
+                    $mail->Body    = '<h3>Password reset for '.$_POST['nickname'].' - InfotainmentSystem</h3><br><br>
+                   
+                    Your new Password is : '.$passwd.'<br>
                     Please use the above credentials to login.<br><br>
                     Click <b><a href="https://10.2.7.100/admin/signin.php">here</a> to login</b> 
                     <br><br>
@@ -59,11 +57,11 @@
 ?>
 
 <div class="container">
-        <h1 class="mt-4">Shto User</h1>
+        <h1 class="mt-4">Bentuzer hinzufügen</h1>
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group col-sm-3">
-                <label>Email</label>
+                <label>E-Mail Adresse</label>
                 <input type="email" name="email" class="form-control" required>
             </div>
             <div class="form-group col-sm-3">
@@ -71,7 +69,7 @@
                 <input type="text" name="nickname" class="form-control" required>
             </div>
             <div class="dropdown col-sm-3">
-            <label>Roli</label>
+            <label>Rolle</label>
             <select class="form-control" name="role">
                 <?php
 
@@ -94,7 +92,7 @@
             </div>
             <br>
             <div class="form-group col-sm-3">
-                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Shto User</button>
+                <button type="submit" class="btn btn-dark btn-lg" value="Submit">Bentuzer hinzufügen</button>
             </div>
         </form>
     </div>    

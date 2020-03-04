@@ -53,13 +53,15 @@
                     <td>Name</td>
                     <td>Email</td>
                     <td>Rolle</td>
-                    <td>Date</td>
+                    <td>Datum</td>
+                    <td>Reset Password</td>
                 </tr>
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Rolle</th>
-                    <th>Date</th>
+                    <th>Datum</th>
+                    <th>Reset Password</th>
                 </tr>
             </thead>
             <?php
@@ -76,6 +78,7 @@
 
                     echo'
                             <td>'.$row['u_register'].'</td>
+                            <td><a href="">reset_password</a></td>
                         </tr>
                     ';
                 }

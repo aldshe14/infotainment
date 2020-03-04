@@ -102,7 +102,7 @@
 ?>
 
 <link rel="stylesheet" href="css/signin.css">
-<form class="form-signin" action="?uid=<?php echo $id[0]; ?>" method="POST">
+<form class="form-signin" action="?uid=<?php echo $id[0].'-'.$id[1]; ?>" method="POST">
     <img class="mb-4" src="img/logo_b.png" alt="" width="100%" height="auto">
 
     <h1 class="h3 mb-3 font-weight-normal text-center">Passwort ändern</h1>
@@ -154,6 +154,6 @@
         </label>
     </div>
     -->
-    <button class="btn btn-lg btn-dark btn-block" type="submit" name="login">Reset</button>
+    <button class="btn btn-lg btn-dark btn-block" type="submit" name="reset">Reset</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; Infotainment System <?php echo date("Y");?></p>
 </form>
