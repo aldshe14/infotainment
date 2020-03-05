@@ -22,39 +22,7 @@
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo '<table border=1 style="width=100%">
-    <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
+    
     <tr>
         <td>Klasse</td>
         <td colspan="3">1</td>
@@ -124,9 +92,9 @@
                 echo '<td rowspan="2"></td><td rowspan="2"></td><td rowspan="2"></td>';
             }else{
                 if(strlen($res[$i]['klasse'])>2){
-                    echo '<td>'.$res[$i]['fach'].'</td><td>'.$res[$i]['klasse'].'</td><td>'.$res[$i]['raum'].'</td>';
+                    echo '<td>'.$res[$i]['fach'].'</td><td>'.$res[$i]['lehrer'].'</td><td>'.$res[$i]['raum'].'</td>';
                 }else{
-                    echo '<td rowspan="2">'.$res[$i]['fach'].'</td><td rowspan="2">'.$res[$i]['klasse'].'</td><td rowspan="2">'.$res[$i]['raum'].'</td>';
+                    echo '<td rowspan="2">'.$res[$i]['fach'].'</td><td rowspan="2">'.$res[$i]['lehrer'].'</td><td rowspan="2">'.$res[$i]['raum'].'</td>';
                 }
 
             }
@@ -141,9 +109,9 @@
                 $stmt1 ->bindValue(':stunde',$i+1);
                 $stmt1->execute();
                 $res1=$stmt1->fetchAll(PDO::FETCH_ASSOC);
-                echo " ".($i+1);
+                //echo " ".($i+1);
                 if(isset($res1[1])){
-                    echo '<td>'.$res1[1]['fach'].'</td><td>'.$res1[1]['klasse'].'</td><td>'.$res1[1]['raum'].'</td>';
+                    echo '<td>'.$res1[1]['fach'].'</td><td>'.$res1[1]['lehrer'].'</td><td>'.$res1[1]['raum'].'</td>';
                 }
                 
             }
