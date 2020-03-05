@@ -1,24 +1,42 @@
 <?php
 	require_once "connection.php";
-    
-    $rawDate = date("Y-m-d");
-    $day = date('N', strtotime($rawDate));
+   
 
     $sql = "select * from vStundenplan
         where tag=:tag";
+
+    $rawDate = date("Y-m-d");
+    $day = date('N', strtotime($rawDate));
+    if($day==6){
+        $day=1;
+    }
+    elseif ($day==7) {
+        $day=1;
+    }
+    else{
+        $day=$day;
+    }
     $stmt = $con->prepare($sql);
     $stmt->bindValue(":tag",$day);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-   
-  <table> <caption>Life Expectancy By Current Age</caption> <tr> <th colspan="2">65</th> <th colspan="2">40</th> <th colspan="2">20</th> </tr> <tr> <th>Men</th> <th>Women</th> <th>Men</th> <th>Women</th> <th>Men</th> <th>Women</th> </tr> <tr> <td>82</td> <td>85</td> <td>78</td> <td>82</td> <td>77</td> <td>81</td> </tr> </table>
 
-Read more: https://html.com/tables/rowspan-colspan/#ixzz68IrG9LMg
+    $sql1= "select klasse from vStundenplan where klasse like '%%x'";
+    $stmt1 = $con->prepare($sql1);
+    $stmt1->execute();
+    $res=$stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql2= "select klasse from vStundenplan where klasse like '%%y'";
+    $stmt2 = $con->prepare($sql2);
+    $stmt2->execute();
+    $resi=$stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+    print_r($resi['']['klasse']);
 
 echo '<table border = 1 style="width=100%"
 <tr>
-    <th colspan = "2">Klasse</th>
-
+    <th>Gruppe1</th>
+    <th> Gruppe2 </th>
     <th>Fach</th>
     <th>Lehrer</th>
     <th>Raum</th>
@@ -26,13 +44,11 @@ echo '<table border = 1 style="width=100%"
 </tr>'
     ;
 
-  
-
     foreach($result as $row) {
     
         echo "<tr>";  
      
-            echo "<td>".$row['klasse']."</td> <td>".$row['fach']."</td><td>".$row['lehrer']."</td><td>".$row['raum']."</td>";
+            echo "<td>".$res['']['klasse']."</td> <td>".$resi['']['klasse']."</td><td>".$row['fach']."</td><td>".$row['lehrer']."</td><td>".$row['raum']."</td>";
        
             
        

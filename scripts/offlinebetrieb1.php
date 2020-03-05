@@ -2,7 +2,7 @@
 	// Erster Schritt -> Array mit Tabellenname
 
 	$tables=['chatbotMultiLanguage','tb_infotainment_apisettings' ,'tb_infotainment_chatbot_users','tb_infotainment_display','tb_infotainment_fehlendelehrer','tb_infotainment_kalendarinfo','tb_infotainment_klasse','tb_infotainment_language','tb_infotainment_layout', 'tb_infotainment_layout_sections', 'tb_infotainment_location', 'tb_infotainment_roles', 'tb_infotainment_supplieren', 'tb_infotainment_timetable', 'tb_infotainment_timetable_layout', 'tb_infotainment_unterricht', 
-	'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_weather_posts','tb_infotainment_images'];
+	'tb_infotainment_users', 'tb_infotainment_weather', 'tb_infotainment_weather_info', 'tb_infotainment_website_posts','tb_infotainment_images'];
 
 	$tables1=['chatbotMultiLanguage'];
 	// 2. Schritt -> Connection mit Server(local)
@@ -35,8 +35,8 @@
      foreach($result as $row){
      	// 5. Schritt -> Connection mit jedem Display
      	$ip=$row['ip'];
-     	$user="rrushberry";
-     	$pwd="rrushberry";
+     	$user="infotainment";
+     	$pwd="1nf0tainment";
      	$dbname="infotainment_system";
 
      	$msg;
@@ -47,7 +47,8 @@
     		$Connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     		for($i=0; $i < sizeof($tables); $i++){
 				// 7. Schritt -> Select die aktuelle Tabelle from server
-				echo $tables[$i];
+				echo "<br>--------------------------------------------------------------------------------------------<br>";
+				echo "<br><br><br> ---- ".$tables[$i]."----<br><br><br>";
 				$statement="Select * from ".$tables[$i].";";
 				$pdo = $con->prepare($statement);
 				echo $statement;
@@ -95,19 +96,29 @@
 		    		echo "<br>Select failed:". $e->getMessage();
 				}
 				
-				echo "<br>";
+				echo "<br><br>";
+				echo "-----------------Server-----------------------<br>";
+				print_r($arr);
+				echo "<br>-----------------Client-----------------------<br>";
 				print_r($arrr);
-				foreach ($arr as $tbl) {
+				for($a=0; $a<sizeof($arr);$a++) {
 					if(!empty($arrr)){
-						foreach ($arrr as $cmp) {
-							echo "<br>cmp<br>";
-						print_r($cmp);
-						$diff = array_diff($tbl, $cmp);
-						echo "<br>Diff<br>";
+						//$break=0;
+						//foreach ($arrr as $cmp) {
+							//if($break==1){
+							//	break;
+							//}
+						echo "<br>----------Comparing--------------<br>";
+						print_r($arr[$a]);
+						echo "<br>----------With--------------<br>";
+						print_r($arrr[$a]);
+						$diff = array_diff($arr[$a], $arrr[$a]);
+						echo "<br>-----------Diff-----------------<br>";
 						print_r($diff);
 						echo "<br><br>";
 						if (empty($diff)){
-							echo "Nothing has changed";
+							echo "-----------------Nothing has changed---------<br>";
+							//$break = 1;
 							//break;
 						}else {
 							
@@ -125,8 +136,8 @@
 
 								}
 								
-								
 							}
+
 							$index = 0;
 							$st .= "VALUES";
 						    $st .= "(";
@@ -143,79 +154,12 @@
 									$st .= ",";
 
 								}
-							
-							break;
 							}
-							echo "<br>Statement<br>".$st."<br>";
+							echo "<br>--------Statement-------------<br>".$st."<br>";
 							echo "<br>".$index."<br>";
 							$pdo = $Connection->prepare($st);
 							$insert = 1;
-							foreach ($diff as $in) {
-															
-								//$pattern="=>[]";
-								//if(preg_match($pattern, $valuea)){
-								//	$pdo->bindParam($valuea);
-								//	$pdo->execute();
-								//	echo "Die Aenderungen wurden gespeichert";
-								//}
-								//else{
-								//	echo "Es hat nicht funktioniert";
-								//}
-								echo "<br>".$insert." value ".$in."<br>"; 
-								$pdo->bindValue($insert,$in);
-								$insert ++;
-														
 
-							}
-							
-						}try{										
-								$pdo->execute();
-								
-								echo "Die Aenderungen wurden gespeichert";
-								break;
-							}catch(PDOException $e){
-					    		echo "Connection failed:". $e->getMessage();
-							}
-					}
-					}else{
-						$diff = array_diff($tbl, $arrr);
-						$st="INSERT into ".$tables[$i];
-							$st .="(";
-
-							for($j=0; $j<sizeof($res); $j++){
-								if($j==sizeof($res)-1){
-									$st .= $res[$j]['Field'];
-									$st .= ")";
-								}
-								else{
-									$st .= $res[$j]['Field'];
-									$st .= ",";
-
-								}
-							
-							}
-							$index = 0;
-							$st .= "VALUES";
-						    $st .= "(";
-							for($a=0; $a<sizeof($res); $a++){
-								if($a==sizeof($res)-1){
-									$st .="?";
-									$st .= ");";
-									$index++;
-								}
-								else{
-									$index++;
-									$st .= "?";
-									$st .= ",";
-
-								}
-							
-
-							}
-							echo "<br>Statement1<br>".$st."<br>";
-							echo "<br>".$index."<br>";
-							$pdo = $Connection->prepare($st);
-							$insert = 1;
 							foreach ($diff as $in) {
 															
 								//$pattern="=>[]";
@@ -234,12 +178,89 @@
 
 							}
 							try{										
-									$pdo->execute();
-									
-									echo "Die Aenderungen wurden gespeichert";
-								}catch(PDOException $e){
-						    		echo "Connection failed:". $e->getMessage();
+								$pdo->execute();
+							
+								echo "<br>----Die Aenderungen wurden gespeichert------<br>";
+								
+							}catch(PDOException $e){
+						    		echo "<br>------------!!!Connection failed:". $e->getMessage();
 							}
+							
+						}
+						
+						//}
+					}else{
+
+						$diff = array_diff($arr[$a], $arrr);
+						echo "<br>----------Comparing 1--------------<br>";
+							print_r($arrr);
+							echo "<br>----------With 1--------------<br>";
+							print_r($tbl);
+							
+							echo "<br>-----------Diff 1-----------------<br>";
+							print_r($diff);
+						$st="INSERT into ".$tables[$i];
+							$st .="(";
+
+						for($j=0; $j<sizeof($res); $j++){
+							if($j==sizeof($res)-1){
+								$st .= $res[$j]['Field'];
+								$st .= ")";
+							}
+							else{
+								$st .= $res[$j]['Field'];
+								$st .= ",";
+
+							}
+						
+						}
+						$index = 0;
+						$st .= "VALUES";
+					    $st .= "(";
+						for($b=0; $b<sizeof($res); $b++){
+							if($b==sizeof($res)-1){
+								$st .="?";
+								$st .= ");";
+								$index++;
+							}
+							else{
+								$index++;
+								$st .= "?";
+								$st .= ",";
+
+							}
+						
+
+						}
+						echo "<br>---------Statement1-------<br>".$st."<br>";
+						echo "<br>".$index."<br>";
+						$pdo = $Connection->prepare($st);
+						$insert = 1;
+
+						foreach ($diff as $in) {
+														
+							//$pattern="=>[]";
+							//if(preg_match($pattern, $valuea)){
+							//	$pdo->bindParam($valuea);
+							//	$pdo->execute();
+							//	echo "Die Aenderungen wurden gespeichert";
+							//}
+							//else{
+							//	echo "Es hat nicht funktioniert";
+							//}
+							echo "<br>".$insert." value ".$in."<br>"; 
+							$pdo->bindValue($insert,$in);
+							$insert ++;
+													
+
+						}
+						try{										
+								$pdo->execute();
+								
+								echo "<br>--------Die Aenderungen 1 wurden gespeichert---------<br>";
+							}catch(PDOException $e){
+					    		echo "<br>----------!!!Connection failed:". $e->getMessage();
+						}
 					}
 					
 				}
